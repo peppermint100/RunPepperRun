@@ -17,10 +17,10 @@ class RunningViewController: UIViewController {
         return sv
     }()
     
-    private let runningHistoryView: UIView = {
-        let view = UIView()
+    private let runningCardView: UICollectionView = {
+        let layout = RunningCardCollectionViewFlowLayout()
+        let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .red
         return view
     }()
     
@@ -35,8 +35,9 @@ class RunningViewController: UIViewController {
         super.viewDidLoad()
         view.addSubview(stackView)
         view.backgroundColor = .systemBackground
-        buildNavigationBar()
         buildStackView()
+        buildNavigationBar()
+        buildCollectionView()
         applyConstraints()
         // Do any additional setup after loading the view.
     }
@@ -49,8 +50,14 @@ class RunningViewController: UIViewController {
     
     // MARK: - UI 세팅
     private func buildStackView() {
-        stackView.addArrangedSubview(runningHistoryView)
+        stackView.addArrangedSubview(runningCardView)
         stackView.addArrangedSubview(runningMapView)
+    }
+    
+    private func buildCollectionView() {
+        runningCardView.delegate = self
+        runningCardView.dataSource = self
+        runningCardView.register(RunningCardCollectionViewCell.self, forCellWithReuseIdentifier: RunningCardCollectionViewCell.identifier)
     }
     
     //MARK: - 제약조건
@@ -63,7 +70,7 @@ class RunningViewController: UIViewController {
         ]
         
         let runningHistoryViewConstraints = [
-            runningHistoryView.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 0.35)
+            runningCardView.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 0.35)
         ]
         
         let runningMapViewConstraints = [
@@ -73,5 +80,20 @@ class RunningViewController: UIViewController {
         NSLayoutConstraint.activate(stackViewConstraints)
         NSLayoutConstraint.activate(runningHistoryViewConstraints)
         NSLayoutConstraint.activate(runningMapViewConstraints)
+    }
+}
+
+// MARK: - 컬렉션 뷰 델리게이트
+extension RunningViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 3
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView
+            .dequeueReusableCell(withReuseIdentifier: RunningCardCollectionViewCell.identifier, for: indexPath)
+                as? RunningCardCollectionViewCell else { return UICollectionViewCell() }
+        
+        return cell
     }
 }
