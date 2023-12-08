@@ -110,10 +110,16 @@ extension RunningViewController: CLLocationManagerDelegate {
     }
     
     private func handleLocationAuthorization() {
-        print(locationManager.authorizationStatus.rawValue)
         switch locationManager.authorizationStatus {
         case .notDetermined, .restricted:
             locationManager.requestWhenInUseAuthorization()
+        default:
+            break
+        }
+        
+        switch locationManager.accuracyAuthorization {
+        case .reducedAccuracy:
+            locationManager.requestTemporaryFullAccuracyAuthorization(withPurposeKey: "Allow Full Accuracy")
         default:
             break
         }
