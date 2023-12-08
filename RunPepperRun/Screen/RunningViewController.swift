@@ -6,8 +6,11 @@
 //
 
 import UIKit
+import MapKit
 
 class RunningViewController: UIViewController {
+    
+    private let locationManager = CLLocationManager()
     
     private let stackView: UIStackView = {
         let sv = UIStackView()
@@ -24,11 +27,10 @@ class RunningViewController: UIViewController {
         return view
     }()
     
-    private let runningMapView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .blue
-        return view
+    private let runningMapView: MKMapView = {
+        let mv = MKMapView()
+        mv.translatesAutoresizingMaskIntoConstraints = false
+        return mv
     }()
     
     override func viewDidLoad() {
@@ -39,16 +41,17 @@ class RunningViewController: UIViewController {
         buildNavigationBar()
         buildCollectionView()
         applyConstraints()
-        // Do any additional setup after loading the view.
+        setUpLocationManager()
+        handleLocationAuthorization()
     }
     
-    // MARK: - 네비게이션 바 세팅
+// MARK: - 네비게이션 바 세팅
     private func buildNavigationBar() {
         navigationItem.title = "러닝"
         navigationController?.navigationBar.prefersLargeTitles = true
     }
     
-    // MARK: - UI 세팅
+// MARK: - UI 세팅
     private func buildStackView() {
         stackView.addArrangedSubview(runningCardView)
         stackView.addArrangedSubview(runningMapView)
@@ -60,7 +63,7 @@ class RunningViewController: UIViewController {
         runningCardView.register(RunningCardCollectionViewCell.self, forCellWithReuseIdentifier: RunningCardCollectionViewCell.identifier)
     }
     
-    //MARK: - 제약조건
+//MARK: - 제약조건
     private func applyConstraints() {
         let stackViewConstraints = [
             stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -81,6 +84,7 @@ class RunningViewController: UIViewController {
         NSLayoutConstraint.activate(runningHistoryViewConstraints)
         NSLayoutConstraint.activate(runningMapViewConstraints)
     }
+
 }
 
 // MARK: - 컬렉션 뷰 델리게이트
@@ -95,5 +99,23 @@ extension RunningViewController: UICollectionViewDataSource, UICollectionViewDel
                 as? RunningCardCollectionViewCell else { return UICollectionViewCell() }
         
         return cell
+    }
+}
+
+    
+// MARK: - 맵, 위치 관련
+extension RunningViewController: CLLocationManagerDelegate {
+    private func setUpLocationManager() {
+        locationManager.delegate = self
+    }
+    
+    private func handleLocationAuthorization() {
+        print(locationManager.authorizationStatus.rawValue)
+        switch locationManager.authorizationStatus {
+        case .notDetermined, .restricted:
+            locationManager.requestWhenInUseAuthorization()
+        default:
+            break
+        }
     }
 }
