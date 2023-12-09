@@ -6,17 +6,14 @@
 //
 
 import UIKit
-import MapKit
-
 
 class RunningViewController: UIViewController {
-    
-    private let locationManager = CLLocationManager()
     
     private let stackView: UIStackView = {
         let sv = UIStackView()
         sv.translatesAutoresizingMaskIntoConstraints = false
         sv.axis = .vertical
+        sv.distribution = .fillProportionally
         return sv
     }()
     
@@ -27,43 +24,34 @@ class RunningViewController: UIViewController {
         return view
     }()
     
-    private let runningMapView: MKMapView = {
-        let mv = MKMapView()
-        mv.translatesAutoresizingMaskIntoConstraints = false
-        mv.userTrackingMode = .follow
-        return mv
-    }()
-    
-    private let startButton: RoundedButton = {
-        let button = RoundedButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
+    private let runningMapView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .blue
+        return view
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        buildUI()
+        view.addSubview(stackView)
+        view.backgroundColor = .systemBackground
+        buildStackView()
         buildNavigationBar()
         buildCollectionView()
         applyConstraints()
-        setUpLocationManager()
-        handleLocationAuthorization()
+        // Do any additional setup after loading the view.
     }
     
-// MARK: - 네비게이션 바 세팅
+    // MARK: - 네비게이션 바 세팅
     private func buildNavigationBar() {
         navigationItem.title = "러닝"
         navigationController?.navigationBar.prefersLargeTitles = true
     }
     
-// MARK: - UI 세팅
-    private func buildUI() {
-        view.backgroundColor = .systemBackground
-        view.addSubview(stackView)
-        view.addSubview(startButton)
+    // MARK: - UI 세팅
+    private func buildStackView() {
         stackView.addArrangedSubview(runningCardView)
         stackView.addArrangedSubview(runningMapView)
-        startButton.delegate = self
     }
     
     private func buildCollectionView() {
@@ -72,7 +60,7 @@ class RunningViewController: UIViewController {
         runningCardView.register(RunningCardCollectionViewCell.self, forCellWithReuseIdentifier: RunningCardCollectionViewCell.identifier)
     }
     
-//MARK: - 제약조건
+    //MARK: - 제약조건
     private func applyConstraints() {
         let stackViewConstraints = [
             stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -89,19 +77,10 @@ class RunningViewController: UIViewController {
             runningMapView.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 0.65)
         ]
         
-        let startButtonConstraints = [
-            startButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            startButton.bottomAnchor.constraint(equalTo: runningMapView.bottomAnchor, constant: -30),
-            startButton.widthAnchor.constraint(equalTo: runningMapView.widthAnchor, multiplier: 0.3),
-            startButton.heightAnchor.constraint(equalTo: runningMapView.widthAnchor, multiplier: 0.3),
-        ]
-        
         NSLayoutConstraint.activate(stackViewConstraints)
         NSLayoutConstraint.activate(runningHistoryViewConstraints)
         NSLayoutConstraint.activate(runningMapViewConstraints)
-        NSLayoutConstraint.activate(startButtonConstraints)
     }
-
 }
 
 // MARK: - 컬렉션 뷰 델리게이트
@@ -116,35 +95,5 @@ extension RunningViewController: UICollectionViewDataSource, UICollectionViewDel
                 as? RunningCardCollectionViewCell else { return UICollectionViewCell() }
         
         return cell
-    }
-}
-
-    
-// MARK: - 맵, 위치 관련
-extension RunningViewController: CLLocationManagerDelegate, MKMapViewDelegate {
-    private func setUpLocationManager() {
-        locationManager.delegate = self
-    }
-    
-    private func handleLocationAuthorization() {
-        switch locationManager.authorizationStatus {
-        case .notDetermined, .restricted:
-            locationManager.requestWhenInUseAuthorization()
-        default:
-            break
-        }
-        
-        switch locationManager.accuracyAuthorization {
-        case .reducedAccuracy:
-            locationManager.requestTemporaryFullAccuracyAuthorization(withPurposeKey: "Allow Full Accuracy")
-        default:
-            break
-        }
-    }
-}
-
-// MARK: - 시작 버튼 델리게이트
-extension RunningViewController: RoundedButtonDelegate {
-    func didTapButton() {
     }
 }

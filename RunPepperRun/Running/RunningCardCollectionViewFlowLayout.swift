@@ -27,7 +27,6 @@ class RunningCardCollectionViewFlowLayout: UICollectionViewFlowLayout {
     
     private func buildCellItem() {
         guard let collectionView = collectionView else { return }
-        collectionView.showsHorizontalScrollIndicator = false
         let cellWidth = collectionView.frame.size.width - 110
         let cellHeight = collectionView.frame.size.height - 60
         itemSize = CGSize(width: cellWidth, height: cellHeight)
