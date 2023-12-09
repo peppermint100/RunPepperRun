@@ -8,6 +8,7 @@
 import UIKit
 import MapKit
 
+
 class RunningViewController: UIViewController {
     
     private let locationManager = CLLocationManager()
@@ -16,7 +17,6 @@ class RunningViewController: UIViewController {
         let sv = UIStackView()
         sv.translatesAutoresizingMaskIntoConstraints = false
         sv.axis = .vertical
-        sv.distribution = .fillProportionally
         return sv
     }()
     
@@ -30,14 +30,19 @@ class RunningViewController: UIViewController {
     private let runningMapView: MKMapView = {
         let mv = MKMapView()
         mv.translatesAutoresizingMaskIntoConstraints = false
+        mv.userTrackingMode = .follow
         return mv
+    }()
+    
+    private let startButton: RoundedButton = {
+        let button = RoundedButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.addSubview(stackView)
-        view.backgroundColor = .systemBackground
-        buildStackView()
+        buildUI()
         buildNavigationBar()
         buildCollectionView()
         applyConstraints()
@@ -52,9 +57,13 @@ class RunningViewController: UIViewController {
     }
     
 // MARK: - UI 세팅
-    private func buildStackView() {
+    private func buildUI() {
+        view.backgroundColor = .systemBackground
+        view.addSubview(stackView)
+        view.addSubview(startButton)
         stackView.addArrangedSubview(runningCardView)
         stackView.addArrangedSubview(runningMapView)
+        startButton.delegate = self
     }
     
     private func buildCollectionView() {
@@ -80,9 +89,17 @@ class RunningViewController: UIViewController {
             runningMapView.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 0.65)
         ]
         
+        let startButtonConstraints = [
+            startButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            startButton.bottomAnchor.constraint(equalTo: runningMapView.bottomAnchor, constant: -30),
+            startButton.widthAnchor.constraint(equalTo: runningMapView.widthAnchor, multiplier: 0.3),
+            startButton.heightAnchor.constraint(equalTo: runningMapView.widthAnchor, multiplier: 0.3),
+        ]
+        
         NSLayoutConstraint.activate(stackViewConstraints)
         NSLayoutConstraint.activate(runningHistoryViewConstraints)
         NSLayoutConstraint.activate(runningMapViewConstraints)
+        NSLayoutConstraint.activate(startButtonConstraints)
     }
 
 }
@@ -104,7 +121,7 @@ extension RunningViewController: UICollectionViewDataSource, UICollectionViewDel
 
     
 // MARK: - 맵, 위치 관련
-extension RunningViewController: CLLocationManagerDelegate {
+extension RunningViewController: CLLocationManagerDelegate, MKMapViewDelegate {
     private func setUpLocationManager() {
         locationManager.delegate = self
     }
@@ -123,5 +140,11 @@ extension RunningViewController: CLLocationManagerDelegate {
         default:
             break
         }
+    }
+}
+
+// MARK: - 시작 버튼 델리게이트
+extension RunningViewController: RoundedButtonDelegate {
+    func didTapButton() {
     }
 }
