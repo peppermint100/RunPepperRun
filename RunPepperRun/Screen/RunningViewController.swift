@@ -146,5 +146,18 @@ extension RunningViewController: CLLocationManagerDelegate, MKMapViewDelegate {
 // MARK: - 시작 버튼 델리게이트
 extension RunningViewController: RoundedButtonDelegate {
     func didTapButton() {
+        switch locationManager.authorizationStatus {
+        case .authorizedAlways, .authorizedWhenInUse:
+            presentToTrackingVC()
+        default:
+            // TODO: - 권한 재요청 코드 추가
+            break
+        }
+    }
+    
+    private func presentToTrackingVC() {
+        let vc = TrackingViewController()
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
     }
 }
