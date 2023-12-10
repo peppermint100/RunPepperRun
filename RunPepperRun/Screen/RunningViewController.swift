@@ -101,7 +101,6 @@ class RunningViewController: UIViewController {
         NSLayoutConstraint.activate(runningMapViewConstraints)
         NSLayoutConstraint.activate(startButtonConstraints)
     }
-
 }
 
 // MARK: - 컬렉션 뷰 델리게이트
