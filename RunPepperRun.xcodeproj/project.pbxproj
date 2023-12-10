@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		BAAD1B552B24546200296ED8 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAD1B542B24546200296ED8 /* RoundedButton.swift */; };
 		BAAD1B5B2B254E1600296ED8 /* TrackingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAD1B5A2B254E1600296ED8 /* TrackingViewController.swift */; };
+		BAAD1B5E2B2559D200296ED8 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAD1B5D2B2559D200296ED8 /* Route.swift */; };
 		BAAF54C02B219A6F00265237 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAF54BF2B219A6F00265237 /* AppDelegate.swift */; };
 		BAAF54C22B219A6F00265237 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAF54C12B219A6F00265237 /* SceneDelegate.swift */; };
 		BAAF54C42B219A6F00265237 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAF54C32B219A6F00265237 /* ViewController.swift */; };
@@ -25,6 +26,8 @@
 /* Begin PBXFileReference section */
 		BAAD1B542B24546200296ED8 /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		BAAD1B5A2B254E1600296ED8 /* TrackingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingViewController.swift; sourceTree = "<group>"; };
+		BAAD1B5C2B25504B00296ED8 /* Route1.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Route1.gpx; sourceTree = "<group>"; };
+		BAAD1B5D2B2559D200296ED8 /* Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
 		BAAF54BC2B219A6F00265237 /* RunPepperRun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RunPepperRun.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAAF54BF2B219A6F00265237 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BAAF54C12B219A6F00265237 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -54,6 +57,7 @@
 		BAAD1B492B243DA100296ED8 /* Route */ = {
 			isa = PBXGroup;
 			children = (
+				BAAD1B5D2B2559D200296ED8 /* Route.swift */,
 			);
 			path = Route;
 			sourceTree = "<group>";
@@ -103,6 +107,7 @@
 				BAAF54C12B219A6F00265237 /* SceneDelegate.swift */,
 				BAAF54C32B219A6F00265237 /* ViewController.swift */,
 				BAAF54C82B219A7000265237 /* Assets.xcassets */,
+				BAAD1B5C2B25504B00296ED8 /* Route1.gpx */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -207,6 +212,7 @@
 				BAAD1B552B24546200296ED8 /* RoundedButton.swift in Sources */,
 				BAAF54DC2B21ADA500265237 /* StatisticViewController.swift in Sources */,
 				BAAF54C02B219A6F00265237 /* AppDelegate.swift in Sources */,
+				BAAD1B5E2B2559D200296ED8 /* Route.swift in Sources */,
 				BAAF54E72B22C5A300265237 /* RunningCardCollectionViewFlowLayout.swift in Sources */,
 				BAAF54C22B219A6F00265237 /* SceneDelegate.swift in Sources */,
 			);
