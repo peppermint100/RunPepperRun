@@ -35,7 +35,7 @@ class RunningViewController: UIViewController {
     }()
     
     private let startButton: RoundedButton = {
-        let button = RoundedButton()
+        let button = RoundedButton("시작", color: .systemBlue)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -144,7 +144,7 @@ extension RunningViewController: CLLocationManagerDelegate, MKMapViewDelegate {
 
 // MARK: - 시작 버튼 델리게이트
 extension RunningViewController: RoundedButtonDelegate {
-    func didTapButton() {
+    func didTapButton(_ button: RoundedButton) {
         switch locationManager.authorizationStatus {
         case .authorizedAlways, .authorizedWhenInUse:
             presentToTrackingVC()
@@ -157,6 +157,6 @@ extension RunningViewController: RoundedButtonDelegate {
     private func presentToTrackingVC() {
         let vc = TrackingViewController()
         vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true)
+        present(vc, animated: false)
     }
 }
