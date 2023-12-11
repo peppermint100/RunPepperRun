@@ -8,7 +8,7 @@
 import UIKit
 
 protocol RoundedButtonDelegate: AnyObject {
-    func didTapButton()
+    func didTapButton(_ button: RoundedButton)
 }
 
 class RoundedButton: UIButton {
@@ -19,11 +19,11 @@ class RoundedButton: UIButton {
         super.init(frame: frame)
     }
     
-    convenience init() {
+    convenience init(_ title: String?, color: UIColor?) {
         self.init(frame: .zero)
-        backgroundColor = .systemBlue
+        backgroundColor = color ?? .systemBlue
         titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
-        setTitle("시작", for: .normal)
+        setTitle(title ?? "", for: .normal)
         setTitleColor(.white, for: .normal)
         addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
     }
@@ -42,6 +42,6 @@ class RoundedButton: UIButton {
     }
     
     @objc private func didTapButton() {
-        delegate?.didTapButton()
+        delegate?.didTapButton(self)
     }
 }
