@@ -38,6 +38,7 @@ class RunningResultViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         buildUI()
+        buildMap()
         applyConstraints()
     }
     
@@ -72,5 +73,19 @@ class RunningResultViewController: UIViewController {
         NSLayoutConstraint.activate(resultMapViewConstraints)
         NSLayoutConstraint.activate(runningResultViewConstraints)
         NSLayoutConstraint.activate(endButtonViewConstraints)
+    }
+}
+
+extension RunningResultViewController: MKMapViewDelegate {
+    private func buildMap() {
+        resultMapView.delegate = self
+        route?.drawRouteOn(map: resultMapView)
+    }
+    
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        let renderer = MKGradientPolylineRenderer(overlay: overlay)
+        renderer.lineWidth = 5
+        renderer.strokeColor = .systemBlue
+        return renderer
     }
 }
