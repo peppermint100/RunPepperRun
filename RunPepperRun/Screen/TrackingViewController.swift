@@ -189,7 +189,8 @@ extension TrackingViewController: RoundedButtonDelegate {
     
     private func showEndRunningAlert() {
         let alert = UIAlertController(title: "런닝을 종료합니다.", message: "런닝을 종료합니다.", preferredStyle: .alert)
-        let ok = UIAlertAction(title: "종료", style: .destructive) { okAction in
+        let ok = UIAlertAction(title: "종료", style: .destructive) { [weak self] okAction in
+            self?.presentToRunningResultVC()
         }
         
         let cancel = UIAlertAction(title: "재개", style: .cancel) { [weak self] cancelAction in
@@ -199,5 +200,12 @@ extension TrackingViewController: RoundedButtonDelegate {
         alert.addAction(cancel)
         alert.addAction(ok)
         present(alert, animated: true)
+    }
+    
+    private func presentToRunningResultVC() {
+        let vc = RunningResultViewController()
+        vc.route = route
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: false)
     }
 }

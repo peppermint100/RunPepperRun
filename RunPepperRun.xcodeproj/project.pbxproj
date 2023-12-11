@@ -21,6 +21,7 @@
 		BAAF54DE2B21ADB900265237 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAF54DD2B21ADB900265237 /* SettingsViewController.swift */; };
 		BAAF54E32B22B08800265237 /* RunningCardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAF54E22B22B08800265237 /* RunningCardCollectionViewCell.swift */; };
 		BAAF54E72B22C5A300265237 /* RunningCardCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAF54E62B22C5A300265237 /* RunningCardCollectionViewFlowLayout.swift */; };
+		BAC7702D2B26E563003BA825 /* RunningResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC7702C2B26E563003BA825 /* RunningResultViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,7 @@
 		BAAF54DD2B21ADB900265237 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		BAAF54E22B22B08800265237 /* RunningCardCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningCardCollectionViewCell.swift; sourceTree = "<group>"; };
 		BAAF54E62B22C5A300265237 /* RunningCardCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningCardCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
+		BAC7702C2B26E563003BA825 /* RunningResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningResultViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +122,7 @@
 				BAAF54DB2B21ADA500265237 /* StatisticViewController.swift */,
 				BAAF54DD2B21ADB900265237 /* SettingsViewController.swift */,
 				BAAD1B5A2B254E1600296ED8 /* TrackingViewController.swift */,
+				BAC7702C2B26E563003BA825 /* RunningResultViewController.swift */,
 			);
 			path = Screen;
 			sourceTree = "<group>";
@@ -208,6 +211,7 @@
 				BAAD1B5B2B254E1600296ED8 /* TrackingViewController.swift in Sources */,
 				BAAF54DA2B21AD7200265237 /* RunningViewController.swift in Sources */,
 				BAAF54DE2B21ADB900265237 /* SettingsViewController.swift in Sources */,
+				BAC7702D2B26E563003BA825 /* RunningResultViewController.swift in Sources */,
 				BAAF54D82B21AD2B00265237 /* MainTabBarViewController.swift in Sources */,
 				BAAD1B552B24546200296ED8 /* RoundedButton.swift in Sources */,
 				BAAF54DC2B21ADA500265237 /* StatisticViewController.swift in Sources */,
