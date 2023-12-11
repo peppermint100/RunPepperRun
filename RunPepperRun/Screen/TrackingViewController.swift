@@ -10,7 +10,8 @@ import MapKit
 
 class TrackingViewController: UIViewController {
     
-    let locationManager = CLLocationManager()
+    private let locationManager = CLLocationManager()
+    private var route = Route()
     
     private let stackView: UIStackView = {
         let sv = UIStackView()
@@ -90,6 +91,7 @@ class TrackingViewController: UIViewController {
         setUpLocationManager()
         buildUI()
         applyConstraints()
+        buildRoundedButtons()
     }
     
 // MARK: - UI 설정
@@ -166,6 +168,36 @@ extension TrackingViewController: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.last {
+            route.addLocation(location)
         }
+    }
+}
+
+// MARK: - Buttons 델리게이트
+extension TrackingViewController: RoundedButtonDelegate {
+    private func buildRoundedButtons() {
+        stopButton.delegate = self
+        endButton.delegate = self
+    }
+    
+    func didTapButton(_ button: RoundedButton) {
+        if button == endButton {
+            locationManager.stopUpdatingLocation()
+            showEndRunningAlert()
+        }
+    }
+    
+    private func showEndRunningAlert() {
+        let alert = UIAlertController(title: "런닝을 종료합니다.", message: "런닝을 종료합니다.", preferredStyle: .alert)
+        let ok = UIAlertAction(title: "종료", style: .destructive) { okAction in
+        }
+        
+        let cancel = UIAlertAction(title: "재개", style: .cancel) { [weak self] cancelAction in
+            self?.locationManager.startUpdatingLocation()
+        }
+        
+        alert.addAction(cancel)
+        alert.addAction(ok)
+        present(alert, animated: true)
     }
 }
