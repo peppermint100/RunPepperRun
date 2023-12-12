@@ -163,6 +163,10 @@ class TrackingViewController: UIViewController {
 extension TrackingViewController: CLLocationManagerDelegate {
     private func setUpLocationManager() {
         locationManager.delegate = self
+        locationManager.allowsBackgroundLocationUpdates = true
+        locationManager.pausesLocationUpdatesAutomatically = false
+        locationManager.showsBackgroundLocationIndicator = true
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.startUpdatingLocation()
     }
     
