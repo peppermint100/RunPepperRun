@@ -35,7 +35,7 @@ class RunningViewController: UIViewController {
     }()
     
     private let startButton: RoundedButton = {
-        let button = RoundedButton("시작", color: .systemBlue)
+        let button = RoundedButton("시작", color: .systemBlue, shadow: true)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()

@@ -65,7 +65,7 @@ class TrackingViewController: UIViewController {
     }()
     
     private let stopButton: RoundedButton = {
-        let button = RoundedButton("정지", color: .systemYellow)
+        let button = RoundedButton("정지", color: .systemYellow, shadow: false)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -77,7 +77,7 @@ class TrackingViewController: UIViewController {
     }()
     
     private let endButton: RoundedButton = {
-        let button = RoundedButton("종료", color: .systemRed)
+        let button = RoundedButton("종료", color: .systemRed, shadow: false)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
