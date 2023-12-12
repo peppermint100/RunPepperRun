@@ -198,9 +198,9 @@ extension TrackingViewController: RoundedButtonDelegate {
     }
     
     func didTapButton(_ button: RoundedButton) {
-        locationManager.stopUpdatingLocation()
         
         if button == endButton {
+            locationManager.stopUpdatingLocation()
             tapEndButton()
         }
         
@@ -216,10 +216,12 @@ extension TrackingViewController: RoundedButtonDelegate {
     
     private func tapStopButton() {
         if timer?.status == .ticking {
+            locationManager.stopUpdatingLocation()
             timer?.suspend()
             stopButton.setTitle("재개", for: .normal)
             stopButton.backgroundColor = .systemGreen
         } else if timer?.status == .suspended {
+            locationManager.startUpdatingLocation()
             timer?.resume()
             stopButton.setTitle("정지", for: .normal)
             stopButton.backgroundColor = .systemYellow

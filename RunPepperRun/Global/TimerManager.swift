@@ -44,6 +44,7 @@ class TimerManager {
     }
     
     func deactivate() {
+        resume()
         status = .canceled
         timer?.cancel()
         timer = nil
