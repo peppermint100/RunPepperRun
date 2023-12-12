@@ -10,7 +10,7 @@ import MapKit
 
 class TrackingViewController: UIViewController {
     
-    private var timer: DispatchSourceTimer?
+    private var timer: TimerManager?
     private var seconds = 0
     private let locationManager = CLLocationManager()
     private var route = Route()
@@ -164,24 +164,11 @@ class TrackingViewController: UIViewController {
 // MARK: - Timer 관련
     private func buildTimer() {
         if timer != nil { return }
-        timer = DispatchSource.makeTimerSource(flags: [], queue: DispatchQueue.main)
-        timer?.schedule(deadline: .now() + 1, repeating: 1)
-        timer?.setEventHandler(handler: timerTicks)
-        timer?.resume()
+        timer = TimerManager(label: timerLabel)
     }
-    
-    private func timerTicks() {
-        seconds += 1
-        let minutes = seconds / 60
-        let secondsOnTimer = seconds % 60
-        let text = String(format: "%02d:%02d", minutes, secondsOnTimer)
-        print(text)
-        timerLabel.text = text
-    }
-    
+
     deinit {
-        timer?.cancel()
-        timer = nil
+        timer?.deactivate()
     }
 }
 
@@ -211,15 +198,31 @@ extension TrackingViewController: RoundedButtonDelegate {
     }
     
     func didTapButton(_ button: RoundedButton) {
+        locationManager.stopUpdatingLocation()
+        
         if button == endButton {
-            locationManager.stopUpdatingLocation()
-            timer?.suspend()
-            showEndRunningAlert()
-            return
+            tapEndButton()
         }
         
-        if button == stopButton {
+        else if button == stopButton {
+            tapStopButton()
+        }
+    }
+    
+    private func tapEndButton() {
+        timer?.suspend()
+        showEndRunningAlert()
+    }
+    
+    private func tapStopButton() {
+        if timer?.status == .ticking {
             timer?.suspend()
+            stopButton.setTitle("재개", for: .normal)
+            stopButton.backgroundColor = .systemGreen
+        } else if timer?.status == .suspended {
+            timer?.resume()
+            stopButton.setTitle("정지", for: .normal)
+            stopButton.backgroundColor = .systemYellow
         }
     }
     
