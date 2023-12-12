@@ -164,7 +164,12 @@ class TrackingViewController: UIViewController {
 // MARK: - Timer 관련
     private func buildTimer() {
         if timer != nil { return }
-        timer = TimerManager(label: timerLabel)
+        timer = TimerManager()
+        timer?.onTick = updateTimerLabel
+    }
+    
+    private func updateTimerLabel() {
+        timerLabel.text = timer?.timerString
     }
 
     deinit {

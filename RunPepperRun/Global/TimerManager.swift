@@ -15,37 +15,43 @@ class TimerManager {
     var timer: DispatchSourceTimer?
     var seconds = 0
     var status: TimerStatus = .canceled
+    var timerString = "00:00"
+    var onTick: (() -> Void)?
     
-    init(label: UILabel) {
+    init() {
         timer = DispatchSource.makeTimerSource(flags: [], queue: DispatchQueue.main)
         timer?.schedule(deadline: .now() + 1, repeating: 1)
         timer?.setEventHandler { [weak self] in
-            self?.updateLabel(label)
+            self?.timerTicks()
         }
         status = .ticking
         timer?.resume()
     }
     
-    func updateLabel(_ label: UILabel) {
+    private func timerTicks() {
         seconds += 1
         let minutes = seconds / 60
         let secondsOnTimer = seconds % 60
-        label.text = String(format: "%02d:%02d", minutes, secondsOnTimer)
+        timerString = String(format: "%02d:%02d", minutes, secondsOnTimer)
+        onTick?()
     }
     
     func suspend() {
+        if status == .suspended { return }
         status = .suspended
         timer?.suspend()
     }
     
     func resume() {
+        if status == .ticking { return }
         status = .ticking
         timer?.resume()
     }
     
     func deactivate() {
-        resume()
+        if status == .canceled { return }
         status = .canceled
+        resume()
         timer?.cancel()
         timer = nil
     }
