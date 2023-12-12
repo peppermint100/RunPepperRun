@@ -10,6 +10,8 @@ import MapKit
 
 class TrackingViewController: UIViewController {
     
+    private var timer: DispatchSourceTimer?
+    private var seconds = 0
     private let locationManager = CLLocationManager()
     private var route = Route()
     
@@ -92,6 +94,7 @@ class TrackingViewController: UIViewController {
         buildUI()
         applyConstraints()
         buildRoundedButtons()
+        buildTimer()
     }
     
 // MARK: - UI 설정
@@ -157,6 +160,29 @@ class TrackingViewController: UIViewController {
         NSLayoutConstraint.activate(stopButtonConstraints)
         NSLayoutConstraint.activate(endButtonConstraints)
     }
+    
+// MARK: - Timer 관련
+    private func buildTimer() {
+        if timer != nil { return }
+        timer = DispatchSource.makeTimerSource(flags: [], queue: DispatchQueue.main)
+        timer?.schedule(deadline: .now() + 1, repeating: 1)
+        timer?.setEventHandler(handler: timerTicks)
+        timer?.resume()
+    }
+    
+    private func timerTicks() {
+        seconds += 1
+        let minutes = seconds / 60
+        let secondsOnTimer = seconds % 60
+        let text = String(format: "%02d:%02d", minutes, secondsOnTimer)
+        print(text)
+        timerLabel.text = text
+    }
+    
+    deinit {
+        timer?.cancel()
+        timer = nil
+    }
 }
 
 // MARK: - LocationManager 델리게이트
@@ -187,18 +213,26 @@ extension TrackingViewController: RoundedButtonDelegate {
     func didTapButton(_ button: RoundedButton) {
         if button == endButton {
             locationManager.stopUpdatingLocation()
+            timer?.suspend()
             showEndRunningAlert()
+            return
+        }
+        
+        if button == stopButton {
+            timer?.suspend()
         }
     }
     
     private func showEndRunningAlert() {
         let alert = UIAlertController(title: "런닝을 종료합니다.", message: "런닝을 종료합니다.", preferredStyle: .alert)
         let ok = UIAlertAction(title: "종료", style: .destructive) { [weak self] okAction in
+            self?.timer?.suspend()
             self?.presentToRunningResultVC()
         }
         
         let cancel = UIAlertAction(title: "재개", style: .cancel) { [weak self] cancelAction in
             self?.locationManager.startUpdatingLocation()
+            self?.timer?.resume()
         }
         
         alert.addAction(cancel)
