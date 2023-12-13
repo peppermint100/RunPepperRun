@@ -10,8 +10,9 @@ import MapKit
 
 class TrackingViewController: UIViewController {
     
-    private var timer: TimerManager?
+    private var timer: DispatchSourceTimer?
     private var seconds = 0
+    private var timerSuspended = true
     private let locationManager = CLLocationManager()
     private var route = Route()
     
@@ -161,21 +162,57 @@ class TrackingViewController: UIViewController {
         NSLayoutConstraint.activate(endButtonConstraints)
     }
     
-// MARK: - Timer 관련
-    private func buildTimer() {
-        if timer != nil { return }
-        timer = TimerManager()
-        timer?.onTick = updateTimerLabel
-    }
-    
-    private func updateTimerLabel() {
-        timerLabel.text = timer?.timerString
-    }
-
     deinit {
-        timer?.deactivate()
+        invalidateTimer()
     }
 }
+
+// MARK: - Timer 관련
+extension TrackingViewController {
+    private func buildTimer() {
+        if timer != nil { return }
+        timer = DispatchSource.makeTimerSource(flags: [], queue: DispatchQueue.main)
+        timer?.schedule(deadline: .now() + 1, repeating: 1)
+        timer?.setEventHandler { [weak self] in
+            self?.timerTicks()
+        }
+        resumeTimer()
+    }
+    
+    private func timerTicks() {
+        seconds += 1
+        timerLabel.text = String(format: "%02d:%02d", seconds/60, seconds%60)
+    }
+    
+    private func suspendTimer() {
+        timerSuspended = true
+        timer?.suspend()
+    }
+    
+    private func resumeTimer() {
+        timerSuspended = false
+        timer?.resume()
+    }
+    
+    private func isTimerIdle() -> Bool {
+        return timerSuspended && seconds == 0
+    }
+    
+    private func isTimerTicking() -> Bool {
+        return !timerSuspended && seconds > 0
+    }
+    
+    private func invalidateTimer() {
+        if timerSuspended {
+            timer?.resume()
+        }
+        seconds = 0
+        timerSuspended = true
+        timer?.cancel()
+        timer = nil
+    }
+}
+
 
 // MARK: - LocationManager 델리게이트
 extension TrackingViewController: CLLocationManagerDelegate {
@@ -205,7 +242,6 @@ extension TrackingViewController: RoundedButtonDelegate {
     func didTapButton(_ button: RoundedButton) {
         
         if button == endButton {
-            locationManager.stopUpdatingLocation()
             tapEndButton()
         }
         
@@ -215,34 +251,35 @@ extension TrackingViewController: RoundedButtonDelegate {
     }
     
     private func tapEndButton() {
-        timer?.suspend()
+        locationManager.stopUpdatingLocation()
+        suspendTimer()
         showEndRunningAlert()
     }
     
     private func tapStopButton() {
-        if timer?.status == .ticking {
+        if isTimerTicking() {
             locationManager.stopUpdatingLocation()
-            timer?.suspend()
+            suspendTimer()
             stopButton.setTitle("재개", for: .normal)
             stopButton.backgroundColor = .systemGreen
-        } else if timer?.status == .suspended {
+        } else if timerSuspended {
             locationManager.startUpdatingLocation()
-            timer?.resume()
+            resumeTimer()
             stopButton.setTitle("정지", for: .normal)
             stopButton.backgroundColor = .systemYellow
         }
     }
     
     private func showEndRunningAlert() {
-        let alert = UIAlertController(title: "런닝을 종료합니다.", message: "런닝을 종료합니다.", preferredStyle: .alert)
+        let alert = UIAlertController(title: "런닝을 종료합니다.", message: nil, preferredStyle: .alert)
         let ok = UIAlertAction(title: "종료", style: .destructive) { [weak self] okAction in
-            self?.timer?.suspend()
+            self?.suspendTimer()
             self?.presentToRunningResultVC()
         }
         
         let cancel = UIAlertAction(title: "재개", style: .cancel) { [weak self] cancelAction in
             self?.locationManager.startUpdatingLocation()
-            self?.timer?.resume()
+            self?.resumeTimer()
         }
         
         alert.addAction(cancel)

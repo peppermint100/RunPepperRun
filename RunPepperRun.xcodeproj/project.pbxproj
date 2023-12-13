@@ -23,7 +23,6 @@
 		BAAF54E72B22C5A300265237 /* RunningCardCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAF54E62B22C5A300265237 /* RunningCardCollectionViewFlowLayout.swift */; };
 		BAC7702D2B26E563003BA825 /* RunningResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC7702C2B26E563003BA825 /* RunningResultViewController.swift */; };
 		BAC7702F2B26FADF003BA825 /* RouteDisplaying.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC7702E2B26FADF003BA825 /* RouteDisplaying.swift */; };
-		BAF169F52B28465900C4149F /* TimerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF169F42B28465900C4149F /* TimerManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,7 +45,6 @@
 		BAAF54E62B22C5A300265237 /* RunningCardCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningCardCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		BAC7702C2B26E563003BA825 /* RunningResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningResultViewController.swift; sourceTree = "<group>"; };
 		BAC7702E2B26FADF003BA825 /* RouteDisplaying.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteDisplaying.swift; sourceTree = "<group>"; };
-		BAF169F42B28465900C4149F /* TimerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,7 +94,6 @@
 		BAAF54BE2B219A6F00265237 /* RunPepperRun */ = {
 			isa = PBXGroup;
 			children = (
-				BAF169F32B28464C00C4149F /* Global */,
 				BAAD1B4F2B24404800296ED8 /* Map */,
 				BAAD1B492B243DA100296ED8 /* Route */,
 				BAAF54DF2B21C01E00265237 /* Running */,
@@ -140,14 +137,6 @@
 				BAAF54E62B22C5A300265237 /* RunningCardCollectionViewFlowLayout.swift */,
 			);
 			path = Running;
-			sourceTree = "<group>";
-		};
-		BAF169F32B28464C00C4149F /* Global */ = {
-			isa = PBXGroup;
-			children = (
-				BAF169F42B28465900C4149F /* TimerManager.swift */,
-			);
-			path = Global;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -226,7 +215,6 @@
 				BAC7702F2B26FADF003BA825 /* RouteDisplaying.swift in Sources */,
 				BAAF54DA2B21AD7200265237 /* RunningViewController.swift in Sources */,
 				BAAF54DE2B21ADB900265237 /* SettingsViewController.swift in Sources */,
-				BAF169F52B28465900C4149F /* TimerManager.swift in Sources */,
 				BAC7702D2B26E563003BA825 /* RunningResultViewController.swift in Sources */,
 				BAAF54D82B21AD2B00265237 /* MainTabBarViewController.swift in Sources */,
 				BAAD1B552B24546200296ED8 /* RoundedButton.swift in Sources */,
