@@ -59,13 +59,13 @@ class TrackingViewController: UIViewController {
         return view
     }()
     
-    private let stopButtonView: UIView = {
+    private let pauseAndResumeButtonView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    private let stopButton: RoundedButton = {
+    private let pauseAndResumeButton: RoundedButton = {
         let button = RoundedButton("정지", color: .systemYellow, shadow: false)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -108,10 +108,10 @@ class TrackingViewController: UIViewController {
         timerView.addSubview(timerLabel)
         buttonsView.addArrangedSubview(stopAndEndButtonView)
         buttonsView.addArrangedSubview(spotifyButtonView)
-        stopAndEndButtonView.addArrangedSubview(stopButtonView)
+        stopAndEndButtonView.addArrangedSubview(pauseAndResumeButtonView)
         stopAndEndButtonView.addArrangedSubview(endButtonView)
         endButtonView.addSubview(endButton)
-        stopButtonView.addSubview(stopButton)
+        pauseAndResumeButtonView.addSubview(pauseAndResumeButton)
     }
     
     private func applyConstraints() {
@@ -140,10 +140,10 @@ class TrackingViewController: UIViewController {
         ]
         
         let stopButtonConstraints = [
-            stopButton.centerXAnchor.constraint(equalTo: stopButtonView.centerXAnchor),
-            stopButton.centerYAnchor.constraint(equalTo: stopButtonView.centerYAnchor),
-            stopButton.widthAnchor.constraint(equalTo: stopButtonView.widthAnchor, multiplier: 0.7),
-            stopButton.heightAnchor.constraint(equalTo: stopButtonView.widthAnchor, multiplier: 0.7),
+            pauseAndResumeButton.centerXAnchor.constraint(equalTo: pauseAndResumeButtonView.centerXAnchor),
+            pauseAndResumeButton.centerYAnchor.constraint(equalTo: pauseAndResumeButtonView.centerYAnchor),
+            pauseAndResumeButton.widthAnchor.constraint(equalTo: pauseAndResumeButtonView.widthAnchor, multiplier: 0.7),
+            pauseAndResumeButton.heightAnchor.constraint(equalTo: pauseAndResumeButtonView.widthAnchor, multiplier: 0.7),
         ]
         
         let endButtonConstraints = [
@@ -235,7 +235,7 @@ extension TrackingViewController: CLLocationManagerDelegate {
 // MARK: - Buttons 델리게이트
 extension TrackingViewController: RoundedButtonDelegate {
     private func buildRoundedButtons() {
-        stopButton.delegate = self
+        pauseAndResumeButton.delegate = self
         endButton.delegate = self
     }
     
@@ -245,7 +245,7 @@ extension TrackingViewController: RoundedButtonDelegate {
             tapEndButton()
         }
         
-        else if button == stopButton {
+        else if button == pauseAndResumeButton {
             tapStopButton()
         }
     }
@@ -260,13 +260,13 @@ extension TrackingViewController: RoundedButtonDelegate {
         if isTimerTicking() {
             locationManager.stopUpdatingLocation()
             suspendTimer()
-            stopButton.setTitle("재개", for: .normal)
-            stopButton.backgroundColor = .systemGreen
+            pauseAndResumeButton.setTitle("재개", for: .normal)
+            pauseAndResumeButton.backgroundColor = .systemGreen
         } else if timerSuspended {
             locationManager.startUpdatingLocation()
             resumeTimer()
-            stopButton.setTitle("정지", for: .normal)
-            stopButton.backgroundColor = .systemYellow
+            pauseAndResumeButton.setTitle("정지", for: .normal)
+            pauseAndResumeButton.backgroundColor = .systemYellow
         }
     }
     
