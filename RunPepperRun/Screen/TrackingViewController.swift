@@ -32,7 +32,7 @@ class TrackingViewController: UIViewController {
     private let timerLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 40, weight: .bold)
+        label.font = UIFont.systemFont(ofSize: 60, weight: .bold)
         label.text = "00:00"
         label.textColor = .label
         return label
@@ -68,6 +68,7 @@ class TrackingViewController: UIViewController {
     private let pauseAndResumeButton: RoundedButton = {
         let button = RoundedButton("정지", color: .systemYellow, shadow: false)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 26, weight: .semibold)
         return button
     }()
     
@@ -80,6 +81,7 @@ class TrackingViewController: UIViewController {
     private let endButton: RoundedButton = {
         let button = RoundedButton("종료", color: .systemRed, shadow: false)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 26, weight: .semibold)
         return button
     }()
     
@@ -100,7 +102,7 @@ class TrackingViewController: UIViewController {
     
 // MARK: - UI 설정
     private func buildUI() {
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .systemCyan
         view.addSubview(stackView)
         stackView.addArrangedSubview(timerView)
         stackView.addArrangedSubview(runningStatusView)
@@ -261,12 +263,18 @@ extension TrackingViewController: RoundedButtonDelegate {
             locationManager.stopUpdatingLocation()
             suspendTimer()
             pauseAndResumeButton.setTitle("재개", for: .normal)
-            pauseAndResumeButton.backgroundColor = .systemGreen
+            UIView.animate(withDuration: 0.4) { [weak self] in
+                self?.view.backgroundColor = .systemYellow
+                self?.pauseAndResumeButton.backgroundColor = .systemGreen
+            }
         } else if timerSuspended {
             locationManager.startUpdatingLocation()
             resumeTimer()
             pauseAndResumeButton.setTitle("정지", for: .normal)
-            pauseAndResumeButton.backgroundColor = .systemYellow
+            UIView.animate(withDuration: 0.4) { [weak self] in
+                self?.view.backgroundColor = .systemCyan
+                self?.pauseAndResumeButton.backgroundColor = .systemYellow
+            }
         }
     }
     
