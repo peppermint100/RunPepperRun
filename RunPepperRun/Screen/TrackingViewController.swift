@@ -8,6 +8,7 @@
 import UIKit
 import MapKit
 
+
 class TrackingViewController: UIViewController {
     
     private var timer: DispatchSourceTimer?
@@ -90,7 +91,27 @@ class TrackingViewController: UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-
+    
+    private let connectToSpotifyButton: UIButton = {
+        let button = UIButton()
+        let image = UIImage(named: "SpotifyIcon")
+        var config = UIButton.Configuration.plain()
+        var titleContainer = AttributeContainer()
+        titleContainer.font = UIFont.systemFont(ofSize: 22, weight: .bold)
+        config.image = image
+        config.imagePadding = 5
+        config.imagePlacement = .leading
+        config.titleAlignment = .trailing
+        config.attributedTitle = AttributedString("Spotify 연동하기", attributes: titleContainer)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.configuration = config
+        button.backgroundColor = UIColor(red: 25/255, green: 185/255, blue: 84/255, alpha: 1)
+        button.tintColor = .black
+        button.layer.cornerRadius = 12
+        button.clipsToBounds = true
+        return button
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpLocationManager()
@@ -114,6 +135,7 @@ class TrackingViewController: UIViewController {
         stopAndEndButtonView.addArrangedSubview(endButtonView)
         endButtonView.addSubview(endButton)
         pauseAndResumeButtonView.addSubview(pauseAndResumeButton)
+        spotifyButtonView.addSubview(connectToSpotifyButton)
     }
     
     private func applyConstraints() {
@@ -154,6 +176,13 @@ class TrackingViewController: UIViewController {
             endButton.widthAnchor.constraint(equalTo: endButtonView.widthAnchor, multiplier: 0.7),
             endButton.heightAnchor.constraint(equalTo: endButtonView.widthAnchor, multiplier: 0.7),
         ]
+        
+        let connectToSpotifyButtonConstraints = [
+            connectToSpotifyButton.centerXAnchor.constraint(equalTo: spotifyButtonView.centerXAnchor),
+            connectToSpotifyButton.centerYAnchor.constraint(equalTo: spotifyButtonView.centerYAnchor),
+            connectToSpotifyButton.widthAnchor.constraint(equalTo: spotifyButtonView.widthAnchor, multiplier: 0.80),
+            connectToSpotifyButton.heightAnchor.constraint(equalTo: spotifyButtonView.heightAnchor, multiplier: 0.45),
+        ]
      
         NSLayoutConstraint.activate(stackViewConstraints)
         NSLayoutConstraint.activate(timerViewConstraints)
@@ -162,6 +191,7 @@ class TrackingViewController: UIViewController {
         NSLayoutConstraint.activate(timerLabelConstraints)
         NSLayoutConstraint.activate(stopButtonConstraints)
         NSLayoutConstraint.activate(endButtonConstraints)
+        NSLayoutConstraint.activate(connectToSpotifyButtonConstraints)
     }
     
     deinit {
