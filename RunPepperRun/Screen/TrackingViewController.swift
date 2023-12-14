@@ -53,7 +53,7 @@ class TrackingViewController: UIViewController {
         return sv
     }()
     
-    private let stopAndEndButtonView: UIStackView = {
+    private let roundedButtonsView: UIStackView = {
         let view = UIStackView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.distribution = .fillEqually
@@ -129,10 +129,10 @@ class TrackingViewController: UIViewController {
         stackView.addArrangedSubview(runningStatusView)
         stackView.addArrangedSubview(buttonsView)
         timerView.addSubview(timerLabel)
-        buttonsView.addArrangedSubview(stopAndEndButtonView)
+        buttonsView.addArrangedSubview(roundedButtonsView)
         buttonsView.addArrangedSubview(spotifyButtonView)
-        stopAndEndButtonView.addArrangedSubview(pauseAndResumeButtonView)
-        stopAndEndButtonView.addArrangedSubview(endButtonView)
+        roundedButtonsView.addArrangedSubview(pauseAndResumeButtonView)
+        roundedButtonsView.addArrangedSubview(endButtonView)
         endButtonView.addSubview(endButton)
         pauseAndResumeButtonView.addSubview(pauseAndResumeButton)
         spotifyButtonView.addSubview(connectToSpotifyButton)
@@ -163,7 +163,7 @@ class TrackingViewController: UIViewController {
             timerLabel.centerYAnchor.constraint(equalTo: timerView.centerYAnchor),
         ]
         
-        let stopButtonConstraints = [
+        let pauseAndResumeButtonConstraints = [
             pauseAndResumeButton.centerXAnchor.constraint(equalTo: pauseAndResumeButtonView.centerXAnchor),
             pauseAndResumeButton.centerYAnchor.constraint(equalTo: pauseAndResumeButtonView.centerYAnchor),
             pauseAndResumeButton.widthAnchor.constraint(equalTo: pauseAndResumeButtonView.widthAnchor, multiplier: 0.7),
@@ -189,7 +189,7 @@ class TrackingViewController: UIViewController {
         NSLayoutConstraint.activate(runningStatusViewConstraints)
         NSLayoutConstraint.activate(buttonsViewConstraints)
         NSLayoutConstraint.activate(timerLabelConstraints)
-        NSLayoutConstraint.activate(stopButtonConstraints)
+        NSLayoutConstraint.activate(pauseAndResumeButtonConstraints)
         NSLayoutConstraint.activate(endButtonConstraints)
         NSLayoutConstraint.activate(connectToSpotifyButtonConstraints)
     }
@@ -280,7 +280,7 @@ extension TrackingViewController: RoundedButtonDelegate {
         }
         
         else if button == pauseAndResumeButton {
-            tapStopButton()
+            tapPauseAndResumeButton()
         }
     }
     
@@ -290,7 +290,7 @@ extension TrackingViewController: RoundedButtonDelegate {
         showEndRunningAlert()
     }
     
-    private func tapStopButton() {
+    private func tapPauseAndResumeButton() {
         if isTimerTicking() {
             locationManager.stopUpdatingLocation()
             suspendTimer()
