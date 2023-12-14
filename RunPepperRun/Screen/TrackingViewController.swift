@@ -295,7 +295,7 @@ extension TrackingViewController: RoundedButtonDelegate {
             pauseAndResumeButton.setTitle("재개", for: .normal)
             UIView.animate(withDuration: 0.4) { [weak self] in
                 self?.view.backgroundColor = .systemYellow
-                self?.pauseAndResumeButton.backgroundColor = .systemGreen
+                self?.pauseAndResumeButton.backgroundColor = .systemCyan
             }
         } else if timerSuspended {
             locationManager.startUpdatingLocation()
