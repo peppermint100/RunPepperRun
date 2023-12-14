@@ -232,10 +232,6 @@ extension TrackingViewController {
         timer?.resume()
     }
     
-    private func isTimerIdle() -> Bool {
-        return timerSuspended && seconds == 0
-    }
-    
     private func isTimerTicking() -> Bool {
         return !timerSuspended && seconds > 0
     }
