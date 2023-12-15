@@ -96,7 +96,7 @@ class TrackingViewController: UIViewController {
         let image = UIImage(named: "SpotifyIcon")
         var config = UIButton.Configuration.plain()
         var titleContainer = AttributeContainer()
-        titleContainer.font = UIFont.systemFont(ofSize: 22, weight: .bold)
+        titleContainer.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         config.image = image
         config.imagePadding = 5
         config.imagePlacement = .leading
@@ -250,9 +250,6 @@ extension TrackingViewController {
 
 // MARK: - LocationManager, Map 관련
 extension TrackingViewController: CLLocationManagerDelegate {
-    private func setUpMapView() {
-        mapView.isHidden = mapHidden
-    }
     
     private func setUpLocationManager() {
         locationManager.delegate = self
