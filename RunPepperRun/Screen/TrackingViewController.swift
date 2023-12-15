@@ -115,14 +115,14 @@ class TrackingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpLocationManager()
-        buildUI()
+        setUpUI()
+        setUpRoundedButtons()
         applyConstraints()
-        buildRoundedButtons()
-        buildTimer()
+        setUpTimer()
     }
     
 // MARK: - UI 설정
-    private func buildUI() {
+    private func setUpUI() {
         view.backgroundColor = .systemCyan
         view.addSubview(stackView)
         stackView.addArrangedSubview(timerView)
@@ -201,7 +201,7 @@ class TrackingViewController: UIViewController {
 
 // MARK: - Timer 관련
 extension TrackingViewController {
-    private func buildTimer() {
+    private func setUpTimer() {
         if timer != nil { return }
         timer = DispatchSource.makeTimerSource(flags: [], queue: DispatchQueue.main)
         timer?.schedule(deadline: .now() + 1, repeating: 1)
@@ -266,31 +266,20 @@ extension TrackingViewController: CLLocationManagerDelegate {
     }
 }
 
-// MARK: - Buttons 델리게이트
-extension TrackingViewController: RoundedButtonDelegate {
-    private func buildRoundedButtons() {
-        pauseAndResumeButton.delegate = self
-        endButton.delegate = self
+// MARK: - RoundedButton 관련
+extension TrackingViewController {
+    private func setUpRoundedButtons() {
+        pauseAndResumeButton.addTarget(self, action: #selector(tapPauseAndResumeButton), for: .touchUpInside)
+        endButton.addTarget(self, action: #selector(tapEndButton), for: .touchUpInside)
     }
     
-    func didTapButton(_ button: RoundedButton) {
-        
-        if button == endButton {
-            tapEndButton()
-        }
-        
-        else if button == pauseAndResumeButton {
-            tapPauseAndResumeButton()
-        }
-    }
-    
-    private func tapEndButton() {
+    @objc private func tapEndButton() {
         locationManager.stopUpdatingLocation()
         suspendTimer()
         showEndRunningAlert()
     }
     
-    private func tapPauseAndResumeButton() {
+    @objc private func tapPauseAndResumeButton() {
         if isTimerTicking() {
             locationManager.stopUpdatingLocation()
             suspendTimer()
