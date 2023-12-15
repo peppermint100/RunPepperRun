@@ -7,13 +7,9 @@
 
 import UIKit
 
-protocol RoundedButtonDelegate: AnyObject {
-    func didTapButton(_ button: RoundedButton)
-}
 
 class RoundedButton: UIButton {
     
-    weak var delegate: RoundedButtonDelegate?
     var shadow = false
 
     override init(frame: CGRect) {
@@ -27,7 +23,6 @@ class RoundedButton: UIButton {
         titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
         setTitle(title ?? "", for: .normal)
         setTitleColor(.white, for: .normal)
-        addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
     }
     
     required init(coder: NSCoder) {
@@ -43,9 +38,5 @@ class RoundedButton: UIButton {
             layer.shadowOpacity = 1.0
             layer.shadowRadius = 4
         }
-    }
-    
-    @objc private func didTapButton() {
-        delegate?.didTapButton(self)
     }
 }
