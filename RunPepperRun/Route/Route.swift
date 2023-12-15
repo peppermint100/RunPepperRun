@@ -10,13 +10,13 @@ import MapKit
 
 
 struct Route {
-    var locations: [CLLocation]
-    var coordinates: [CLLocationCoordinate2D] {
+    private var locations: [CLLocation]
+    private var coordinates: [CLLocationCoordinate2D] {
         get {
             return locations.map { $0.coordinate }
         }
     }
-  
+    
     init() {
         self.locations = Array<CLLocation>()
     }

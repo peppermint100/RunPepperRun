@@ -10,7 +10,6 @@ import MapKit
 
 
 class TrackingViewController: UIViewController {
-    
     private var timer: DispatchSourceTimer?
     private var seconds = 0
     private var timerSuspended = true
@@ -39,10 +38,10 @@ class TrackingViewController: UIViewController {
         return label
     }()
     
-    private let runningStatusView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
+    private let runningStatusView: RunningStatusCollectionView = {
+        let cv = RunningStatusCollectionView()
+        cv.translatesAutoresizingMaskIntoConstraints = false
+        return cv
     }()
     
     private let buttonsView: UIStackView = {
@@ -117,6 +116,7 @@ class TrackingViewController: UIViewController {
         setUpLocationManager()
         setUpUI()
         setUpRoundedButtons()
+        setUpRunngingStatusCollectionView()
         applyConstraints()
         setUpTimer()
     }
@@ -147,11 +147,11 @@ class TrackingViewController: UIViewController {
         ]
         
         let timerViewConstraints = [
-            timerView.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 0.4),
+            timerView.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 0.3),
         ]
         
         let runningStatusViewConstraints = [
-            runningStatusView.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 0.2),
+            runningStatusView.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 0.3),
         ]
         
         let buttonsViewConstraints = [
@@ -248,8 +248,12 @@ extension TrackingViewController {
 }
 
 
-// MARK: - LocationManager 델리게이트
+// MARK: - LocationManager, Map 관련
 extension TrackingViewController: CLLocationManagerDelegate {
+    private func setUpMapView() {
+        mapView.isHidden = mapHidden
+    }
+    
     private func setUpLocationManager() {
         locationManager.delegate = self
         locationManager.allowsBackgroundLocationUpdates = true
@@ -321,5 +325,27 @@ extension TrackingViewController {
         vc.route = route
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: false)
+    }
+}
+
+// MARK: - RunningStatusCollectionView 관련
+extension TrackingViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    private func setUpRunngingStatusCollectionView() {
+        runningStatusView.setUpCollectionView(delegate: self, dataSource: self)
+    }
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 4
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RunningStatusCollectionViewCell.identifier, for: indexPath)
+                as? RunningStatusCollectionViewCell else { return UICollectionViewCell() }
+        return cell
     }
 }
