@@ -14,7 +14,8 @@ class TrackingViewController: UIViewController {
     private var seconds = 0
     private var timerSuspended = true
     private let locationManager = CLLocationManager()
-    private var route = Route()
+    
+    var route: Route?
     
     private let stackView: UIStackView = {
         let sv = UIStackView()
@@ -262,7 +263,7 @@ extension TrackingViewController: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.last {
-            route.addLocation(location)
+            route?.addLocation(location)
         }
     }
 }

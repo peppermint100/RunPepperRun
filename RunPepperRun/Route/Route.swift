@@ -17,6 +17,10 @@ struct Route {
         }
     }
     
+    private var startLocation: CLLocation {
+        locations.first ?? CLLocation(latitude: 0, longitude: 0)
+    }
+    
     init() {
         self.locations = Array<CLLocation>()
     }
