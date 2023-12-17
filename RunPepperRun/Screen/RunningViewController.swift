@@ -35,7 +35,7 @@ class RunningViewController: UIViewController {
     }()
     
     private let startButton: RoundedButton = {
-        let button = RoundedButton("시작", color: .systemBlue)
+        let button = RoundedButton("시작", color: .systemBlue, shadow: true)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -47,6 +47,7 @@ class RunningViewController: UIViewController {
         buildCollectionView()
         applyConstraints()
         setUpLocationManager()
+        setUpStartButton()
         handleLocationAuthorization()
     }
     
@@ -63,7 +64,6 @@ class RunningViewController: UIViewController {
         view.addSubview(startButton)
         stackView.addArrangedSubview(runningCardView)
         stackView.addArrangedSubview(runningMapView)
-        startButton.delegate = self
     }
     
     private func buildCollectionView() {
@@ -142,9 +142,13 @@ extension RunningViewController: CLLocationManagerDelegate, MKMapViewDelegate {
     }
 }
 
-// MARK: - 시작 버튼 델리게이트
-extension RunningViewController: RoundedButtonDelegate {
-    func didTapButton(_ button: RoundedButton) {
+// MARK: - 시작 버튼 관련
+extension RunningViewController {
+    private func setUpStartButton() {
+        startButton.addTarget(self, action: #selector(tapStartButton), for: .touchUpInside)
+    }
+    
+    @objc private func tapStartButton() {
         switch locationManager.authorizationStatus {
         case .authorizedAlways, .authorizedWhenInUse:
             presentToTrackingVC()
