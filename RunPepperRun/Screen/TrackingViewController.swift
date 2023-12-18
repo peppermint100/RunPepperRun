@@ -13,6 +13,7 @@ class TrackingViewController: UIViewController {
     private var timer: DispatchSourceTimer?
     private var seconds = 0
     private var timerSuspended = true
+
     private var timerTicking: Bool {
         return !timerSuspended && seconds > 0
     }
