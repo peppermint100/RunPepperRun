@@ -22,40 +22,59 @@ struct Route {
         }
     }
     
-    private var firstLocation: CLLocation {
+    var firstLocation: CLLocation {
         locations.first ?? CLLocation(latitude: 0, longitude: 0)
     }
     
-    private var lastLocation: CLLocation {
+    var lastLocation: CLLocation {
         locations.last ?? firstLocation
     }
     
+    // km
     var distance: CLLocationDistance {
-        return calculateDistance(locations: self.locations)
+        return locations.reduce(0.0) { (totalDistance, location) in
+            let nextLocation = locations[locations.index(after: locations.firstIndex(of: location) ?? 0)]
+            return totalDistance + nextLocation.distance(from: location)
+        }.toKiloMeters()
     }
     
-    var averageSpeed: CLLocationSpeed {
-        guard let firstLocation = locations.first, let lastLocation = locations.last else {
-            return 0.0
-        }
-
-        let timeInterval = lastLocation.timestamp.timeIntervalSince(firstLocation.timestamp)
-        let totalDistance = calculateDistance(locations: locations)
-        return totalDistance / timeInterval
+    // km/h
+    var speed: CLLocationSpeed {
+        return distance / time
     }
     
-    var pace: TimeInterval {
-        return calculateTotalTimeSeconds(locations: self.locations) / distance / 1000
+    // hours
+    var time: Double {
+        return lastLocation.timestamp.timeIntervalSince(firstLocation.timestamp).toHours()
     }
     
     // 칼로리 = MET x 체중(kg) x 시간(시간)
     var caloriesBurned: Double {
-        return met * Route.userWeightKilogram * ((lastLocation.timestamp.timeIntervalSince(firstLocation.timestamp))/3600)
+        return met * Route.userWeightKilogram * time
+    }
+    
+    var pace: Double {
+        if paces.isEmpty {
+            let weight = 1 / distance
+            return time * weight
+        }
+        
+        return paces.last!
+    }
+    
+    private var paces: [Double] = []
+    
+    var averagePaces: Double {
+        if paces.isEmpty {
+            return pace
+        }
+        
+        return paces.reduce(0.0, +) / Double(paces.count)
     }
     
     // MET = (1.11 x 속도(km/h))^2 + 3.09
     private var met: Double {
-        return pow(1.11, averageSpeed) + 3.09
+        return pow(1.11 * speed, 2) + 3.09
     }
     
     init() {
@@ -66,20 +85,8 @@ struct Route {
         self.locations.append(location)
     }
     
-    private func calculateDistance(locations: [CLLocation]) -> CLLocationDistance {
-        return locations.reduce(0.0) { (totalDistance, location) in
-            let nextLocation = locations[locations.index(after: locations.firstIndex(of: location) ?? 0)]
-            return totalDistance + nextLocation.distance(from: location)
-        }
-    }
-    
-    func calculateTotalTimeSeconds(locations: [CLLocation]) -> TimeInterval {
-        guard let firstLocation = locations.first, let lastLocation = locations.last else {
-            return 0.0
-        }
-
-        let totalTime = lastLocation.timestamp.timeIntervalSince(firstLocation.timestamp)
-        return totalTime
+    mutating func savePace() {
+        paces.append(pace)
     }
 }
 

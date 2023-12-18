@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		BA0B34132B2C2715004DD130 /* RunningStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0B34122B2C2715004DD130 /* RunningStatus.swift */; };
 		BA0B34152B2C2BBD004DD130 /* RunningStatusCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0B34142B2C2BBD004DD130 /* RunningStatusCollectionViewCell.swift */; };
+		BA0B34182B2FF8C7004DD130 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0B34172B2FF8C7004DD130 /* Extensions.swift */; };
 		BAAADC862B2AF5C90035246E /* RunningStatusCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAADC852B2AF5C90035246E /* RunningStatusCollectionView.swift */; };
 		BAAADC882B2AF7760035246E /* RunningStatusCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAADC872B2AF7760035246E /* RunningStatusCollectionViewFlowLayout.swift */; };
 		BAAD1B552B24546200296ED8 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAD1B542B24546200296ED8 /* RoundedButton.swift */; };
@@ -32,6 +33,7 @@
 /* Begin PBXFileReference section */
 		BA0B34122B2C2715004DD130 /* RunningStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningStatus.swift; sourceTree = "<group>"; };
 		BA0B34142B2C2BBD004DD130 /* RunningStatusCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningStatusCollectionViewCell.swift; sourceTree = "<group>"; };
+		BA0B34172B2FF8C7004DD130 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		BAAADC852B2AF5C90035246E /* RunningStatusCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningStatusCollectionView.swift; sourceTree = "<group>"; };
 		BAAADC872B2AF7760035246E /* RunningStatusCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningStatusCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		BAAD1B542B24546200296ED8 /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
@@ -66,6 +68,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BA0B34162B2FF8B8004DD130 /* Global */ = {
+			isa = PBXGroup;
+			children = (
+				BAAD1B542B24546200296ED8 /* RoundedButton.swift */,
+				BA0B34172B2FF8C7004DD130 /* Extensions.swift */,
+			);
+			path = Global;
+			sourceTree = "<group>";
+		};
 		BAAD1B492B243DA100296ED8 /* Route */ = {
 			isa = PBXGroup;
 			children = (
@@ -73,14 +84,6 @@
 				BAC7702E2B26FADF003BA825 /* RouteDisplaying.swift */,
 			);
 			path = Route;
-			sourceTree = "<group>";
-		};
-		BAAD1B4F2B24404800296ED8 /* Map */ = {
-			isa = PBXGroup;
-			children = (
-				BAAD1B542B24546200296ED8 /* RoundedButton.swift */,
-			);
-			path = Map;
 			sourceTree = "<group>";
 		};
 		BAAF54B32B219A6F00265237 = {
@@ -102,7 +105,7 @@
 		BAAF54BE2B219A6F00265237 /* RunPepperRun */ = {
 			isa = PBXGroup;
 			children = (
-				BAAD1B4F2B24404800296ED8 /* Map */,
+				BA0B34162B2FF8B8004DD130 /* Global */,
 				BAAD1B492B243DA100296ED8 /* Route */,
 				BAAF54DF2B21C01E00265237 /* Running */,
 				BAAF54D62B21ACCD00265237 /* Screen */,
@@ -228,6 +231,7 @@
 				BAC7702F2B26FADF003BA825 /* RouteDisplaying.swift in Sources */,
 				BAAF54DA2B21AD7200265237 /* RunningViewController.swift in Sources */,
 				BA0B34152B2C2BBD004DD130 /* RunningStatusCollectionViewCell.swift in Sources */,
+				BA0B34182B2FF8C7004DD130 /* Extensions.swift in Sources */,
 				BA0B34132B2C2715004DD130 /* RunningStatus.swift in Sources */,
 				BAAF54DE2B21ADB900265237 /* SettingsViewController.swift in Sources */,
 				BAC7702D2B26E563003BA825 /* RunningResultViewController.swift in Sources */,

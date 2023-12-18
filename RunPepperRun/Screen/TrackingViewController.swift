@@ -231,7 +231,7 @@ extension TrackingViewController {
     }
     
     private func resumeTimer() {
-        if isTimerTicking() {
+        if timerTicking {
             return
         }
         timerSuspended = false
