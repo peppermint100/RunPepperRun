@@ -12,7 +12,7 @@ import MapKit
 struct Route {
     // TODO: - 이 후에 UserDefaults로 사용자가 설정할 수 있도록 지정
     // 단위는 CLLocationDistance와 일치하도록 meter
-    static let standardDistanceForPaceMeters = 500
+    static let standardDistanceForPaceMeters: Double = 100
     static let userWeightKilogram: Double = 70
     
     private var locations: [CLLocation]
@@ -22,40 +22,67 @@ struct Route {
         }
     }
     
-    private var firstLocation: CLLocation {
+    var firstLocation: CLLocation {
         locations.first ?? CLLocation(latitude: 0, longitude: 0)
     }
     
-    private var lastLocation: CLLocation {
+    var lastLocation: CLLocation {
         locations.last ?? firstLocation
     }
     
+    // meter
     var distance: CLLocationDistance {
-        return calculateDistance(locations: self.locations)
+        return locations.reduce(0.0) { (totalDistance, location) in
+            if
+                let idx = locations.firstIndex(of: location),
+                locations.index(before: idx) > 0 {
+                let beforeLocation = locations[locations.index(before: idx)]
+                return totalDistance + beforeLocation.distance(from: location)
+            }
+            else {
+                return totalDistance
+            }
+        }
     }
     
-    var averageSpeed: CLLocationSpeed {
-        guard let firstLocation = locations.first, let lastLocation = locations.last else {
+    // km/h
+    var speed: CLLocationSpeed {
+        if Route.standardDistanceForPaceMeters > distance {
             return 0.0
         }
-
-        let timeInterval = lastLocation.timestamp.timeIntervalSince(firstLocation.timestamp)
-        let totalDistance = calculateDistance(locations: locations)
-        return totalDistance / timeInterval
+        return distance.toKiloMeters() / time.toHours()
     }
     
-    var pace: TimeInterval {
-        return calculateTotalTimeSeconds(locations: self.locations) / distance / 1000
+    // seconds
+    var time: Double {
+        return lastLocation.timestamp.timeIntervalSince(firstLocation.timestamp)
     }
     
-    // 칼로리 = MET x 체중(kg) x 시간(시간)
+    // 칼로리 계산 = MET * 3.5 * WEIGHT(kg) * time(minutes)/ 200
     var caloriesBurned: Double {
-        return met * Route.userWeightKilogram * ((lastLocation.timestamp.timeIntervalSince(firstLocation.timestamp))/3600)
+        if Route.standardDistanceForPaceMeters > distance {
+            return 0.0
+        }
+        
+        return Route.userWeightKilogram * 3.5 * time.toMinutes() * (speed - 3) / 200
     }
     
-    // MET = (1.11 x 속도(km/h))^2 + 3.09
-    private var met: Double {
-        return pow(1.11, averageSpeed) + 3.09
+    var pace: Double {
+        if Route.standardDistanceForPaceMeters > distance || paces.isEmpty {
+            return 0.0
+        }
+        
+        return paces.last!
+    }
+    
+    private var paces: [Double] = []
+    
+    var averagePaces: Double {
+        if paces.isEmpty {
+            return pace
+        }
+        
+        return paces.reduce(0.0, +) / Double(paces.count)
     }
     
     init() {
@@ -66,20 +93,9 @@ struct Route {
         self.locations.append(location)
     }
     
-    private func calculateDistance(locations: [CLLocation]) -> CLLocationDistance {
-        return locations.reduce(0.0) { (totalDistance, location) in
-            let nextLocation = locations[locations.index(after: locations.firstIndex(of: location) ?? 0)]
-            return totalDistance + nextLocation.distance(from: location)
-        }
-    }
-    
-    func calculateTotalTimeSeconds(locations: [CLLocation]) -> TimeInterval {
-        guard let firstLocation = locations.first, let lastLocation = locations.last else {
-            return 0.0
-        }
-
-        let totalTime = lastLocation.timestamp.timeIntervalSince(firstLocation.timestamp)
-        return totalTime
+    // 이 후에 timer 런닝거리경과를 보고 있다가 paces에 pace를 추가한다.
+    mutating func addPace() {
+        paces.append(pace)
     }
 }
 
