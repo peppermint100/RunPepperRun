@@ -13,7 +13,8 @@ class TrackingViewController: UIViewController {
     private var timer: DispatchSourceTimer?
     private var seconds = 0
     private var timerSuspended = true
-    private var timerTikcing: Bool {
+
+    private var timerTicking: Bool {
         return !timerSuspended && seconds > 0
     }
     
@@ -282,7 +283,7 @@ extension TrackingViewController {
     }
     
     @objc private func tapPauseAndResumeButton() {
-        if timerTikcing {
+        if timerTicking {
             locationManager.stopUpdatingLocation()
             suspendTimer()
             pauseAndResumeButton.setTitle("재개", for: .normal)
