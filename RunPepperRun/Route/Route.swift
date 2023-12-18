@@ -30,6 +30,12 @@ struct Route {
         locations.last ?? firstLocation
     }
     
+    private var paces: [Double] = []
+    
+    init() {
+        self.locations = Array<CLLocation>()
+    }
+    
     // meter
     var distance: CLLocationDistance {
         return locations.reduce(0.0) { (totalDistance, location) in
@@ -67,6 +73,7 @@ struct Route {
         return Route.userWeightKilogram * 3.5 * time.toMinutes() * (speed - 3) / 200
     }
     
+    
     var pace: Double {
         if Route.standardDistanceForPaceMeters > distance || paces.isEmpty {
             return 0.0
@@ -74,8 +81,6 @@ struct Route {
         
         return paces.last!
     }
-    
-    private var paces: [Double] = []
     
     var averagePaces: Double {
         if paces.isEmpty {
@@ -85,17 +90,13 @@ struct Route {
         return paces.reduce(0.0, +) / Double(paces.count)
     }
     
-    init() {
-        self.locations = Array<CLLocation>()
-    }
-    
     mutating func addLocation(_ location: CLLocation) {
         self.locations.append(location)
     }
     
     // 이 후에 timer 런닝거리경과를 보고 있다가 paces에 pace를 추가한다.
-    mutating func addPace() {
-        paces.append(pace)
+    mutating func addPace(_ pace: Double) {
+        self.paces.append(pace)
     }
 }
 
