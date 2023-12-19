@@ -220,6 +220,7 @@ extension TrackingViewController {
     private func timerTicks() {
         seconds += 1
         timerLabel.text = String(format: "%02d:%02d", seconds/60, seconds%60)
+        updateRunningStatusCells()
     }
     
     private func suspendTimer() {
@@ -328,7 +329,8 @@ extension TrackingViewController {
 }
 
 // MARK: - RunningStatusCollectionView 관련
-extension TrackingViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension TrackingViewController:
+    UICollectionViewDelegate, UICollectionViewDataSource {
     
     private func setUpRunngingStatusCollectionView() {
         runningStatusView.setUpCollectionView(delegate: self, dataSource: self)
@@ -339,12 +341,32 @@ extension TrackingViewController: UICollectionViewDelegate, UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        return RunningStatus.allCases.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RunningStatusCollectionViewCell.identifier, for: indexPath)
-                as? RunningStatusCollectionViewCell else { return UICollectionViewCell() }
+                as? RunningStatusCollectionViewCell
+        else { return UICollectionViewCell() }
+        
+        let status = RunningStatus(rawValue:indexPath.row)
+        
+        cell.titles = status?.getTitlesFrom(route)
+        
         return cell
+    }
+    
+    private func updateRunningStatusCells() {
+        for status in RunningStatus.allCases {
+            guard let cell = runningStatusView.cellForItem(at: IndexPath(row: status.rawValue, section: 0))
+                    as? RunningStatusCollectionViewCell else {
+                return
+            }
+            
+            let titles = status.getTitlesFrom(route)
+            
+            cell.titles = titles
+            runningStatusView.reloadData()
+        }
     }
 }

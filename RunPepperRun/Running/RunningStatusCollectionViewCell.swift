@@ -7,10 +7,17 @@
 
 import UIKit
 
+
 class RunningStatusCollectionViewCell: UICollectionViewCell {
     
     static let identifier = "RunningStatusCollectionViewCell"
-    
+    var titles: RunningStatusTitles? = RunningStatusTitles(title: "-", subTitle: "-") {
+        didSet {
+            titleLabel.text = titles?.title
+            subTitleLabel.text = titles?.subTitle
+        }
+    }
+
     private let stackView: UIStackView = {
         let sv = UIStackView()
         sv.translatesAutoresizingMaskIntoConstraints = false
@@ -18,10 +25,9 @@ class RunningStatusCollectionViewCell: UICollectionViewCell {
         return sv
     }()
     
-    private let titleLabel: UILabel = {
+    private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "00:00"
-        let fontSize: CGFloat = 40
+        let fontSize: CGFloat = 30
         let boldItalicDescriptor = UIFontDescriptor
             .preferredFontDescriptor(withTextStyle: .headline)
             .withSymbolicTraits([.traitBold, .traitItalic])
@@ -29,20 +35,21 @@ class RunningStatusCollectionViewCell: UICollectionViewCell {
         label.font = boldItalicFont
         label.textColor = .label
         label.textAlignment = .center
+        label.text = titles?.title
         return label
     }()
     
-    private let subTitleLabel: UILabel = {
+    private lazy var subTitleLabel: UILabel = {
         let label = UILabel()
-        label.text = "속도"
         let fontSize: CGFloat = 18
         let boldItalicDescriptor = UIFontDescriptor
             .preferredFontDescriptor(withTextStyle: .headline)
             .withSymbolicTraits([.traitBold, .traitItalic])
         let boldItalicFont = UIFont(descriptor: boldItalicDescriptor!, size: fontSize)
         label.font = boldItalicFont
-        label.textColor = .systemGray4
+        label.textColor = .systemGray2
         label.textAlignment = .center
+        label.text = titles?.subTitle
         return label
     }()
     
