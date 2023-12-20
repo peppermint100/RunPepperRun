@@ -17,6 +17,7 @@ class RunningViewController: UIViewController {
         let sv = UIStackView()
         sv.translatesAutoresizingMaskIntoConstraints = false
         sv.axis = .vertical
+        sv.distribution = .fill
         return sv
     }()
     
@@ -42,9 +43,9 @@ class RunningViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        buildUI()
-        buildNavigationBar()
-        buildCollectionView()
+        setUpUI()
+        setUpNavigationBar()
+        setUpRunningCardCollectionView()
         applyConstraints()
         setUpLocationManager()
         setUpStartButton()
@@ -52,13 +53,13 @@ class RunningViewController: UIViewController {
     }
     
 // MARK: - 네비게이션 바 세팅
-    private func buildNavigationBar() {
+    private func setUpNavigationBar() {
         navigationItem.title = "러닝"
         navigationController?.navigationBar.prefersLargeTitles = true
     }
     
 // MARK: - UI 세팅
-    private func buildUI() {
+    private func setUpUI() {
         view.backgroundColor = .systemBackground
         view.addSubview(stackView)
         view.addSubview(startButton)
@@ -66,7 +67,7 @@ class RunningViewController: UIViewController {
         stackView.addArrangedSubview(runningMapView)
     }
     
-    private func buildCollectionView() {
+    private func setUpRunningCardCollectionView() {
         runningCardView.delegate = self
         runningCardView.dataSource = self
         runningCardView.register(RunningCardCollectionViewCell.self, forCellWithReuseIdentifier: RunningCardCollectionViewCell.identifier)
@@ -77,16 +78,16 @@ class RunningViewController: UIViewController {
         let stackViewConstraints = [
             stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            stackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             stackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ]
         
         let runningHistoryViewConstraints = [
-            runningCardView.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 0.35)
+            runningCardView.heightAnchor.constraint(lessThanOrEqualTo: stackView.heightAnchor, multiplier: 0.35)
         ]
         
         let runningMapViewConstraints = [
-            runningMapView.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 0.65)
+            runningMapView.heightAnchor.constraint(lessThanOrEqualTo: stackView.heightAnchor, multiplier: 0.65)
         ]
         
         let startButtonConstraints = [

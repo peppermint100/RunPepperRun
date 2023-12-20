@@ -61,7 +61,7 @@
          </BuildableReference>
       </BuildableProductRunnable>
       <LocationScenarioReference
-         identifier = "../../RunPepperRun/Resource/Route2.gpx"
+         identifier = "../../RunPepperRun/Resource/Route1.gpx"
          referenceType = "0">
       </LocationScenarioReference>
    </LaunchAction>
