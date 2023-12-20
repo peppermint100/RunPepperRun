@@ -10,6 +10,7 @@ import MapKit
 
 
 class TrackingViewController: UIViewController {
+    var tracker: Tracker?
     private var timer: DispatchSourceTimer?
     private var seconds = 0
     private var timerSuspended = true
@@ -17,10 +18,6 @@ class TrackingViewController: UIViewController {
     private var timerTicking: Bool {
         return !timerSuspended && seconds > 0
     }
-    
-    private let locationManager = CLLocationManager()
-    
-    var route: Route?
     
     private let stackView: UIStackView = {
         let sv = UIStackView()
@@ -119,7 +116,6 @@ class TrackingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUpLocationManager()
         setUpUI()
         setUpRoundedButtons()
         applyConstraints()
@@ -248,26 +244,6 @@ extension TrackingViewController {
     }
 }
 
-
-// MARK: - LocationManager, Map 관련
-extension TrackingViewController: CLLocationManagerDelegate {
-    
-    private func setUpLocationManager() {
-        locationManager.delegate = self
-        locationManager.allowsBackgroundLocationUpdates = true
-        locationManager.pausesLocationUpdatesAutomatically = false
-        locationManager.showsBackgroundLocationIndicator = true
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.startUpdatingLocation()
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let location = locations.last {
-            route?.addLocation(location)
-        }
-    }
-}
-
 // MARK: - RoundedButton 관련
 extension TrackingViewController {
     private func setUpRoundedButtons() {
@@ -276,14 +252,14 @@ extension TrackingViewController {
     }
     
     @objc private func tapEndButton() {
-        locationManager.stopUpdatingLocation()
+        tracker?.stopUpdatingLocation()
         suspendTimer()
         showEndRunningAlert()
     }
     
     @objc private func tapPauseAndResumeButton() {
         if timerTicking {
-            locationManager.stopUpdatingLocation()
+            tracker?.stopUpdatingLocation()
             suspendTimer()
             pauseAndResumeButton.setTitle("재개", for: .normal)
             UIView.animate(withDuration: 0.4) { [weak self] in
@@ -291,7 +267,7 @@ extension TrackingViewController {
                 self?.pauseAndResumeButton.backgroundColor = .systemCyan
             }
         } else if timerSuspended {
-            locationManager.startUpdatingLocation()
+            tracker?.startUpdatingLocation()
             resumeTimer()
             pauseAndResumeButton.setTitle("정지", for: .normal)
             UIView.animate(withDuration: 0.4) { [weak self] in
@@ -309,7 +285,7 @@ extension TrackingViewController {
         }
         
         let cancel = UIAlertAction(title: "재개", style: .cancel) { [weak self] cancelAction in
-            self?.locationManager.startUpdatingLocation()
+            self?.tracker?.startUpdatingLocation()
             self?.resumeTimer()
         }
         
@@ -320,8 +296,8 @@ extension TrackingViewController {
     
     private func presentToRunningResultVC() {
         let vc = RunningResultViewController()
-        vc.route = route
         vc.modalPresentationStyle = .fullScreen
+        vc.tracker = tracker
         present(vc, animated: false)
     }
 }
