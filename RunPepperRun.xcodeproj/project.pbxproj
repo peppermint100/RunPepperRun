@@ -7,12 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		BA0B34152B2C2BBD004DD130 /* RunningStatusCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0B34142B2C2BBD004DD130 /* RunningStatusCollectionViewCell.swift */; };
 		BA0B34182B2FF8C7004DD130 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0B34172B2FF8C7004DD130 /* Extensions.swift */; };
 		BA0B341B2B303F2C004DD130 /* RunningStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0B341A2B303F2C004DD130 /* RunningStatus.swift */; };
-		BAAADC862B2AF5C90035246E /* RunningStatusCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAADC852B2AF5C90035246E /* RunningStatusCollectionView.swift */; };
-		BAAADC882B2AF7760035246E /* RunningStatusCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAADC872B2AF7760035246E /* RunningStatusCollectionViewFlowLayout.swift */; };
-		BA0B34182B2FF8C7004DD130 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0B34172B2FF8C7004DD130 /* Extensions.swift */; };
 		BAAD1B552B24546200296ED8 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAD1B542B24546200296ED8 /* RoundedButton.swift */; };
 		BAAD1B5B2B254E1600296ED8 /* TrackingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAD1B5A2B254E1600296ED8 /* TrackingViewController.swift */; };
 		BAAF54C02B219A6F00265237 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAF54BF2B219A6F00265237 /* AppDelegate.swift */; };
@@ -39,8 +35,6 @@
 		BA0B34172B2FF8C7004DD130 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		BA0B34192B301B85004DD130 /* Route2.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Route2.gpx; sourceTree = "<group>"; };
 		BA0B341A2B303F2C004DD130 /* RunningStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningStatus.swift; sourceTree = "<group>"; };
-		BAAADC852B2AF5C90035246E /* RunningStatusCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningStatusCollectionView.swift; sourceTree = "<group>"; };
-		BAAADC872B2AF7760035246E /* RunningStatusCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningStatusCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		BAAD1B542B24546200296ED8 /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		BAAD1B5A2B254E1600296ED8 /* TrackingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingViewController.swift; sourceTree = "<group>"; };
 		BAAD1B5C2B25504B00296ED8 /* Route1.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Route1.gpx; sourceTree = "<group>"; };
@@ -156,8 +150,6 @@
 			children = (
 				BAAF54E22B22B08800265237 /* RunningCardCollectionViewCell.swift */,
 				BAAF54E62B22C5A300265237 /* RunningCardCollectionViewFlowLayout.swift */,
-				BAAADC872B2AF7760035246E /* RunningStatusCollectionViewFlowLayout.swift */,
-				BA0B34142B2C2BBD004DD130 /* RunningStatusCollectionViewCell.swift */,
 				BA0B341A2B303F2C004DD130 /* RunningStatus.swift */,
 				BAB619DE2B31739A00B96E29 /* RunningStatusTitles.swift */,
 				BAB619E02B3292ED00B96E29 /* RunningStatusContainerView.swift */,
@@ -170,7 +162,6 @@
 			isa = PBXGroup;
 			children = (
 				BA0B34142B2C2BBD004DD130 /* RunningStatusCollectionViewCell.swift */,
-				BA0B34122B2C2715004DD130 /* RunningStatus.swift */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -255,7 +246,6 @@
 				BAAF54DE2B21ADB900265237 /* SettingsViewController.swift in Sources */,
 				BAC7702D2B26E563003BA825 /* RunningResultViewController.swift in Sources */,
 				BAB619DF2B31739A00B96E29 /* RunningStatusTitles.swift in Sources */,
-				BAAADC882B2AF7760035246E /* RunningStatusCollectionViewFlowLayout.swift in Sources */,
 				BAAF54D82B21AD2B00265237 /* MainTabBarViewController.swift in Sources */,
 				BAAD1B552B24546200296ED8 /* RoundedButton.swift in Sources */,
 				BA0B341B2B303F2C004DD130 /* RunningStatus.swift in Sources */,

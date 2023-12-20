@@ -20,7 +20,6 @@ class RunningStatusView: UIStackView {
         label.font = boldItalicFont
         label.textColor = .label
         label.textAlignment = .center
-        label.text = titles?.title
         return label
     }()
     
@@ -34,7 +33,6 @@ class RunningStatusView: UIStackView {
         label.font = boldItalicFont
         label.textColor = .systemGray2
         label.textAlignment = .center
-        label.text = titles?.subTitle
         return label
     }()
     

@@ -215,7 +215,6 @@ extension TrackingViewController {
     private func timerTicks() {
         seconds += 1
         timerLabel.text = String(format: "%02d:%02d", seconds/60, seconds%60)
-        updateRunningStatusCells()
     }
     
     private func suspendTimer() {
