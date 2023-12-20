@@ -10,6 +10,7 @@ import MapKit
 
 
 class TrackingViewController: UIViewController {
+    var tracker: Tracker?
     private var timer: DispatchSourceTimer?
     private var seconds = 0
     private var timerSuspended = true
@@ -17,10 +18,6 @@ class TrackingViewController: UIViewController {
     private var timerTicking: Bool {
         return !timerSuspended && seconds > 0
     }
-    
-    private let locationManager = CLLocationManager()
-    
-    var route: Route?
     
     private let stackView: UIStackView = {
         let sv = UIStackView()
@@ -44,10 +41,10 @@ class TrackingViewController: UIViewController {
         return label
     }()
     
-    private let runningStatusView: RunningStatusCollectionView = {
-        let cv = RunningStatusCollectionView()
-        cv.translatesAutoresizingMaskIntoConstraints = false
-        return cv
+    private let runningStatusView: RunningStatusContainerView = {
+        let view = RunningStatusContainerView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
     
     private let buttonsView: UIStackView = {
@@ -119,10 +116,8 @@ class TrackingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUpLocationManager()
         setUpUI()
         setUpRoundedButtons()
-        setUpRunngingStatusCollectionView()
         applyConstraints()
         setUpTimer()
     }
@@ -250,26 +245,6 @@ extension TrackingViewController {
     }
 }
 
-
-// MARK: - LocationManager, Map 관련
-extension TrackingViewController: CLLocationManagerDelegate {
-    
-    private func setUpLocationManager() {
-        locationManager.delegate = self
-        locationManager.allowsBackgroundLocationUpdates = true
-        locationManager.pausesLocationUpdatesAutomatically = false
-        locationManager.showsBackgroundLocationIndicator = true
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.startUpdatingLocation()
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let location = locations.last {
-            route?.addLocation(location)
-        }
-    }
-}
-
 // MARK: - RoundedButton 관련
 extension TrackingViewController {
     private func setUpRoundedButtons() {
@@ -278,14 +253,14 @@ extension TrackingViewController {
     }
     
     @objc private func tapEndButton() {
-        locationManager.stopUpdatingLocation()
+        tracker?.stopUpdatingLocation()
         suspendTimer()
         showEndRunningAlert()
     }
     
     @objc private func tapPauseAndResumeButton() {
         if timerTicking {
-            locationManager.stopUpdatingLocation()
+            tracker?.stopUpdatingLocation()
             suspendTimer()
             pauseAndResumeButton.setTitle("재개", for: .normal)
             UIView.animate(withDuration: 0.4) { [weak self] in
@@ -293,7 +268,7 @@ extension TrackingViewController {
                 self?.pauseAndResumeButton.backgroundColor = .systemCyan
             }
         } else if timerSuspended {
-            locationManager.startUpdatingLocation()
+            tracker?.startUpdatingLocation()
             resumeTimer()
             pauseAndResumeButton.setTitle("정지", for: .normal)
             UIView.animate(withDuration: 0.4) { [weak self] in
@@ -311,7 +286,7 @@ extension TrackingViewController {
         }
         
         let cancel = UIAlertAction(title: "재개", style: .cancel) { [weak self] cancelAction in
-            self?.locationManager.startUpdatingLocation()
+            self?.tracker?.startUpdatingLocation()
             self?.resumeTimer()
         }
         
@@ -322,51 +297,9 @@ extension TrackingViewController {
     
     private func presentToRunningResultVC() {
         let vc = RunningResultViewController()
-        vc.route = route
         vc.modalPresentationStyle = .fullScreen
+        vc.tracker = tracker
         present(vc, animated: false)
     }
 }
 
-// MARK: - RunningStatusCollectionView 관련
-extension TrackingViewController:
-    UICollectionViewDelegate, UICollectionViewDataSource {
-    
-    private func setUpRunngingStatusCollectionView() {
-        runningStatusView.setUpCollectionView(delegate: self, dataSource: self)
-    }
-    
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return RunningStatus.allCases.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RunningStatusCollectionViewCell.identifier, for: indexPath)
-                as? RunningStatusCollectionViewCell
-        else { return UICollectionViewCell() }
-        
-        let status = RunningStatus(rawValue:indexPath.row)
-        
-        cell.titles = status?.getTitlesFrom(route)
-        
-        return cell
-    }
-    
-    private func updateRunningStatusCells() {
-        for status in RunningStatus.allCases {
-            guard let cell = runningStatusView.cellForItem(at: IndexPath(row: status.rawValue, section: 0))
-                    as? RunningStatusCollectionViewCell else {
-                return
-            }
-            
-            let titles = status.getTitlesFrom(route)
-            
-            cell.titles = titles
-            runningStatusView.reloadData()
-        }
-    }
-}

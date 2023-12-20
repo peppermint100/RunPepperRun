@@ -10,7 +10,7 @@ import MapKit
 
 class RunningResultViewController: UIViewController {
     
-    var route: Route?
+    var tracker: Tracker?
     
     private let stackView: UIStackView = {
         let sv = UIStackView()
@@ -79,7 +79,7 @@ class RunningResultViewController: UIViewController {
 extension RunningResultViewController: MKMapViewDelegate {
     private func buildMap() {
         resultMapView.delegate = self
-        route?.drawRouteOn(map: resultMapView)
+        tracker?.drawRouteOn(map: resultMapView)
     }
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {

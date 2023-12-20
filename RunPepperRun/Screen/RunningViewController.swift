@@ -153,10 +153,8 @@ extension RunningViewController {
         case .authorizedAlways, .authorizedWhenInUse:
             guard let location = locationManager.location else { return }
             let vc = TrackingViewController()
-            var route = Route()
-            route.addLocation(location)
             vc.modalPresentationStyle = .fullScreen
-            vc.route = route
+            vc.tracker = Tracker(initialLocation: location)
             present(vc, animated: false)
         default:
             // TODO: - 권한 재요청 코드 추가

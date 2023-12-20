@@ -12,9 +12,9 @@
 		BA0B341B2B303F2C004DD130 /* RunningStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0B341A2B303F2C004DD130 /* RunningStatus.swift */; };
 		BAAADC862B2AF5C90035246E /* RunningStatusCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAADC852B2AF5C90035246E /* RunningStatusCollectionView.swift */; };
 		BAAADC882B2AF7760035246E /* RunningStatusCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAADC872B2AF7760035246E /* RunningStatusCollectionViewFlowLayout.swift */; };
+		BA0B34182B2FF8C7004DD130 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0B34172B2FF8C7004DD130 /* Extensions.swift */; };
 		BAAD1B552B24546200296ED8 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAD1B542B24546200296ED8 /* RoundedButton.swift */; };
 		BAAD1B5B2B254E1600296ED8 /* TrackingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAD1B5A2B254E1600296ED8 /* TrackingViewController.swift */; };
-		BAAD1B5E2B2559D200296ED8 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAD1B5D2B2559D200296ED8 /* Route.swift */; };
 		BAAF54C02B219A6F00265237 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAF54BF2B219A6F00265237 /* AppDelegate.swift */; };
 		BAAF54C22B219A6F00265237 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAF54C12B219A6F00265237 /* SceneDelegate.swift */; };
 		BAAF54C42B219A6F00265237 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAF54C32B219A6F00265237 /* ViewController.swift */; };
@@ -27,6 +27,9 @@
 		BAAF54E32B22B08800265237 /* RunningCardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAF54E22B22B08800265237 /* RunningCardCollectionViewCell.swift */; };
 		BAAF54E72B22C5A300265237 /* RunningCardCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAF54E62B22C5A300265237 /* RunningCardCollectionViewFlowLayout.swift */; };
 		BAB619DF2B31739A00B96E29 /* RunningStatusTitles.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB619DE2B31739A00B96E29 /* RunningStatusTitles.swift */; };
+		BAB619E12B3292ED00B96E29 /* RunningStatusContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB619E02B3292ED00B96E29 /* RunningStatusContainerView.swift */; };
+		BAB619E62B329A6000B96E29 /* RunningStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB619E52B329A6000B96E29 /* RunningStatusView.swift */; };
+		BAB619E82B32AC6100B96E29 /* Tracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB619E72B32AC6100B96E29 /* Tracker.swift */; };
 		BAC7702D2B26E563003BA825 /* RunningResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC7702C2B26E563003BA825 /* RunningResultViewController.swift */; };
 		BAC7702F2B26FADF003BA825 /* RouteDisplaying.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC7702E2B26FADF003BA825 /* RouteDisplaying.swift */; };
 /* End PBXBuildFile section */
@@ -41,7 +44,6 @@
 		BAAD1B542B24546200296ED8 /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		BAAD1B5A2B254E1600296ED8 /* TrackingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingViewController.swift; sourceTree = "<group>"; };
 		BAAD1B5C2B25504B00296ED8 /* Route1.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Route1.gpx; sourceTree = "<group>"; };
-		BAAD1B5D2B2559D200296ED8 /* Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
 		BAAF54BC2B219A6F00265237 /* RunPepperRun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RunPepperRun.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAAF54BF2B219A6F00265237 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BAAF54C12B219A6F00265237 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -56,6 +58,9 @@
 		BAAF54E22B22B08800265237 /* RunningCardCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningCardCollectionViewCell.swift; sourceTree = "<group>"; };
 		BAAF54E62B22C5A300265237 /* RunningCardCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningCardCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		BAB619DE2B31739A00B96E29 /* RunningStatusTitles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningStatusTitles.swift; sourceTree = "<group>"; };
+		BAB619E02B3292ED00B96E29 /* RunningStatusContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningStatusContainerView.swift; sourceTree = "<group>"; };
+		BAB619E52B329A6000B96E29 /* RunningStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningStatusView.swift; sourceTree = "<group>"; };
+		BAB619E72B32AC6100B96E29 /* Tracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tracker.swift; sourceTree = "<group>"; };
 		BAC7702C2B26E563003BA825 /* RunningResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningResultViewController.swift; sourceTree = "<group>"; };
 		BAC7702E2B26FADF003BA825 /* RouteDisplaying.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteDisplaying.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -83,8 +88,8 @@
 		BAAD1B492B243DA100296ED8 /* Route */ = {
 			isa = PBXGroup;
 			children = (
-				BAAD1B5D2B2559D200296ED8 /* Route.swift */,
 				BAC7702E2B26FADF003BA825 /* RouteDisplaying.swift */,
+				BAB619E72B32AC6100B96E29 /* Tracker.swift */,
 			);
 			path = Route;
 			sourceTree = "<group>";
@@ -94,6 +99,7 @@
 			children = (
 				BAAF54BE2B219A6F00265237 /* RunPepperRun */,
 				BAAF54BD2B219A6F00265237 /* Products */,
+				BAB619E42B3299C500B96E29 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -148,15 +154,25 @@
 		BAAF54DF2B21C01E00265237 /* Running */ = {
 			isa = PBXGroup;
 			children = (
-				BAAADC852B2AF5C90035246E /* RunningStatusCollectionView.swift */,
 				BAAF54E22B22B08800265237 /* RunningCardCollectionViewCell.swift */,
 				BAAF54E62B22C5A300265237 /* RunningCardCollectionViewFlowLayout.swift */,
 				BAAADC872B2AF7760035246E /* RunningStatusCollectionViewFlowLayout.swift */,
 				BA0B34142B2C2BBD004DD130 /* RunningStatusCollectionViewCell.swift */,
 				BA0B341A2B303F2C004DD130 /* RunningStatus.swift */,
 				BAB619DE2B31739A00B96E29 /* RunningStatusTitles.swift */,
+				BAB619E02B3292ED00B96E29 /* RunningStatusContainerView.swift */,
+				BAB619E52B329A6000B96E29 /* RunningStatusView.swift */,
 			);
 			path = Running;
+			sourceTree = "<group>";
+		};
+		BAB619E42B3299C500B96E29 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				BA0B34142B2C2BBD004DD130 /* RunningStatusCollectionViewCell.swift */,
+				BA0B34122B2C2715004DD130 /* RunningStatus.swift */,
+			);
+			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -229,13 +245,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BAAADC862B2AF5C90035246E /* RunningStatusCollectionView.swift in Sources */,
 				BAAF54E32B22B08800265237 /* RunningCardCollectionViewCell.swift in Sources */,
 				BAAF54C42B219A6F00265237 /* ViewController.swift in Sources */,
 				BAAD1B5B2B254E1600296ED8 /* TrackingViewController.swift in Sources */,
 				BAC7702F2B26FADF003BA825 /* RouteDisplaying.swift in Sources */,
+				BAB619E62B329A6000B96E29 /* RunningStatusView.swift in Sources */,
 				BAAF54DA2B21AD7200265237 /* RunningViewController.swift in Sources */,
-				BA0B34152B2C2BBD004DD130 /* RunningStatusCollectionViewCell.swift in Sources */,
 				BA0B34182B2FF8C7004DD130 /* Extensions.swift in Sources */,
 				BAAF54DE2B21ADB900265237 /* SettingsViewController.swift in Sources */,
 				BAC7702D2B26E563003BA825 /* RunningResultViewController.swift in Sources */,
@@ -244,9 +259,12 @@
 				BAAF54D82B21AD2B00265237 /* MainTabBarViewController.swift in Sources */,
 				BAAD1B552B24546200296ED8 /* RoundedButton.swift in Sources */,
 				BA0B341B2B303F2C004DD130 /* RunningStatus.swift in Sources */,
+				BAAF54D82B21AD2B00265237 /* MainTabBarViewController.swift in Sources */,
+				BAAD1B552B24546200296ED8 /* RoundedButton.swift in Sources */,
+				BAB619E12B3292ED00B96E29 /* RunningStatusContainerView.swift in Sources */,
+				BAB619E82B32AC6100B96E29 /* Tracker.swift in Sources */,
 				BAAF54DC2B21ADA500265237 /* StatisticViewController.swift in Sources */,
 				BAAF54C02B219A6F00265237 /* AppDelegate.swift in Sources */,
-				BAAD1B5E2B2559D200296ED8 /* Route.swift in Sources */,
 				BAAF54E72B22C5A300265237 /* RunningCardCollectionViewFlowLayout.swift in Sources */,
 				BAAF54C22B219A6F00265237 /* SceneDelegate.swift in Sources */,
 			);
