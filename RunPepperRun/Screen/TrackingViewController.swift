@@ -43,10 +43,10 @@ class TrackingViewController: UIViewController {
         return label
     }()
     
-    private let runningStatusView: RunningStatusCollectionView = {
-        let cv = RunningStatusCollectionView()
-        cv.translatesAutoresizingMaskIntoConstraints = false
-        return cv
+    private let runningStatusView: RunningStatusContainerView = {
+        let view = RunningStatusContainerView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
     
     private let buttonsView: UIStackView = {
@@ -121,7 +121,6 @@ class TrackingViewController: UIViewController {
         setUpLocationManager()
         setUpUI()
         setUpRoundedButtons()
-        setUpRunngingStatusCollectionView()
         applyConstraints()
         setUpTimer()
     }
@@ -230,7 +229,7 @@ extension TrackingViewController {
     }
     
     private func resumeTimer() {
-        if isTimerTicking() {
+        if timerTicking {
             return
         }
         timerSuspended = false
@@ -323,27 +322,5 @@ extension TrackingViewController {
         vc.route = route
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: false)
-    }
-}
-
-// MARK: - RunningStatusCollectionView 관련
-extension TrackingViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-    
-    private func setUpRunngingStatusCollectionView() {
-        runningStatusView.setUpCollectionView(delegate: self, dataSource: self)
-    }
-    
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RunningStatusCollectionViewCell.identifier, for: indexPath)
-                as? RunningStatusCollectionViewCell else { return UICollectionViewCell() }
-        return cell
     }
 }
