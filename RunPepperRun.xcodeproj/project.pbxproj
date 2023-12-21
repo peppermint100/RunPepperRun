@@ -22,12 +22,12 @@
 		BAAF54DE2B21ADB900265237 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAF54DD2B21ADB900265237 /* SettingsViewController.swift */; };
 		BAAF54E32B22B08800265237 /* RunningCardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAF54E22B22B08800265237 /* RunningCardCollectionViewCell.swift */; };
 		BAAF54E72B22C5A300265237 /* RunningCardCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAF54E62B22C5A300265237 /* RunningCardCollectionViewFlowLayout.swift */; };
+		BAB3BE632B33F8DA003B6A81 /* DrawableMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB3BE622B33F8DA003B6A81 /* DrawableMapView.swift */; };
 		BAB619DF2B31739A00B96E29 /* RunningStatusTitles.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB619DE2B31739A00B96E29 /* RunningStatusTitles.swift */; };
 		BAB619E12B3292ED00B96E29 /* RunningStatusContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB619E02B3292ED00B96E29 /* RunningStatusContainerView.swift */; };
 		BAB619E62B329A6000B96E29 /* RunningStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB619E52B329A6000B96E29 /* RunningStatusView.swift */; };
 		BAB619E82B32AC6100B96E29 /* Tracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB619E72B32AC6100B96E29 /* Tracker.swift */; };
 		BAC7702D2B26E563003BA825 /* RunningResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC7702C2B26E563003BA825 /* RunningResultViewController.swift */; };
-		BAC7702F2B26FADF003BA825 /* RouteDisplaying.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC7702E2B26FADF003BA825 /* RouteDisplaying.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,12 +51,12 @@
 		BAAF54DD2B21ADB900265237 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		BAAF54E22B22B08800265237 /* RunningCardCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningCardCollectionViewCell.swift; sourceTree = "<group>"; };
 		BAAF54E62B22C5A300265237 /* RunningCardCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningCardCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
+		BAB3BE622B33F8DA003B6A81 /* DrawableMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawableMapView.swift; sourceTree = "<group>"; };
 		BAB619DE2B31739A00B96E29 /* RunningStatusTitles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningStatusTitles.swift; sourceTree = "<group>"; };
 		BAB619E02B3292ED00B96E29 /* RunningStatusContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningStatusContainerView.swift; sourceTree = "<group>"; };
 		BAB619E52B329A6000B96E29 /* RunningStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningStatusView.swift; sourceTree = "<group>"; };
 		BAB619E72B32AC6100B96E29 /* Tracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tracker.swift; sourceTree = "<group>"; };
 		BAC7702C2B26E563003BA825 /* RunningResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningResultViewController.swift; sourceTree = "<group>"; };
-		BAC7702E2B26FADF003BA825 /* RouteDisplaying.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteDisplaying.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,13 +79,12 @@
 			path = Global;
 			sourceTree = "<group>";
 		};
-		BAAD1B492B243DA100296ED8 /* Route */ = {
+		BAAD1B492B243DA100296ED8 /* Track */ = {
 			isa = PBXGroup;
 			children = (
-				BAC7702E2B26FADF003BA825 /* RouteDisplaying.swift */,
 				BAB619E72B32AC6100B96E29 /* Tracker.swift */,
 			);
-			path = Route;
+			path = Track;
 			sourceTree = "<group>";
 		};
 		BAAF54B32B219A6F00265237 = {
@@ -108,8 +107,9 @@
 		BAAF54BE2B219A6F00265237 /* RunPepperRun */ = {
 			isa = PBXGroup;
 			children = (
+				BAB3BE612B33F8AC003B6A81 /* Map */,
 				BA0B34162B2FF8B8004DD130 /* Global */,
-				BAAD1B492B243DA100296ED8 /* Route */,
+				BAAD1B492B243DA100296ED8 /* Track */,
 				BAAF54DF2B21C01E00265237 /* Running */,
 				BAAF54D62B21ACCD00265237 /* Screen */,
 				BAAF54D52B21AC6400265237 /* Resource */,
@@ -156,6 +156,14 @@
 				BAB619E52B329A6000B96E29 /* RunningStatusView.swift */,
 			);
 			path = Running;
+			sourceTree = "<group>";
+		};
+		BAB3BE612B33F8AC003B6A81 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				BAB3BE622B33F8DA003B6A81 /* DrawableMapView.swift */,
+			);
+			path = Map;
 			sourceTree = "<group>";
 		};
 		BAB619E42B3299C500B96E29 /* Recovered References */ = {
@@ -239,7 +247,6 @@
 				BAAF54E32B22B08800265237 /* RunningCardCollectionViewCell.swift in Sources */,
 				BAAF54C42B219A6F00265237 /* ViewController.swift in Sources */,
 				BAAD1B5B2B254E1600296ED8 /* TrackingViewController.swift in Sources */,
-				BAC7702F2B26FADF003BA825 /* RouteDisplaying.swift in Sources */,
 				BAB619E62B329A6000B96E29 /* RunningStatusView.swift in Sources */,
 				BAAF54DA2B21AD7200265237 /* RunningViewController.swift in Sources */,
 				BA0B34182B2FF8C7004DD130 /* Extensions.swift in Sources */,
@@ -253,6 +260,7 @@
 				BAAD1B552B24546200296ED8 /* RoundedButton.swift in Sources */,
 				BAB619E12B3292ED00B96E29 /* RunningStatusContainerView.swift in Sources */,
 				BAB619E82B32AC6100B96E29 /* Tracker.swift in Sources */,
+				BAB3BE632B33F8DA003B6A81 /* DrawableMapView.swift in Sources */,
 				BAAF54DC2B21ADA500265237 /* StatisticViewController.swift in Sources */,
 				BAAF54C02B219A6F00265237 /* AppDelegate.swift in Sources */,
 				BAAF54E72B22C5A300265237 /* RunningCardCollectionViewFlowLayout.swift in Sources */,

@@ -19,7 +19,7 @@ class Tracker: NSObject {
     weak var delegate: TrackerDelegate?
     
     private var locations = [CLLocation]()
-    private var coordinates: [CLLocationCoordinate2D] {
+    var coordinates: [CLLocationCoordinate2D] {
         get {
             return locations.map { $0.coordinate }
         }
@@ -82,25 +82,10 @@ extension Tracker: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.last {
             updateLocation(location)
-            
             let speed = String(format: "%.2f km/h", speed.toKilometersPerHour())
             let distance = String(format: "%.2f km", distance.toKiloMeters())
             delegate?.tracker(self, updateDistance: distance)
             delegate?.tracker(self, updateSpeed: speed)
-        }
-    }
-}
-
-// MARK: - Route
-extension Tracker: RouteDisplaying {
-    func drawRouteOn(map: MKMapView) {
-        let count = locations.count
-        let line = MKPolyline(coordinates: coordinates, count: count)
-        
-        DispatchQueue.main.async {
-            map.addOverlay(line, level: .aboveRoads)
-            let customEdgePadding: UIEdgeInsets = UIEdgeInsets(top: 50, left: 50, bottom: 50, right: 20)
-            map.setVisibleMapRect(line.boundingMapRect, edgePadding: customEdgePadding, animated: false)
         }
     }
 }

@@ -19,8 +19,8 @@ class RunningResultViewController: UIViewController {
         return sv
     }()
     
-    private let resultMapView: MKMapView = {
-        let mv = MKMapView()
+    private let resultMapView: DrawableMapView = {
+        let mv = DrawableMapView()
         return mv
     }()
     
@@ -79,7 +79,10 @@ class RunningResultViewController: UIViewController {
 extension RunningResultViewController: MKMapViewDelegate {
     private func buildMap() {
         resultMapView.delegate = self
-        tracker?.drawRouteOn(map: resultMapView)
+        if let tracker {
+            resultMapView.drawRoute(with: tracker.coordinates)
+            resultMapView.drawPin(at: tracker.initialLocation.coordinate, title: "시작")
+        }
     }
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {

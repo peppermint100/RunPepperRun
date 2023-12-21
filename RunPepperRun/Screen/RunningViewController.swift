@@ -28,10 +28,10 @@ class RunningViewController: UIViewController {
         return view
     }()
     
-    private let runningMapView: MKMapView = {
-        let mv = MKMapView()
-        mv.translatesAutoresizingMaskIntoConstraints = false
+    private let runningMapView: DrawableMapView = {
+        let mv = DrawableMapView()
         mv.userTrackingMode = .follow
+        mv.translatesAutoresizingMaskIntoConstraints = false
         return mv
     }()
     
@@ -121,7 +121,7 @@ extension RunningViewController: UICollectionViewDataSource, UICollectionViewDel
 
     
 // MARK: - 맵, 위치 관련
-extension RunningViewController: CLLocationManagerDelegate, MKMapViewDelegate {
+extension RunningViewController: CLLocationManagerDelegate {
     private func setUpLocationManager() {
         locationManager.delegate = self
     }
