@@ -18,15 +18,19 @@ class HealthKitManager {
     
     func requestAuthorization() {
         let types: Set<HKSampleType> = [HKObjectType.workoutType(),
-                         HKObjectType.quantityType(forIdentifier: .activeEnergyBurned)!,
-                         HKObjectType.quantityType(forIdentifier: .distanceWalkingRunning)!,
-                         HKObjectType.quantityType(forIdentifier: .runningSpeed)!,
-                        ]
+                     HKObjectType.quantityType(forIdentifier: .activeEnergyBurned)!,
+                     HKObjectType.quantityType(forIdentifier: .distanceWalkingRunning)!,
+                     HKObjectType.quantityType(forIdentifier: .runningSpeed)!,
+        ]
         
-        store.requestAuthorization(toShare: types, read: types) { (success, error) in
-            if !success {
-                return
+        store.getRequestStatusForAuthorization(toShare: types, read: types, completion: { status, error in
+            if status == .shouldRequest || status == .unknown {
+                self.store.requestAuthorization(toShare: types, read: types) { success, _ in
+                    if !success {
+                        return
+                    }
+                }
             }
-        }
+        })
     }
 }
