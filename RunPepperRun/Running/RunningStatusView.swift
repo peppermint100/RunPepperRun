@@ -9,6 +9,14 @@ import UIKit
 
 
 class RunningStatusView: UIStackView {
+    
+    var title: String? {
+        didSet {
+            titleLabel.text = oldValue
+        }
+    }
+    
+    var subTitle: String
 
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
@@ -20,6 +28,7 @@ class RunningStatusView: UIStackView {
         label.font = boldItalicFont
         label.textColor = .label
         label.textAlignment = .center
+        label.text = "-"
         return label
     }()
     
@@ -33,11 +42,13 @@ class RunningStatusView: UIStackView {
         label.font = boldItalicFont
         label.textColor = .systemGray2
         label.textAlignment = .center
+        label.text = subTitle
         return label
     }()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init(subTitle: String) {
+        self.subTitle = subTitle
+        super.init(frame: .zero)
         axis = .vertical
         addArrangedSubview(titleLabel)
         addArrangedSubview(subTitleLabel)

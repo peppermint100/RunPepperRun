@@ -41,8 +41,8 @@ class TrackingViewController: UIViewController {
         return label
     }()
     
-    private let runningStatusView: RunningStatusContainerView = {
-        let view = RunningStatusContainerView()
+    private lazy var runningStatusView: RunningStatusContainerView = {
+        let view = RunningStatusContainerView(tracker: tracker)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()

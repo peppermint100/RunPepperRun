@@ -13,6 +13,12 @@ extension CLLocationDistance {
         return self * 0.001
     }
 }
+
+extension CLLocationSpeed {
+    func toKilometersPerHour() -> CLLocationSpeed {
+        return self / 3.6
+    }
+}
  
 extension TimeInterval {
     

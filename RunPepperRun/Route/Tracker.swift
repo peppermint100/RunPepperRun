@@ -8,8 +8,15 @@
 import Foundation
 import MapKit
 
+protocol TrackerDelegate: AnyObject {
+    func tracker(_ tracker: Tracker, updateSpeed: String)
+    func tracker(_ tracker: Tracker, updateDistance: String)
+}
+
 class Tracker: NSObject {
     var initialLocation: CLLocation
+    
+    weak var delegate: TrackerDelegate?
     
     private var locations = [CLLocation]()
     private var coordinates: [CLLocationCoordinate2D] {
@@ -23,10 +30,14 @@ class Tracker: NSObject {
         locations.last ?? initialLocation
     }
     
+    // m/s
     var speed: CLLocationSpeed {
-        currentLocation.speed
+        return currentLocation.speed > 0
+        ? currentLocation.speed 
+        : distance / currentLocation.timestamp.timeIntervalSince(initialLocation.timestamp)
     }
     
+    // meters
     var distance: CLLocationDistance = 0.0
     
     // TODO: - HealthKit 연동
@@ -42,7 +53,7 @@ class Tracker: NSObject {
         setUpLocationManager()
     }
     
-    func addLocation(_ location: CLLocation) {
+    func updateLocation(_ location: CLLocation) {
         distance += currentLocation.distance(from: location)
         locations.append(location)
     }
@@ -70,7 +81,12 @@ extension Tracker: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.last {
-            addLocation(location)
+            updateLocation(location)
+            
+            let speed = String(format: "%.2f km/h", speed.toKilometersPerHour())
+            let distance = String(format: "%.2f km", distance.toKiloMeters())
+            delegate?.tracker(self, updateDistance: distance)
+            delegate?.tracker(self, updateSpeed: speed)
         }
     }
 }
