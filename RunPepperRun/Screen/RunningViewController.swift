@@ -50,6 +50,7 @@ class RunningViewController: UIViewController {
         setUpLocationManager()
         setUpStartButton()
         handleLocationAuthorization()
+        HealthKitManager.shared.requestAuthorization()
     }
     
 // MARK: - 네비게이션 바 세팅

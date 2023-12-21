@@ -23,6 +23,7 @@
 		BAAF54E32B22B08800265237 /* RunningCardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAF54E22B22B08800265237 /* RunningCardCollectionViewCell.swift */; };
 		BAAF54E72B22C5A300265237 /* RunningCardCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAF54E62B22C5A300265237 /* RunningCardCollectionViewFlowLayout.swift */; };
 		BAB3BE632B33F8DA003B6A81 /* DrawableMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB3BE622B33F8DA003B6A81 /* DrawableMapView.swift */; };
+		BAB3BE672B3401EF003B6A81 /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB3BE662B3401EF003B6A81 /* HealthKitManager.swift */; };
 		BAB619DF2B31739A00B96E29 /* RunningStatusTitles.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB619DE2B31739A00B96E29 /* RunningStatusTitles.swift */; };
 		BAB619E12B3292ED00B96E29 /* RunningStatusContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB619E02B3292ED00B96E29 /* RunningStatusContainerView.swift */; };
 		BAB619E62B329A6000B96E29 /* RunningStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB619E52B329A6000B96E29 /* RunningStatusView.swift */; };
@@ -52,6 +53,8 @@
 		BAAF54E22B22B08800265237 /* RunningCardCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningCardCollectionViewCell.swift; sourceTree = "<group>"; };
 		BAAF54E62B22C5A300265237 /* RunningCardCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningCardCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		BAB3BE622B33F8DA003B6A81 /* DrawableMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawableMapView.swift; sourceTree = "<group>"; };
+		BAB3BE642B340176003B6A81 /* RunPepperRunDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RunPepperRunDebug.entitlements; sourceTree = "<group>"; };
+		BAB3BE662B3401EF003B6A81 /* HealthKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
 		BAB619DE2B31739A00B96E29 /* RunningStatusTitles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningStatusTitles.swift; sourceTree = "<group>"; };
 		BAB619E02B3292ED00B96E29 /* RunningStatusContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningStatusContainerView.swift; sourceTree = "<group>"; };
 		BAB619E52B329A6000B96E29 /* RunningStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningStatusView.swift; sourceTree = "<group>"; };
@@ -107,6 +110,8 @@
 		BAAF54BE2B219A6F00265237 /* RunPepperRun */ = {
 			isa = PBXGroup;
 			children = (
+				BAB3BE652B3401DE003B6A81 /* HealthKit */,
+				BAB3BE642B340176003B6A81 /* RunPepperRunDebug.entitlements */,
 				BAB3BE612B33F8AC003B6A81 /* Map */,
 				BA0B34162B2FF8B8004DD130 /* Global */,
 				BAAD1B492B243DA100296ED8 /* Track */,
@@ -164,6 +169,14 @@
 				BAB3BE622B33F8DA003B6A81 /* DrawableMapView.swift */,
 			);
 			path = Map;
+			sourceTree = "<group>";
+		};
+		BAB3BE652B3401DE003B6A81 /* HealthKit */ = {
+			isa = PBXGroup;
+			children = (
+				BAB3BE662B3401EF003B6A81 /* HealthKitManager.swift */,
+			);
+			path = HealthKit;
 			sourceTree = "<group>";
 		};
 		BAB619E42B3299C500B96E29 /* Recovered References */ = {
@@ -254,6 +267,7 @@
 				BAC7702D2B26E563003BA825 /* RunningResultViewController.swift in Sources */,
 				BAB619DF2B31739A00B96E29 /* RunningStatusTitles.swift in Sources */,
 				BAAF54D82B21AD2B00265237 /* MainTabBarViewController.swift in Sources */,
+				BAB3BE672B3401EF003B6A81 /* HealthKitManager.swift in Sources */,
 				BAAD1B552B24546200296ED8 /* RoundedButton.swift in Sources */,
 				BA0B341B2B303F2C004DD130 /* RunningStatus.swift in Sources */,
 				BAAF54D82B21AD2B00265237 /* MainTabBarViewController.swift in Sources */,
@@ -406,6 +420,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = RunPepperRun/RunPepperRunDebug.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = ARSZYU7AJ8;
