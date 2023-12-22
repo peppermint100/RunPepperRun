@@ -8,8 +8,8 @@
 import UIKit
 import MapKit
 
+
 class TrackingViewController: UIViewController {
-    
     private var timer: DispatchSourceTimer?
     private var seconds = 0
     private var timerSuspended = true
@@ -37,14 +37,14 @@ class TrackingViewController: UIViewController {
     private let timerLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 40, weight: .bold)
+        label.font = UIFont.systemFont(ofSize: 60, weight: .bold)
         label.text = "00:00"
         label.textColor = .label
         return label
     }()
     
-    private let runningStatusView: UIView = {
-        let view = UIView()
+    private let runningStatusView: RunningStatusContainerView = {
+        let view = RunningStatusContainerView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -73,6 +73,7 @@ class TrackingViewController: UIViewController {
     private let pauseAndResumeButton: RoundedButton = {
         let button = RoundedButton("정지", color: .systemYellow, shadow: false)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 26, weight: .semibold)
         return button
     }()
     
@@ -85,6 +86,7 @@ class TrackingViewController: UIViewController {
     private let endButton: RoundedButton = {
         let button = RoundedButton("종료", color: .systemRed, shadow: false)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 26, weight: .semibold)
         return button
     }()
     
@@ -93,7 +95,27 @@ class TrackingViewController: UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-
+    
+    private let connectToSpotifyButton: UIButton = {
+        let button = UIButton()
+        let image = UIImage(named: "SpotifyIcon")
+        var config = UIButton.Configuration.plain()
+        var titleContainer = AttributeContainer()
+        titleContainer.font = UIFont.systemFont(ofSize: 18, weight: .bold)
+        config.image = image
+        config.imagePadding = 5
+        config.imagePlacement = .leading
+        config.titleAlignment = .trailing
+        config.attributedTitle = AttributedString("Spotify 연동하기", attributes: titleContainer)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.configuration = config
+        button.backgroundColor = UIColor(red: 25/255, green: 185/255, blue: 84/255, alpha: 1)
+        button.tintColor = .black
+        button.layer.cornerRadius = 12
+        button.clipsToBounds = true
+        return button
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpLocationManager()
@@ -105,7 +127,7 @@ class TrackingViewController: UIViewController {
     
 // MARK: - UI 설정
     private func setUpUI() {
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .systemCyan
         view.addSubview(stackView)
         stackView.addArrangedSubview(timerView)
         stackView.addArrangedSubview(runningStatusView)
@@ -117,6 +139,7 @@ class TrackingViewController: UIViewController {
         roundedButtonsView.addArrangedSubview(endButtonView)
         endButtonView.addSubview(endButton)
         pauseAndResumeButtonView.addSubview(pauseAndResumeButton)
+        spotifyButtonView.addSubview(connectToSpotifyButton)
     }
     
     private func applyConstraints() {
@@ -128,11 +151,11 @@ class TrackingViewController: UIViewController {
         ]
         
         let timerViewConstraints = [
-            timerView.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 0.4),
+            timerView.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 0.3),
         ]
         
         let runningStatusViewConstraints = [
-            runningStatusView.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 0.2),
+            runningStatusView.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 0.3),
         ]
         
         let buttonsViewConstraints = [
@@ -157,6 +180,13 @@ class TrackingViewController: UIViewController {
             endButton.widthAnchor.constraint(equalTo: endButtonView.widthAnchor, multiplier: 0.7),
             endButton.heightAnchor.constraint(equalTo: endButtonView.widthAnchor, multiplier: 0.7),
         ]
+        
+        let connectToSpotifyButtonConstraints = [
+            connectToSpotifyButton.centerXAnchor.constraint(equalTo: spotifyButtonView.centerXAnchor),
+            connectToSpotifyButton.centerYAnchor.constraint(equalTo: spotifyButtonView.centerYAnchor),
+            connectToSpotifyButton.widthAnchor.constraint(equalTo: spotifyButtonView.widthAnchor, multiplier: 0.80),
+            connectToSpotifyButton.heightAnchor.constraint(equalTo: spotifyButtonView.heightAnchor, multiplier: 0.45),
+        ]
      
         NSLayoutConstraint.activate(stackViewConstraints)
         NSLayoutConstraint.activate(timerViewConstraints)
@@ -165,6 +195,7 @@ class TrackingViewController: UIViewController {
         NSLayoutConstraint.activate(timerLabelConstraints)
         NSLayoutConstraint.activate(pauseAndResumeButtonConstraints)
         NSLayoutConstraint.activate(endButtonConstraints)
+        NSLayoutConstraint.activate(connectToSpotifyButtonConstraints)
     }
     
     deinit {
@@ -190,11 +221,17 @@ extension TrackingViewController {
     }
     
     private func suspendTimer() {
+        if timerSuspended {
+            return
+        }
         timerSuspended = true
         timer?.suspend()
     }
     
     private func resumeTimer() {
+        if timerTicking {
+            return
+        }
         timerSuspended = false
         timer?.resume()
     }
@@ -211,8 +248,9 @@ extension TrackingViewController {
 }
 
 
-// MARK: - LocationManager 델리게이트
+// MARK: - LocationManager, Map 관련
 extension TrackingViewController: CLLocationManagerDelegate {
+    
     private func setUpLocationManager() {
         locationManager.delegate = self
         locationManager.allowsBackgroundLocationUpdates = true
@@ -247,12 +285,18 @@ extension TrackingViewController {
             locationManager.stopUpdatingLocation()
             suspendTimer()
             pauseAndResumeButton.setTitle("재개", for: .normal)
-            pauseAndResumeButton.backgroundColor = .systemGreen
+            UIView.animate(withDuration: 0.4) { [weak self] in
+                self?.view.backgroundColor = .systemYellow
+                self?.pauseAndResumeButton.backgroundColor = .systemCyan
+            }
         } else if timerSuspended {
             locationManager.startUpdatingLocation()
             resumeTimer()
             pauseAndResumeButton.setTitle("정지", for: .normal)
-            pauseAndResumeButton.backgroundColor = .systemYellow
+            UIView.animate(withDuration: 0.4) { [weak self] in
+                self?.view.backgroundColor = .systemCyan
+                self?.pauseAndResumeButton.backgroundColor = .systemYellow
+            }
         }
     }
     
