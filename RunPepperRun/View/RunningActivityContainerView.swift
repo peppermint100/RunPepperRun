@@ -10,8 +10,6 @@ import MapKit
 
 class RunningActivityContainerView: UIStackView {
     
-    var running: Running?
-    
     private let speedAndDistanceView: UIStackView = {
         let sv = UIStackView()
         sv.distribution = .fillEqually
@@ -52,7 +50,6 @@ class RunningActivityContainerView: UIStackView {
     
     convenience init(running: Running?) {
         self.init(frame: .zero)
-        self.running = running
         axis = .vertical
         distribution = .fillEqually
         addArrangedSubview(speedAndDistanceView)
