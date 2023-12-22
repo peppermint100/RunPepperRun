@@ -151,16 +151,14 @@ extension RunningViewController {
     @objc private func tapStartButton() {
         switch locationManager.authorizationStatus {
         case .authorizedAlways, .authorizedWhenInUse:
-            presentToTrackingVC()
+            guard let location = locationManager.location else { return }
+            let vc = TrackingViewController()
+            vc.modalPresentationStyle = .fullScreen
+            vc.tracker = Tracker(initialLocation: location)
+            present(vc, animated: false)
         default:
             // TODO: - 권한 재요청 코드 추가
             break
         }
-    }
-    
-    private func presentToTrackingVC() {
-        let vc = TrackingViewController()
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: false)
     }
 }

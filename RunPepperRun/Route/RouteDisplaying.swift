@@ -10,6 +10,6 @@ import MapKit
 
 typealias Pathline = MKPolyline
 
-protocol RouteDisplaying {
+protocol RouteDisplaying: AnyObject {
     func drawRouteOn(map: MKMapView)
 }
