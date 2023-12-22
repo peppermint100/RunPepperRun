@@ -155,7 +155,7 @@ extension RunningViewController {
             guard let location = locationManager.location else { return }
             let vc = TrackingViewController()
             vc.modalPresentationStyle = .fullScreen
-            vc.tracker = Tracker(initialLocation: location)
+            vc.running = Running(startFrom: location)
             present(vc, animated: false)
         default:
             // TODO: - 권한 재요청 코드 추가

@@ -9,14 +9,14 @@ import MapKit
 
 extension CLLocationDistance {
     
-    func toKiloMeters() -> Double {
-        return self * 0.001
+    func toKiloMetersString() -> String {
+        return String(format: "%.2f km", (self * 0.001))
     }
 }
 
 extension CLLocationSpeed {
-    func toKilometersPerHour() -> CLLocationSpeed {
-        return self / 3.6
+    func toKilometersPerHourString() -> String {
+        return String(format: "%.2f km/h", (self / 3.6))
     }
 }
  

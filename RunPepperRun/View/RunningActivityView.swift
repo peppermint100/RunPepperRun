@@ -8,7 +8,7 @@
 import UIKit
 
 
-class RunningStatusView: UIStackView {
+class RunningActivityView: UIStackView {
     
     var title: String? {
         didSet {
@@ -55,6 +55,6 @@ class RunningStatusView: UIStackView {
     }
     
     required init(coder: NSCoder) {
-        fatalError("RunningStatusView 생성 실패")
+        fatalError("RunningActivityView 생성 실패")
     }
 }

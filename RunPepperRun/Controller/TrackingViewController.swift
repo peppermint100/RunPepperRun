@@ -10,7 +10,7 @@ import MapKit
 
 
 class TrackingViewController: UIViewController {
-    var tracker: Tracker?
+    var running: Running?
     private var timer: DispatchSourceTimer?
     private var seconds = 0
     private var timerSuspended = true
@@ -41,8 +41,8 @@ class TrackingViewController: UIViewController {
         return label
     }()
     
-    private lazy var runningStatusView: RunningStatusContainerView = {
-        let view = RunningStatusContainerView(tracker: tracker)
+    private lazy var runningStatusView: RunningActivityContainerView = {
+        let view = RunningActivityContainerView(running: running)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -252,14 +252,14 @@ extension TrackingViewController {
     }
     
     @objc private func tapEndButton() {
-        tracker?.stopUpdatingLocation()
+        running?.stop()
         suspendTimer()
         showEndRunningAlert()
     }
     
     @objc private func tapPauseAndResumeButton() {
         if timerTicking {
-            tracker?.stopUpdatingLocation()
+            running?.stop()
             suspendTimer()
             pauseAndResumeButton.setTitle("재개", for: .normal)
             UIView.animate(withDuration: 0.4) { [weak self] in
@@ -267,7 +267,7 @@ extension TrackingViewController {
                 self?.pauseAndResumeButton.backgroundColor = .systemCyan
             }
         } else if timerSuspended {
-            tracker?.startUpdatingLocation()
+            running?.start()
             resumeTimer()
             pauseAndResumeButton.setTitle("정지", for: .normal)
             UIView.animate(withDuration: 0.4) { [weak self] in
@@ -285,7 +285,7 @@ extension TrackingViewController {
         }
         
         let cancel = UIAlertAction(title: "재개", style: .cancel) { [weak self] cancelAction in
-            self?.tracker?.startUpdatingLocation()
+            self?.running?.start()
             self?.resumeTimer()
         }
         
@@ -297,7 +297,7 @@ extension TrackingViewController {
     private func presentToRunningResultVC() {
         let vc = RunningResultViewController()
         vc.modalPresentationStyle = .fullScreen
-        vc.tracker = tracker
+        vc.running = running
         present(vc, animated: false)
     }
 }

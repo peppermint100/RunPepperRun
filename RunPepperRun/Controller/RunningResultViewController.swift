@@ -10,7 +10,7 @@ import MapKit
 
 class RunningResultViewController: UIViewController {
     
-    var tracker: Tracker?
+    var running: Running?
     
     private let stackView: UIStackView = {
         let sv = UIStackView()
@@ -79,9 +79,9 @@ class RunningResultViewController: UIViewController {
 extension RunningResultViewController: MKMapViewDelegate {
     private func buildMap() {
         resultMapView.delegate = self
-        if let tracker {
-            resultMapView.drawRoute(with: tracker.coordinates)
-            resultMapView.drawPin(at: tracker.initialLocation.coordinate, title: "시작")
+        if let running = running, let location = running.location {
+            resultMapView.drawRoute(with: location.coordinates)
+            resultMapView.drawPin(at: running.initialLocation.coordinate, title: "시작")
         }
     }
     

@@ -6,10 +6,11 @@
 //
 
 import UIKit
+import MapKit
 
-class RunningStatusContainerView: UIStackView {
+class RunningActivityContainerView: UIStackView {
     
-    var tracker: Tracker?
+    var running: Running?
     
     private let speedAndDistanceView: UIStackView = {
         let sv = UIStackView()
@@ -25,23 +26,23 @@ class RunningStatusContainerView: UIStackView {
         return sv
     }()
     
-    private let speedView: RunningStatusView = {
-        let view = RunningStatusView(subTitle: "속도")
+    private let speedView: RunningActivityView = {
+        let view = RunningActivityView(subTitle: "속도")
         return view
     }()
     
-    private let distanceView: RunningStatusView = {
-        let view = RunningStatusView(subTitle: "거리")
+    private let distanceView: RunningActivityView = {
+        let view = RunningActivityView(subTitle: "거리")
         return view
     }()
     
-    private let paceView: RunningStatusView = {
-        let view = RunningStatusView(subTitle: "페이스")
+    private let paceView: RunningActivityView = {
+        let view = RunningActivityView(subTitle: "페이스")
         return view
     }()
     
-    private let caloriesView: RunningStatusView = {
-        let view = RunningStatusView(subTitle: "소모칼로리")
+    private let caloriesView: RunningActivityView = {
+        let view = RunningActivityView(subTitle: "소모칼로리")
         return view
     }()
     
@@ -49,9 +50,9 @@ class RunningStatusContainerView: UIStackView {
         super.init(frame: frame)
     }
     
-    convenience init(tracker: Tracker?) {
+    convenience init(running: Running?) {
         self.init(frame: .zero)
-        self.tracker = tracker
+        self.running = running
         axis = .vertical
         distribution = .fillEqually
         addArrangedSubview(speedAndDistanceView)
@@ -60,7 +61,7 @@ class RunningStatusContainerView: UIStackView {
         speedAndDistanceView.addArrangedSubview(distanceView)
         paceAndCaloriesView.addArrangedSubview(paceView)
         paceAndCaloriesView.addArrangedSubview(caloriesView)
-        tracker?.delegate = self
+        running?.activity?.delegate = self
     }
     
     required init(coder: NSCoder) {
@@ -84,13 +85,12 @@ class RunningStatusContainerView: UIStackView {
     }
 }
 
-// MARK: - TrackerDelegate
-extension RunningStatusContainerView: TrackerDelegate {
-    func tracker(_ tracker: Tracker, updateSpeed: String) {
-        setSpeed(updateSpeed)
+extension RunningActivityContainerView: RunningActivityDelegate {
+    func didUpdateDistance(_ distance: CLLocationDistance) {
+        setDistance(distance.toKiloMetersString())
     }
     
-    func tracker(_ tracker: Tracker, updateDistance: String) {
-        setDistance(updateDistance)
+    func didUpdateSpeed(_ speed: CLLocationSpeed) {
+        setSpeed(speed.toKilometersPerHourString())
     }
 }
