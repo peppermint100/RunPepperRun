@@ -83,6 +83,10 @@ class RunningActivityContainerView: UIStackView {
 }
 
 extension RunningActivityContainerView: RunningActivityDelegate {
+    func didUpdatePace(_ pace: NSNumber) {
+        setPace(pace.toPaceHourPerSecondsString())
+    }
+    
     func didUpdateCaloriesBurned(_ caloriesBurned: Double) {
         setCalories(caloriesBurned.toCaloriesString())
     }

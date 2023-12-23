@@ -10,15 +10,36 @@ import CoreMotion
 
 protocol RunningMotionDelegate {
     func didChangeMotionStatus(_ motion: MotionStatus)
+    func didUpdatePace(_ pace: NSNumber)
 }
 
 class RunningMotion {
     
     var delegate: RunningMotionDelegate?
     private let activityManager = CMMotionActivityManager()
+    private let pedometerManager = CMPedometer()
+    
+    var paces: [NSNumber] = []
     
     init() {
         observeMotion()
+        observePedometer()
+    }
+    
+    private func observePedometer() {
+        pedometerManager.startUpdates(from: Date()) { [weak self] data, error in
+            guard error == nil, let data = data else {
+                return
+            }
+            
+            if let pace = data.currentPace {
+                self?.paces.append(pace)
+                
+                DispatchQueue.main.async {
+                    self?.delegate?.didUpdatePace(pace)
+                }
+            }
+        }
     }
     
     private func observeMotion() {

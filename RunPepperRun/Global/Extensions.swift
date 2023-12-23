@@ -25,6 +25,14 @@ extension Double {
         return String(format: "%.2f cal", self)
     }
 }
+
+extension NSNumber {
+    func toPaceHourPerSecondsString() -> String {
+        let minutes = Int(self.doubleValue * 1000 / 60)
+        let seconds = Int(self.doubleValue * 1000 / 60)
+        return String(format: "%d'%d\"", minutes, seconds)
+    }
+}
  
 extension TimeInterval {
     

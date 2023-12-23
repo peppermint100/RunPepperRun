@@ -45,6 +45,10 @@ extension Running: RunningLocationDelegate {
 }
 
 extension Running: RunningMotionDelegate {
+    func didUpdatePace(_ pace: NSNumber) {
+        activity?.pace = pace
+    }
+    
     func didChangeMotionStatus(_ motion: MotionStatus) {
         activity?.motion = motion
     }
