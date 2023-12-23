@@ -8,18 +8,19 @@
 import Foundation
 import MapKit
 
+protocol RunningLocationDelegate {
+    func didUpdateLocations(_ location: CLLocation)
+}
+
 class RunningLocation: NSObject, CLLocationManagerDelegate {
+    
+    var delegate: RunningLocationDelegate?
     
     private let manager = CLLocationManager()
     var locations: [CLLocation] = []
-    var didUpdateLocations: (() -> Void)?
     
     var coordinates: [CLLocationCoordinate2D] {
         locations.map { $0.coordinate }
-    }
-    
-    var currentLocation: CLLocation? {
-        locations.last
     }
     
     override init() {
@@ -47,7 +48,7 @@ class RunningLocation: NSObject, CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.last {
             self.locations.append(location)
-            didUpdateLocations?()
+            delegate?.didUpdateLocations(location)
         }
     }
 }

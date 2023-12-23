@@ -27,6 +27,7 @@
 		BAC8C3642B355B6A002624DF /* Running.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC8C3632B355B6A002624DF /* Running.swift */; };
 		BAC8C3682B355C1B002624DF /* RunningLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC8C3672B355C1B002624DF /* RunningLocation.swift */; };
 		BAC8C36D2B355ECE002624DF /* RunningActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC8C36C2B355ECE002624DF /* RunningActivity.swift */; };
+		BAD56DF92B369B9600C63429 /* RunningMotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD56DF82B369B9600C63429 /* RunningMotion.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +56,7 @@
 		BAC8C3632B355B6A002624DF /* Running.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Running.swift; sourceTree = "<group>"; };
 		BAC8C3672B355C1B002624DF /* RunningLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningLocation.swift; sourceTree = "<group>"; };
 		BAC8C36C2B355ECE002624DF /* RunningActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningActivity.swift; sourceTree = "<group>"; };
+		BAD56DF82B369B9600C63429 /* RunningMotion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningMotion.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +148,7 @@
 				BAC8C3672B355C1B002624DF /* RunningLocation.swift */,
 				BAC8C3632B355B6A002624DF /* Running.swift */,
 				BAC8C36C2B355ECE002624DF /* RunningActivity.swift */,
+				BAD56DF82B369B9600C63429 /* RunningMotion.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -237,6 +240,7 @@
 				BAAD1B5B2B254E1600296ED8 /* TrackingViewController.swift in Sources */,
 				BAB619E62B329A6000B96E29 /* RunningActivityView.swift in Sources */,
 				BAAF54DA2B21AD7200265237 /* RunningViewController.swift in Sources */,
+				BAD56DF92B369B9600C63429 /* RunningMotion.swift in Sources */,
 				BA0B34182B2FF8C7004DD130 /* Extensions.swift in Sources */,
 				BAAF54DE2B21ADB900265237 /* SettingsViewController.swift in Sources */,
 				BAC7702D2B26E563003BA825 /* RunningResultViewController.swift in Sources */,
