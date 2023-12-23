@@ -8,6 +8,7 @@
 import Foundation
 import MapKit
 
+
 class Running {
     
     var initialLocation: CLLocation
@@ -18,7 +19,7 @@ class Running {
         self.initialLocation = initiaLocation
         self.activity = RunningActivity(currentLocation: initiaLocation)
         self.location = RunningLocation()
-        self.location?.didUpdateLocations = didUpdateLocations
+        self.location?.delegate = self
     }
 
     func stop() {
@@ -28,8 +29,10 @@ class Running {
     func start() {
         location?.startUpdating()
     }
-    
-    func didUpdateLocations() {
-        activity?.location = location?.currentLocation ?? initialLocation
+}
+
+extension Running: RunningLocationDelegate {
+    func didUpdateLocations(_ location: CLLocation) {
+        activity?.location = location
     }
 }
