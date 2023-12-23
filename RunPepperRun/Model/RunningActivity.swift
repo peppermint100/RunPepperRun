@@ -69,5 +69,12 @@ class RunningActivity {
         paces.append(pace)
         delegate?.didUpdatePace(pace)
     }
-
+    
+    func getAveragePace() -> Double {
+        let sum = paces.reduce(0.0) { partialResult, pace in
+            return partialResult + pace.doubleValue
+        }
+        
+        return sum / Double(paces.count)
+    }
 }
