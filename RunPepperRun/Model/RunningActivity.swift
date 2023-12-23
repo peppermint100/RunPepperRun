@@ -26,7 +26,7 @@ class RunningActivity {
         willSet {
             distance += newValue.distance(from: currentLocation)
             speed = distance / (newValue.timestamp.timeIntervalSince(startAt))
-            caloriesBurned = motion.met() * 1.08 * RunningActivity.weight / 3600
+            caloriesBurned += motion.met() * 1.08 * RunningActivity.weight / 3600
             delegate?.didUpdateSpeed(speed)
             delegate?.didUpdateDistance(distance)
             delegate?.didUpdateCaloriesBurned(caloriesBurned)
