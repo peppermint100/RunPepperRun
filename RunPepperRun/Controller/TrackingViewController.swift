@@ -252,14 +252,14 @@ extension TrackingViewController {
     }
     
     @objc private func tapEndButton() {
-        running?.stop()
+        running?.pause()
         suspendTimer()
         showEndRunningAlert()
     }
     
     @objc private func tapPauseAndResumeButton() {
         if timerTicking {
-            running?.stop()
+            running?.pause()
             suspendTimer()
             pauseAndResumeButton.setTitle("재개", for: .normal)
             UIView.animate(withDuration: 0.4) { [weak self] in

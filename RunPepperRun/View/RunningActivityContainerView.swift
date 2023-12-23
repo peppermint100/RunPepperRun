@@ -83,6 +83,10 @@ class RunningActivityContainerView: UIStackView {
 }
 
 extension RunningActivityContainerView: RunningActivityDelegate {
+    func didUpdateCaloriesBurned(_ caloriesBurned: Double) {
+        setCalories(caloriesBurned.toCaloriesString())
+    }
+    
     func didUpdateDistance(_ distance: CLLocationDistance) {
         setDistance(distance.toKiloMetersString())
     }

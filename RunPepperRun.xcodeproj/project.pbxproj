@@ -28,6 +28,7 @@
 		BAC8C3682B355C1B002624DF /* RunningLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC8C3672B355C1B002624DF /* RunningLocation.swift */; };
 		BAC8C36D2B355ECE002624DF /* RunningActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC8C36C2B355ECE002624DF /* RunningActivity.swift */; };
 		BAD56DF92B369B9600C63429 /* RunningMotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD56DF82B369B9600C63429 /* RunningMotion.swift */; };
+		BAD56DFB2B36C06C00C63429 /* MotionStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD56DFA2B36C06C00C63429 /* MotionStatus.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +58,7 @@
 		BAC8C3672B355C1B002624DF /* RunningLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningLocation.swift; sourceTree = "<group>"; };
 		BAC8C36C2B355ECE002624DF /* RunningActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningActivity.swift; sourceTree = "<group>"; };
 		BAD56DF82B369B9600C63429 /* RunningMotion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningMotion.swift; sourceTree = "<group>"; };
+		BAD56DFA2B36C06C00C63429 /* MotionStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionStatus.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +151,7 @@
 				BAC8C3632B355B6A002624DF /* Running.swift */,
 				BAC8C36C2B355ECE002624DF /* RunningActivity.swift */,
 				BAD56DF82B369B9600C63429 /* RunningMotion.swift */,
+				BAD56DFA2B36C06C00C63429 /* MotionStatus.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -257,6 +260,7 @@
 				BAAF54C02B219A6F00265237 /* AppDelegate.swift in Sources */,
 				BAAF54E72B22C5A300265237 /* RunningCardCollectionViewFlowLayout.swift in Sources */,
 				BAAF54C22B219A6F00265237 /* SceneDelegate.swift in Sources */,
+				BAD56DFB2B36C06C00C63429 /* MotionStatus.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -14,20 +14,27 @@ class Running {
     var initialLocation: CLLocation
     var location: RunningLocation?
     var activity: RunningActivity?
+    var motion: RunningMotion?
     
     init(startFrom initiaLocation: CLLocation) {
         self.initialLocation = initiaLocation
         self.activity = RunningActivity(currentLocation: initiaLocation)
         self.location = RunningLocation()
+        self.motion = RunningMotion()
         self.location?.delegate = self
+        self.motion?.delegate = self
     }
 
-    func stop() {
+    func pause() {
         location?.stopUpdating()
     }
     
     func start() {
         location?.startUpdating()
+    }
+    
+    func finish() {
+        motion?.stopObservingMotion()
     }
 }
 
@@ -36,3 +43,10 @@ extension Running: RunningLocationDelegate {
         activity?.location = location
     }
 }
+
+extension Running: RunningMotionDelegate {
+    func didChangeMotionStatus(_ motion: MotionStatus) {
+        activity?.motion = motion
+    }
+}
+

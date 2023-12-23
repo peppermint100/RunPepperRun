@@ -19,6 +19,12 @@ extension CLLocationSpeed {
         return String(format: "%.2f km/h", (self / 3.6))
     }
 }
+
+extension Double {
+    func toCaloriesString() -> String {
+        return String(format: "%.2f cal", self)
+    }
+}
  
 extension TimeInterval {
     
