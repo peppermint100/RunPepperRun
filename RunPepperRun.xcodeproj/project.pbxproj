@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		ACFD12E06E89F74AF1DBA685 /* Pods_RunPepperRun.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC2E6287CEEA40B1EF41A0B2 /* Pods_RunPepperRun.framework */; };
 		BAAD1B552B24546200296ED8 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAD1B542B24546200296ED8 /* RoundedButton.swift */; };
 		BAAD1B5B2B254E1600296ED8 /* TrackingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAD1B5A2B254E1600296ED8 /* TrackingViewController.swift */; };
 		BAAD1B5E2B2559D200296ED8 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAD1B5D2B2559D200296ED8 /* Route.swift */; };
@@ -28,6 +29,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1B48CF0FE7430AB0D12CEF4F /* Pods-RunPepperRun.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunPepperRun.release.xcconfig"; path = "Target Support Files/Pods-RunPepperRun/Pods-RunPepperRun.release.xcconfig"; sourceTree = "<group>"; };
+		88BCE0B9D707B2A31B771838 /* Pods-RunPepperRun.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunPepperRun.debug.xcconfig"; path = "Target Support Files/Pods-RunPepperRun/Pods-RunPepperRun.debug.xcconfig"; sourceTree = "<group>"; };
 		BAAD1B542B24546200296ED8 /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		BAAD1B5A2B254E1600296ED8 /* TrackingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingViewController.swift; sourceTree = "<group>"; };
 		BAAD1B5C2B25504B00296ED8 /* Route1.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Route1.gpx; sourceTree = "<group>"; };
@@ -49,6 +52,7 @@
 		BAB619E22B3295A500B96E29 /* RunningStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningStatusView.swift; sourceTree = "<group>"; };
 		BAC7702C2B26E563003BA825 /* RunningResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningResultViewController.swift; sourceTree = "<group>"; };
 		BAC7702E2B26FADF003BA825 /* RouteDisplaying.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteDisplaying.swift; sourceTree = "<group>"; };
+		FC2E6287CEEA40B1EF41A0B2 /* Pods_RunPepperRun.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RunPepperRun.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,12 +60,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ACFD12E06E89F74AF1DBA685 /* Pods_RunPepperRun.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A46FEA914990BAA2F2B40D91 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FC2E6287CEEA40B1EF41A0B2 /* Pods_RunPepperRun.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B72157A04263E379947562B4 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				88BCE0B9D707B2A31B771838 /* Pods-RunPepperRun.debug.xcconfig */,
+				1B48CF0FE7430AB0D12CEF4F /* Pods-RunPepperRun.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		BA64A2A02B42CEE50004E55E /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -109,6 +131,8 @@
 			children = (
 				BAAF54BE2B219A6F00265237 /* RunPepperRun */,
 				BAAF54BD2B219A6F00265237 /* Products */,
+				B72157A04263E379947562B4 /* Pods */,
+				A46FEA914990BAA2F2B40D91 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -152,9 +176,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BAAF54D02B219A7000265237 /* Build configuration list for PBXNativeTarget "RunPepperRun" */;
 			buildPhases = (
+				4EF10F72B94C16E14D50DB36 /* [CP] Check Pods Manifest.lock */,
 				BAAF54B82B219A6F00265237 /* Sources */,
 				BAAF54B92B219A6F00265237 /* Frameworks */,
 				BAAF54BA2B219A6F00265237 /* Resources */,
+				B95A2AF900D7D1759A67E44F /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -209,6 +235,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		4EF10F72B94C16E14D50DB36 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-RunPepperRun-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B95A2AF900D7D1759A67E44F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-RunPepperRun/Pods-RunPepperRun-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-RunPepperRun/Pods-RunPepperRun-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-RunPepperRun/Pods-RunPepperRun-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		BAAF54B82B219A6F00265237 /* Sources */ = {
@@ -285,7 +353,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -348,7 +416,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -369,6 +437,7 @@
 		};
 		BAAF54D12B219A7000265237 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 88BCE0B9D707B2A31B771838 /* Pods-RunPepperRun.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -400,6 +469,7 @@
 		};
 		BAAF54D22B219A7000265237 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1B48CF0FE7430AB0D12CEF4F /* Pods-RunPepperRun.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
