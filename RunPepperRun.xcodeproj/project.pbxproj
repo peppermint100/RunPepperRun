@@ -62,21 +62,46 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		BAAD1B492B243DA100296ED8 /* Route */ = {
+		BA64A2A02B42CEE50004E55E /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				BA64A2A32B42CF180004E55E /* Core */,
+				BAAD1B5A2B254E1600296ED8 /* TrackingViewController.swift */,
+				BAC7702C2B26E563003BA825 /* RunningResultViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		BA64A2A12B42CEEA0004E55E /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				BAAD1B5D2B2559D200296ED8 /* Route.swift */,
 				BAC7702E2B26FADF003BA825 /* RouteDisplaying.swift */,
 			);
-			path = Route;
+			path = Model;
 			sourceTree = "<group>";
 		};
-		BAAD1B4F2B24404800296ED8 /* Map */ = {
+		BA64A2A22B42CEED0004E55E /* View */ = {
 			isa = PBXGroup;
 			children = (
 				BAAD1B542B24546200296ED8 /* RoundedButton.swift */,
+				BAAF54E22B22B08800265237 /* RunningCardCollectionViewCell.swift */,
+				BAAF54E62B22C5A300265237 /* RunningCardCollectionViewFlowLayout.swift */,
+				BAB619E02B3292ED00B96E29 /* RunningStatusContainerView.swift */,
+				BAB619E22B3295A500B96E29 /* RunningStatusView.swift */,
 			);
-			path = Map;
+			path = View;
+			sourceTree = "<group>";
+		};
+		BA64A2A32B42CF180004E55E /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				BAAF54D72B21AD2B00265237 /* MainTabBarViewController.swift */,
+				BAAF54D92B21AD7200265237 /* RunningViewController.swift */,
+				BAAF54DB2B21ADA500265237 /* StatisticViewController.swift */,
+				BAAF54DD2B21ADB900265237 /* SettingsViewController.swift */,
+			);
+			path = Core;
 			sourceTree = "<group>";
 		};
 		BAAF54B32B219A6F00265237 = {
@@ -98,10 +123,9 @@
 		BAAF54BE2B219A6F00265237 /* RunPepperRun */ = {
 			isa = PBXGroup;
 			children = (
-				BAAD1B4F2B24404800296ED8 /* Map */,
-				BAAD1B492B243DA100296ED8 /* Route */,
-				BAAF54DF2B21C01E00265237 /* Running */,
-				BAAF54D62B21ACCD00265237 /* Screen */,
+				BA64A2A22B42CEED0004E55E /* View */,
+				BA64A2A12B42CEEA0004E55E /* Model */,
+				BA64A2A02B42CEE50004E55E /* Controller */,
 				BAAF54D52B21AC6400265237 /* Resource */,
 				BAAF54CA2B219A7000265237 /* LaunchScreen.storyboard */,
 				BAAF54CD2B219A7000265237 /* Info.plist */,
@@ -119,30 +143,6 @@
 				BAAD1B5C2B25504B00296ED8 /* Route1.gpx */,
 			);
 			path = Resource;
-			sourceTree = "<group>";
-		};
-		BAAF54D62B21ACCD00265237 /* Screen */ = {
-			isa = PBXGroup;
-			children = (
-				BAAF54D72B21AD2B00265237 /* MainTabBarViewController.swift */,
-				BAAF54D92B21AD7200265237 /* RunningViewController.swift */,
-				BAAF54DB2B21ADA500265237 /* StatisticViewController.swift */,
-				BAAF54DD2B21ADB900265237 /* SettingsViewController.swift */,
-				BAAD1B5A2B254E1600296ED8 /* TrackingViewController.swift */,
-				BAC7702C2B26E563003BA825 /* RunningResultViewController.swift */,
-			);
-			path = Screen;
-			sourceTree = "<group>";
-		};
-		BAAF54DF2B21C01E00265237 /* Running */ = {
-			isa = PBXGroup;
-			children = (
-				BAAF54E22B22B08800265237 /* RunningCardCollectionViewCell.swift */,
-				BAAF54E62B22C5A300265237 /* RunningCardCollectionViewFlowLayout.swift */,
-				BAB619E02B3292ED00B96E29 /* RunningStatusContainerView.swift */,
-				BAB619E22B3295A500B96E29 /* RunningStatusView.swift */,
-			);
-			path = Running;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
