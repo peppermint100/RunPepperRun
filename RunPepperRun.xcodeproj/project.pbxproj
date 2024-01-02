@@ -16,10 +16,7 @@
 		BAAF54C42B219A6F00265237 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAF54C32B219A6F00265237 /* ViewController.swift */; };
 		BAAF54C92B219A7000265237 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BAAF54C82B219A7000265237 /* Assets.xcassets */; };
 		BAAF54CC2B219A7000265237 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BAAF54CA2B219A7000265237 /* LaunchScreen.storyboard */; };
-		BAAF54D82B21AD2B00265237 /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAF54D72B21AD2B00265237 /* MainTabBarViewController.swift */; };
-		BAAF54DA2B21AD7200265237 /* RunningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAF54D92B21AD7200265237 /* RunningViewController.swift */; };
-		BAAF54DC2B21ADA500265237 /* StatisticViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAF54DB2B21ADA500265237 /* StatisticViewController.swift */; };
-		BAAF54DE2B21ADB900265237 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAF54DD2B21ADB900265237 /* SettingsViewController.swift */; };
+		BAAF54DA2B21AD7200265237 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAF54D92B21AD7200265237 /* HomeViewController.swift */; };
 		BAAF54E32B22B08800265237 /* RunningCardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAF54E22B22B08800265237 /* RunningCardCollectionViewCell.swift */; };
 		BAAF54E72B22C5A300265237 /* RunningCardCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAF54E62B22C5A300265237 /* RunningCardCollectionViewFlowLayout.swift */; };
 		BAB619E12B3292ED00B96E29 /* RunningStatusContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB619E02B3292ED00B96E29 /* RunningStatusContainerView.swift */; };
@@ -42,10 +39,7 @@
 		BAAF54C82B219A7000265237 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BAAF54CB2B219A7000265237 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BAAF54CD2B219A7000265237 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		BAAF54D72B21AD2B00265237 /* MainTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
-		BAAF54D92B21AD7200265237 /* RunningViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningViewController.swift; sourceTree = "<group>"; };
-		BAAF54DB2B21ADA500265237 /* StatisticViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticViewController.swift; sourceTree = "<group>"; };
-		BAAF54DD2B21ADB900265237 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		BAAF54D92B21AD7200265237 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		BAAF54E22B22B08800265237 /* RunningCardCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningCardCollectionViewCell.swift; sourceTree = "<group>"; };
 		BAAF54E62B22C5A300265237 /* RunningCardCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningCardCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		BAB619E02B3292ED00B96E29 /* RunningStatusContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningStatusContainerView.swift; sourceTree = "<group>"; };
@@ -118,10 +112,7 @@
 		BA64A2A32B42CF180004E55E /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				BAAF54D72B21AD2B00265237 /* MainTabBarViewController.swift */,
-				BAAF54D92B21AD7200265237 /* RunningViewController.swift */,
-				BAAF54DB2B21ADA500265237 /* StatisticViewController.swift */,
-				BAAF54DD2B21ADB900265237 /* SettingsViewController.swift */,
+				BAAF54D92B21AD7200265237 /* HomeViewController.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -287,14 +278,11 @@
 				BAAF54C42B219A6F00265237 /* ViewController.swift in Sources */,
 				BAAD1B5B2B254E1600296ED8 /* TrackingViewController.swift in Sources */,
 				BAC7702F2B26FADF003BA825 /* RouteDisplaying.swift in Sources */,
-				BAAF54DA2B21AD7200265237 /* RunningViewController.swift in Sources */,
-				BAAF54DE2B21ADB900265237 /* SettingsViewController.swift in Sources */,
+				BAAF54DA2B21AD7200265237 /* HomeViewController.swift in Sources */,
 				BAC7702D2B26E563003BA825 /* RunningResultViewController.swift in Sources */,
 				BAB619E32B3295A500B96E29 /* RunningStatusView.swift in Sources */,
-				BAAF54D82B21AD2B00265237 /* MainTabBarViewController.swift in Sources */,
 				BAAD1B552B24546200296ED8 /* RoundedButton.swift in Sources */,
 				BAB619E12B3292ED00B96E29 /* RunningStatusContainerView.swift in Sources */,
-				BAAF54DC2B21ADA500265237 /* StatisticViewController.swift in Sources */,
 				BAAF54C02B219A6F00265237 /* AppDelegate.swift in Sources */,
 				BAAD1B5E2B2559D200296ED8 /* Route.swift in Sources */,
 				BAAF54E72B22C5A300265237 /* RunningCardCollectionViewFlowLayout.swift in Sources */,
