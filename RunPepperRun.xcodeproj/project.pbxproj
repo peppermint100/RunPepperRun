@@ -9,7 +9,8 @@
 /* Begin PBXBuildFile section */
 		ACFD12E06E89F74AF1DBA685 /* Pods_RunPepperRun.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC2E6287CEEA40B1EF41A0B2 /* Pods_RunPepperRun.framework */; };
 		BA173A432B4406FA00C7F049 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA173A422B4406FA00C7F049 /* Extension.swift */; };
-		BA5752C32B43DE5800686EB5 /* ActivityCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5752C22B43DE5800686EB5 /* ActivityCardView.swift */; };
+		BA173A452B44231700C7F049 /* CustomNavigationBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA173A442B44231700C7F049 /* CustomNavigationBarView.swift */; };
+		BA5752C32B43DE5800686EB5 /* ActivityCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5752C22B43DE5800686EB5 /* ActivityCardCell.swift */; };
 		BAAD1B5E2B2559D200296ED8 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAD1B5D2B2559D200296ED8 /* Route.swift */; };
 		BAAF54C02B219A6F00265237 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAF54BF2B219A6F00265237 /* AppDelegate.swift */; };
 		BAAF54C22B219A6F00265237 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAF54C12B219A6F00265237 /* SceneDelegate.swift */; };
@@ -18,13 +19,16 @@
 		BAAF54CC2B219A7000265237 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BAAF54CA2B219A7000265237 /* LaunchScreen.storyboard */; };
 		BAAF54DA2B21AD7200265237 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAF54D92B21AD7200265237 /* HomeViewController.swift */; };
 		BAC7702F2B26FADF003BA825 /* RouteDisplaying.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC7702E2B26FADF003BA825 /* RouteDisplaying.swift */; };
+		BAD5B8242B465A3700A40AE0 /* RunningActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD5B8232B465A3700A40AE0 /* RunningActivity.swift */; };
+		BAD5B8262B46793100A40AE0 /* ActivityCellLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD5B8252B46793100A40AE0 /* ActivityCellLayout.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1B48CF0FE7430AB0D12CEF4F /* Pods-RunPepperRun.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunPepperRun.release.xcconfig"; path = "Target Support Files/Pods-RunPepperRun/Pods-RunPepperRun.release.xcconfig"; sourceTree = "<group>"; };
 		88BCE0B9D707B2A31B771838 /* Pods-RunPepperRun.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunPepperRun.debug.xcconfig"; path = "Target Support Files/Pods-RunPepperRun/Pods-RunPepperRun.debug.xcconfig"; sourceTree = "<group>"; };
 		BA173A422B4406FA00C7F049 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
-		BA5752C22B43DE5800686EB5 /* ActivityCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityCardView.swift; sourceTree = "<group>"; };
+		BA173A442B44231700C7F049 /* CustomNavigationBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationBarView.swift; sourceTree = "<group>"; };
+		BA5752C22B43DE5800686EB5 /* ActivityCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityCardCell.swift; sourceTree = "<group>"; };
 		BAAD1B5C2B25504B00296ED8 /* Route1.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Route1.gpx; sourceTree = "<group>"; };
 		BAAD1B5D2B2559D200296ED8 /* Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
 		BAAF54BC2B219A6F00265237 /* RunPepperRun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RunPepperRun.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -36,6 +40,8 @@
 		BAAF54CD2B219A7000265237 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BAAF54D92B21AD7200265237 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		BAC7702E2B26FADF003BA825 /* RouteDisplaying.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteDisplaying.swift; sourceTree = "<group>"; };
+		BAD5B8232B465A3700A40AE0 /* RunningActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningActivity.swift; sourceTree = "<group>"; };
+		BAD5B8252B46793100A40AE0 /* ActivityCellLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityCellLayout.swift; sourceTree = "<group>"; };
 		FC2E6287CEEA40B1EF41A0B2 /* Pods_RunPepperRun.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RunPepperRun.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -89,6 +95,7 @@
 			children = (
 				BAAD1B5D2B2559D200296ED8 /* Route.swift */,
 				BAC7702E2B26FADF003BA825 /* RouteDisplaying.swift */,
+				BAD5B8232B465A3700A40AE0 /* RunningActivity.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -96,7 +103,9 @@
 		BA64A2A22B42CEED0004E55E /* View */ = {
 			isa = PBXGroup;
 			children = (
-				BA5752C22B43DE5800686EB5 /* ActivityCardView.swift */,
+				BA5752C22B43DE5800686EB5 /* ActivityCardCell.swift */,
+				BA173A442B44231700C7F049 /* CustomNavigationBarView.swift */,
+				BAD5B8252B46793100A40AE0 /* ActivityCellLayout.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -268,11 +277,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				BA173A432B4406FA00C7F049 /* Extension.swift in Sources */,
+				BA173A452B44231700C7F049 /* CustomNavigationBarView.swift in Sources */,
+				BAD5B8242B465A3700A40AE0 /* RunningActivity.swift in Sources */,
 				BAAF54C42B219A6F00265237 /* ViewController.swift in Sources */,
 				BAC7702F2B26FADF003BA825 /* RouteDisplaying.swift in Sources */,
+				BAD5B8262B46793100A40AE0 /* ActivityCellLayout.swift in Sources */,
 				BAAF54DA2B21AD7200265237 /* HomeViewController.swift in Sources */,
 				BAAF54C02B219A6F00265237 /* AppDelegate.swift in Sources */,
-				BA5752C32B43DE5800686EB5 /* ActivityCardView.swift in Sources */,
+				BA5752C32B43DE5800686EB5 /* ActivityCardCell.swift in Sources */,
 				BAAD1B5E2B2559D200296ED8 /* Route.swift in Sources */,
 				BAAF54C22B219A6F00265237 /* SceneDelegate.swift in Sources */,
 			);
