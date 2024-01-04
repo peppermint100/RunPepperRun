@@ -8,13 +8,9 @@
 import UIKit
 import SnapKit
 
-class ActivityCardView: UIView {
+class ActivityCardCell: UICollectionViewCell {
     
-    var icon: UIImage
-    var title: String
-    var subtitle: String
-    var iconColor: UIColor
-    
+    static let identifier = "ActivityCardCell"
     let circleSize: CGFloat = 50
     
     private let stackView: UIStackView = {
@@ -35,7 +31,7 @@ class ActivityCardView: UIView {
         let view = UIView()
         return view
     }()
-        
+    
     private let iconImageView: UIImageView = {
         let iv = UIImageView()
         let config = UIImage.SymbolConfiguration(pointSize: 5)
@@ -48,11 +44,12 @@ class ActivityCardView: UIView {
         let view = UIView()
         return view
     }()
-
+    
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         label.textColor = .label
+        label.text = "!23123"
         label.textAlignment = .center
         return label
     }()
@@ -65,14 +62,10 @@ class ActivityCardView: UIView {
         return label
     }()
     
-    init(title: String, subtitle: String, icon: UIImage, iconColor: UIColor) {
-        self.title = title
-        self.subtitle = subtitle
-        self.titleLabel.text = title
-        self.icon = icon
-        self.iconColor = iconColor
-        super.init(frame: .zero)
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         setupUI()
+        applyConstraints()
     }
     
     required init(coder: NSCoder) {
@@ -80,18 +73,13 @@ class ActivityCardView: UIView {
     }
     
     private func setupUI() {
-        addSubview(stackView)
+        contentView.addSubview(stackView)
         stackView.addArrangedSubview(iconContainerView)
         stackView.addArrangedSubview(valuesView)
         iconContainerView.addSubview(iconCircleView)
         iconCircleView.addSubview(iconImageView)
         valuesView.addSubview(titleLabel)
         valuesView.addSubview(subtitleLabel)
-        titleLabel.text = title
-        subtitleLabel.text = subtitle
-        iconImageView.image = icon
-        iconImageView.tintColor = iconColor
-        iconCircleView.backgroundColor = iconColor.lighter()
     }
     
     override func layoutSubviews() {
@@ -99,7 +87,7 @@ class ActivityCardView: UIView {
         iconCircleView.clipsToBounds = true
     }
     
-    override func updateConstraints() {
+    private func applyConstraints() {
         stackView.snp.makeConstraints { make in
             make.top.leading.bottom.trailing.equalToSuperview()
         }
@@ -135,7 +123,84 @@ class ActivityCardView: UIView {
             make.trailing.equalTo(valuesView.snp.trailing)
             make.top.equalTo(titleLabel.snp.bottom).offset(5)
         }
-               
+        
         super.updateConstraints()
+    }
+    
+    func configure(with activity: RunningActivity) {
+        titleLabel.text = title(for: activity)
+        subtitleLabel.text = subtitle(for: activity)
+        iconImageView.image = UIImage(systemName: sfSymbol(for: activity))
+        let iconColor = iconColor(for: activity)
+        iconImageView.tintColor = iconColor
+        iconCircleView.backgroundColor = iconColor.lighter()
+    }
+    
+    private func title(for activity: RunningActivity) -> String {
+        switch activity {
+        case .distance(let value):
+            return String(value)
+        case .speed(let value):
+            return String(value)
+        case .pace(let value):
+            return String(value)
+        case .caloriesBurned(let value):
+            return String(value)
+        case .cadence(let value):
+            return String(value)
+        case .duration(let value):
+            return String(value)
+        }
+    }
+    
+    private func subtitle(for activity: RunningActivity) -> String {
+        switch activity {
+        case .distance:
+            return "거리"
+        case .speed:
+            return "속도"
+        case .pace:
+            return "페이스"
+        case .caloriesBurned:
+            return "소모 칼로리"
+        case .cadence:
+            return "발걸음 수"
+        case .duration:
+            return "시간"
+        }
+    }
+    
+    private func iconColor(for activity: RunningActivity) -> UIColor {
+        switch activity {
+        case .distance:
+            return .systemYellow
+        case .speed:
+            return .systemGreen
+        case .pace:
+            return .systemOrange
+        case .caloriesBurned:
+            return .systemRed
+        case .cadence:
+            return .systemBlue
+        case .duration:
+            return .systemPurple
+        }
+    }
+        
+    func sfSymbol(for activity: RunningActivity) -> String {
+        switch activity {
+        case .distance:
+            return "figure.walk"
+        case .speed:
+            return "bolt.horizontal"
+        case .pace:
+            return "stopwatch"
+        case .caloriesBurned:
+            return "flame"
+        case .cadence:
+            return "shoeprints.fill"
+        case .duration:
+            return "clock"
+        }
     }
 }
