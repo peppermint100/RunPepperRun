@@ -62,13 +62,7 @@ class HomeViewController: UIViewController {
     
 // MARK: - 네비게이션 바 세팅
     private func setupNavigationBar() {
-        navigationItem.title = "10km"
-        navigationController?.navigationBar.prefersLargeTitles = true
-    }
-    
-    // TODO: - Setting Feature에서 추가 개발
-    private func getRunningActivityForNavigationBar() -> RunningActivity {
-        return RunningActivity.distance(36)
+        navigationItem.title = "Home"
     }
     
     // TODO: - Setting Feature에서 추가 개발
