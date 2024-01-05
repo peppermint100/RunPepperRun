@@ -7,6 +7,21 @@
 
 import UIKit
 
+extension UIView {
+    func drawLightGradientOnTop(tag: String) {
+        let gradientLayer = CAGradientLayer()
+        var colors: [CGColor] = []
+        colors.append(UIColor.white.withAlphaComponent(1).cgColor)
+        colors.append(UIColor.white.withAlphaComponent(0).cgColor)
+        gradientLayer.colors = colors
+        gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
+        gradientLayer.endPoint = CGPoint(x: 0.0, y: 0.2)
+        gradientLayer.frame = self.bounds
+        gradientLayer.name = tag
+        self.layer.addSublayer(gradientLayer)
+    }
+}
+
 extension UIColor {
     func lighter(by percentage: CGFloat = 40.0) -> UIColor? {
         return adjust(by: abs(percentage))

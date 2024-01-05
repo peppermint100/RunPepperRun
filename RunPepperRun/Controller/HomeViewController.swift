@@ -11,6 +11,8 @@ import SnapKit
 
 class HomeViewController: UIViewController {
     
+    private let mapViewTag = "mapViewTag"
+    
     private let locationManager = CLLocationManager()
     
     private var activities: [RunningActivity] = []
@@ -41,24 +43,12 @@ class HomeViewController: UIViewController {
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        if traitCollection.userInterfaceStyle == .light {
-            let gradientLayer = CAGradientLayer()
-            var colors: [CGColor] = []
-            colors.append(UIColor.white.withAlphaComponent(1).cgColor)
-            colors.append(UIColor.white.withAlphaComponent(0).cgColor)
-            gradientLayer.colors = colors
-            gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
-            gradientLayer.endPoint = CGPoint(x: 0.0, y: 0.2)
-            gradientLayer.frame = stackView.bounds
-            gradientLayer.name = "mapViewLayer"
-            mapView.layer.addSublayer(gradientLayer)
-        } else {
-            mapView.layer.sublayers?.forEach({ layer in
-                if layer.name == "mapViewLayer" {
-                    layer.removeFromSuperlayer()
-                }
-            })
-        }
+        drawGradientOnMap()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        drawGradientOnMap()
     }
     
     // MARK: - 네비게이션 바 세팅
@@ -83,7 +73,6 @@ class HomeViewController: UIViewController {
             make.trailing.equalToSuperview().offset(-15)
             make.bottom.equalTo(view.safeAreaLayoutGuide)
         }
-        
     }
     private func setupMapView() {
         stackView.addArrangedSubview(mapView)
@@ -137,6 +126,17 @@ class HomeViewController: UIViewController {
         }
     }
     
+    private func drawGradientOnMap() {
+        if traitCollection.userInterfaceStyle == .light {
+            mapView.drawLightGradientOnTop(tag: mapViewTag)
+        } else {
+            mapView.layer.sublayers?.forEach({ layer in
+                if layer.name == mapViewTag {
+                    layer.removeFromSuperlayer()
+                }
+            })
+        }
+    }
 }
 
 // MARK: - 맵, 위치
