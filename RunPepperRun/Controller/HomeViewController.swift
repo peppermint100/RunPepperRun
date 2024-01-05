@@ -12,7 +12,7 @@ import SnapKit
 class HomeViewController: UIViewController {
     
     private let locationManager = CLLocationManager()
- 
+    
     private var activities: [RunningActivity] = []
     
     private let stackView = UIStackView()
@@ -26,14 +26,15 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupUI()
-        setUpStackView()
+        view.addSubview(stackView)
+        view.backgroundColor = .systemBackground
+        setupStackView()
         setupNavigationBar()
         setupMapView()
         setupActivities()
         setupActivityCollectionView()
         setupButtonView()
-        applyConstraints()
+        setupStartButton()
         setupLocationManager()
         handleLocationAuthorization()
     }
@@ -60,7 +61,7 @@ class HomeViewController: UIViewController {
         }
     }
     
-// MARK: - 네비게이션 바 세팅
+    // MARK: - 네비게이션 바 세팅
     private func setupNavigationBar() {
         navigationItem.title = "Home"
         navigationController?.navigationBar.prefersLargeTitles = true
@@ -71,43 +72,11 @@ class HomeViewController: UIViewController {
         let activities: [RunningActivity] = [.speed(36), .cadence(10), .caloriesBurned(224)]
         return activities
     }
-        
-// MARK: - UI 세팅
-    private func setupUI() {
-        view.addSubview(stackView)
-        view.backgroundColor = .systemBackground
-        stackView.addArrangedSubview(mapView)
-        stackView.addArrangedSubview(activityCollectionView)
-        stackView.addArrangedSubview(buttonView)
-        buttonView.addSubview(startButton)
-    }
     
-    private func setUpStackView() {
+    // MARK: - UI 세팅
+    private func setupStackView() {
         stackView.axis = .vertical
         stackView.spacing = 10
-    }
-    
-    private func setupActivities() {
-        activities = getRunningActivitiesForHomeVC()
-    }
-
-    private func setupActivityCollectionView() {
-        activityCollectionView.register(ActivityCardCell.self, forCellWithReuseIdentifier: ActivityCardCell.identifier)
-        activityCollectionView.delegate = self
-        activityCollectionView.dataSource = self
-        activityCollectionView.showsHorizontalScrollIndicator = false
-    }
-    
-    private func setupButtonView() {
-        startButton.setTitle("러닝 시작하기", for: .normal)
-        startButton.setTitleColor(.label, for: .normal)
-        startButton.backgroundColor = .secondarySystemBackground
-        startButton.layer.cornerRadius = 10
-        startButton.clipsToBounds = true
-        startButton.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
-    }
-    
-    private func applyConstraints() {
         stackView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide)
             make.leading.equalToSuperview().offset(15)
@@ -115,18 +84,50 @@ class HomeViewController: UIViewController {
             make.bottom.equalTo(view.safeAreaLayoutGuide)
         }
         
+    }
+    private func setupMapView() {
+        stackView.addArrangedSubview(mapView)
+        mapView.userTrackingMode = .follow
+        mapView.showsUserLocation = true
+        mapView.layer.cornerRadius = 10
+        mapView.clipsToBounds = true
         mapView.snp.makeConstraints { make in
             make.height.equalTo(stackView.snp.height).offset(-10).multipliedBy(0.6)
             make.leading.trailing.top.equalToSuperview()
         }
+    }
+    
+    private func setupActivities() {
+        activities = getRunningActivitiesForHomeVC()
+    }
+    
+    private func setupActivityCollectionView() {
+        stackView.addArrangedSubview(activityCollectionView)
+        activityCollectionView.register(ActivityCardCell.self, forCellWithReuseIdentifier: ActivityCardCell.identifier)
+        activityCollectionView.delegate = self
+        activityCollectionView.dataSource = self
+        activityCollectionView.showsHorizontalScrollIndicator = false
         
         activityCollectionView.snp.makeConstraints { make in
             make.height.equalTo(stackView.snp.height).offset(-10).multipliedBy(0.28)
         }
-        
+    }
+    
+    private func setupButtonView() {
+        stackView.addArrangedSubview(buttonView)
         buttonView.snp.makeConstraints { make in
             make.height.equalTo(stackView.snp.height).multipliedBy(0.12)
         }
+    }
+    
+    private func setupStartButton() {
+        buttonView.addSubview(startButton)
+        startButton.setTitle("러닝 시작하기", for: .normal)
+        startButton.setTitleColor(.label, for: .normal)
+        startButton.backgroundColor = .secondarySystemBackground
+        startButton.layer.cornerRadius = 10
+        startButton.clipsToBounds = true
+        startButton.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
         
         startButton.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(10)
@@ -135,16 +136,11 @@ class HomeViewController: UIViewController {
             make.bottom.equalToSuperview().offset(-15)
         }
     }
+    
 }
 
 // MARK: - 맵, 위치
 extension HomeViewController: CLLocationManagerDelegate, MKMapViewDelegate {
-    private func setupMapView() {
-        mapView.userTrackingMode = .follow
-        mapView.showsUserLocation = true
-        mapView.layer.cornerRadius = 10
-        mapView.clipsToBounds = true
-    }
     
     private func setupLocationManager() {
         locationManager.delegate = self
