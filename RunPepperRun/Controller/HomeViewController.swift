@@ -117,6 +117,7 @@ class HomeViewController: UIViewController {
         startButton.layer.cornerRadius = 10
         startButton.clipsToBounds = true
         startButton.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
+        startButton.addTarget(self, action: #selector(presentToRunningVC), for: .touchUpInside)
         
         startButton.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(10)
@@ -136,6 +137,12 @@ class HomeViewController: UIViewController {
                 }
             })
         }
+    }
+    
+    @objc private func presentToRunningVC() {
+        let vc = RunningViewController()
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: false)
     }
 }
 

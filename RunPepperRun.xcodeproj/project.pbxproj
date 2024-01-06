@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		ACFD12E06E89F74AF1DBA685 /* Pods_RunPepperRun.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC2E6287CEEA40B1EF41A0B2 /* Pods_RunPepperRun.framework */; };
 		BA173A432B4406FA00C7F049 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA173A422B4406FA00C7F049 /* Extension.swift */; };
+		BA3A3B682B4915EF00DF1DE4 /* RunningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3A3B672B4915EF00DF1DE4 /* RunningViewController.swift */; };
+		BA3A3B6A2B492BC600DF1DE4 /* ActivityCellScollLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3A3B692B492BC600DF1DE4 /* ActivityCellScollLayout.swift */; };
 		BA5752C32B43DE5800686EB5 /* ActivityCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5752C22B43DE5800686EB5 /* ActivityCardCell.swift */; };
 		BAAF54C02B219A6F00265237 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAF54BF2B219A6F00265237 /* AppDelegate.swift */; };
 		BAAF54C22B219A6F00265237 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAF54C12B219A6F00265237 /* SceneDelegate.swift */; };
@@ -24,6 +26,8 @@
 		1B48CF0FE7430AB0D12CEF4F /* Pods-RunPepperRun.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunPepperRun.release.xcconfig"; path = "Target Support Files/Pods-RunPepperRun/Pods-RunPepperRun.release.xcconfig"; sourceTree = "<group>"; };
 		88BCE0B9D707B2A31B771838 /* Pods-RunPepperRun.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunPepperRun.debug.xcconfig"; path = "Target Support Files/Pods-RunPepperRun/Pods-RunPepperRun.debug.xcconfig"; sourceTree = "<group>"; };
 		BA173A422B4406FA00C7F049 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		BA3A3B672B4915EF00DF1DE4 /* RunningViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningViewController.swift; sourceTree = "<group>"; };
+		BA3A3B692B492BC600DF1DE4 /* ActivityCellScollLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityCellScollLayout.swift; sourceTree = "<group>"; };
 		BA5752C22B43DE5800686EB5 /* ActivityCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityCardCell.swift; sourceTree = "<group>"; };
 		BAAD1B5C2B25504B00296ED8 /* Route1.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Route1.gpx; sourceTree = "<group>"; };
 		BAAF54BC2B219A6F00265237 /* RunPepperRun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RunPepperRun.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -80,6 +84,7 @@
 			isa = PBXGroup;
 			children = (
 				BAAF54D92B21AD7200265237 /* HomeViewController.swift */,
+				BA3A3B672B4915EF00DF1DE4 /* RunningViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -97,6 +102,7 @@
 			children = (
 				BA5752C22B43DE5800686EB5 /* ActivityCardCell.swift */,
 				BAD5B8252B46793100A40AE0 /* ActivityCellLayout.swift */,
+				BA3A3B692B492BC600DF1DE4 /* ActivityCellScollLayout.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -259,6 +265,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA3A3B6A2B492BC600DF1DE4 /* ActivityCellScollLayout.swift in Sources */,
 				BA173A432B4406FA00C7F049 /* Extension.swift in Sources */,
 				BAD5B8242B465A3700A40AE0 /* RunningActivity.swift in Sources */,
 				BAAF54C42B219A6F00265237 /* ViewController.swift in Sources */,
@@ -266,6 +273,7 @@
 				BAAF54DA2B21AD7200265237 /* HomeViewController.swift in Sources */,
 				BAAF54C02B219A6F00265237 /* AppDelegate.swift in Sources */,
 				BA5752C32B43DE5800686EB5 /* ActivityCardCell.swift in Sources */,
+				BA3A3B682B4915EF00DF1DE4 /* RunningViewController.swift in Sources */,
 				BAAF54C22B219A6F00265237 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

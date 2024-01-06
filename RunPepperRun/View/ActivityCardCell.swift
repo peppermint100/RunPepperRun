@@ -11,7 +11,7 @@ import SnapKit
 class ActivityCardCell: UICollectionViewCell {
     
     static let identifier = "ActivityCardCell"
-    let circleSize: CGFloat = 50
+    let circleSize: CGFloat = 40
     
     private let stackView: UIStackView = {
         let sv = UIStackView()
