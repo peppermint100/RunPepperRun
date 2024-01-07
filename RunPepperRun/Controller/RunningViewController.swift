@@ -11,6 +11,17 @@ import SnapKit
 
 class RunningViewController: UIViewController {
     
+    private var timer: DispatchSourceTimer?
+    private var timerSuspended = true
+    private var timerTicking: Bool {
+        return seconds > 0 && !timerSuspended
+    }
+    private var timerIdle: Bool {
+        return timer == nil || (timerSuspended && seconds == 0)
+    }
+    private var seconds = 0
+    private let buttonImageConfig = UIImage.SymbolConfiguration(pointSize: 26)
+    
     private let stackView = UIStackView()
     private let mapView = MKMapView()
     private let activityCollectionView: UICollectionView = {
@@ -39,7 +50,8 @@ class RunningViewController: UIViewController {
         setupActivityView()
         setupRunnginStatusView()
         setupTimerView()
-        setUpRunningStatusButton()
+        setupRunningStatusButton()
+        setupTimer()
     }
     
     private func setupNavigation() {
@@ -151,21 +163,25 @@ class RunningViewController: UIViewController {
         distanceLabel.textColor = .systemGray
     }
     
-    private func setUpRunningStatusButton() {
+    private func setupRunningStatusButton() {
         runningStatusView.addSubview(runningStatusButton)
         let buttonSize: CGFloat = 80
-        let imageConfig = UIImage.SymbolConfiguration(pointSize: 30)
-        runningStatusButton.setImage(UIImage(systemName: "pause.fill", withConfiguration: imageConfig)!, for: .normal)
+        runningStatusButton.setImage(UIImage(systemName: "pause.fill", withConfiguration: buttonImageConfig)!, for: .normal)
         runningStatusButton.layer.cornerRadius = buttonSize / 2
         runningStatusButton.clipsToBounds = true
         runningStatusButton.backgroundColor = .black
         runningStatusButton.tintColor = .white
+        runningStatusButton.addTarget(self, action: #selector(onTapRunningStatusButton), for: .touchUpInside)
         runningStatusButton.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.trailing.equalToSuperview().offset(-20)
             make.width.equalTo(buttonSize)
             make.height.equalTo(buttonSize)
         }
+    }
+    
+    deinit {
+        cancelTimer()
     }
 }
 
@@ -179,5 +195,56 @@ extension RunningViewController: UICollectionViewDataSource, UICollectionViewDel
         let activity = activities[indexPath.row]
         cell.configure(with: activity)
         return cell
+    }
+}
+
+// MARK: - Timer
+extension RunningViewController {
+    private func setupTimer() {
+        timer = DispatchSource.makeTimerSource(flags: [], queue: DispatchQueue.main)
+        timer?.schedule(deadline: .now() + 1, repeating: 1)
+        timer?.setEventHandler { [weak self] in
+            self?.timerTicks()
+        }
+        resumeTimer()
+    }
+    
+    @objc private func onTapRunningStatusButton() {
+        if timerSuspended {
+            resumeTimer()
+            runningStatusButton.setImage(UIImage(systemName: "pause.fill", withConfiguration: buttonImageConfig)!, for: .normal)
+            
+        } else if timerTicking {
+            suspendTimer()
+            runningStatusButton.setImage(UIImage(systemName: "play.fill", withConfiguration: buttonImageConfig)!, for: .normal)
+        }
+    }
+    
+    private func timerTicks() {
+        seconds += 1
+        let hours = seconds / 3600
+        let secondsLeft = seconds - (hours * 3600)
+        let minutes = secondsLeft / 60
+        let seconds = secondsLeft % 60
+        timerLabel.text = String(format: "%02d:%02d:%02d", hours, minutes, seconds)
+    }
+    
+    private func resumeTimer() {
+        if timerTicking { return }
+        timerSuspended = false
+        timer?.resume()
+    }
+    
+    private func suspendTimer() {
+        if timerSuspended { return }
+        timerSuspended = true
+        timer?.suspend()
+    }
+    
+    private func cancelTimer() {
+        if timerIdle { return }
+        if timerSuspended { resumeTimer() }
+        timerSuspended = true
+        timer?.cancel()
     }
 }
