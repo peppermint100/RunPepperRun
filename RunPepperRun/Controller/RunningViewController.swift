@@ -37,8 +37,10 @@ class RunningViewController: UIViewController {
     private let timerIndicatorLabel = UILabel()
     private let timerLabel = UILabel()
     private let distanceLabel = UILabel()
+    
     private let runningStatusButtonView = UIView()
     private let runningStatusButton = UIButton()
+    private let buttonSize: CGFloat = 80
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -129,7 +131,7 @@ class RunningViewController: UIViewController {
     }
     
     private func setupTimerIndicatorIcon() {
-        let image = UIImage(systemName: "stopwatch")!
+        let image = UIImage(systemName: "stopwatch")
         timerIndicatorIcon.tintColor = .systemGray
         timerIndicatorIcon.image = image
         timerIndicatorIcon.contentMode = .scaleAspectFit
@@ -165,18 +167,47 @@ class RunningViewController: UIViewController {
     
     private func setupRunningStatusButton() {
         runningStatusView.addSubview(runningStatusButton)
-        let buttonSize: CGFloat = 80
         runningStatusButton.setImage(UIImage(systemName: "pause.fill", withConfiguration: buttonImageConfig)!, for: .normal)
         runningStatusButton.layer.cornerRadius = buttonSize / 2
         runningStatusButton.clipsToBounds = true
-        runningStatusButton.backgroundColor = .black
-        runningStatusButton.tintColor = .white
+        runningStatusButton.backgroundColor = .inverted
+        runningStatusButton.tintColor = .systemBackground
         runningStatusButton.addTarget(self, action: #selector(onTapRunningStatusButton), for: .touchUpInside)
+        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(onLongPressRunningStatusButton(_:)))
+        runningStatusButton.addGestureRecognizer(longPressGesture)
         runningStatusButton.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
-            make.trailing.equalToSuperview().offset(-20)
+            make.trailing.lessThanOrEqualToSuperview().offset(-25)
             make.width.equalTo(buttonSize)
             make.height.equalTo(buttonSize)
+        }
+    }
+    
+    @objc private func onLongPressRunningStatusButton(_ gesture: UIGestureRecognizer) {
+        switch gesture.state {
+        case .began:
+            UIView.animate(withDuration: 0.6) { [weak self] in
+                self?.runningStatusButton.layer.cornerRadius = (self!.buttonSize * 1.3) / 2
+                self?.runningStatusButton.backgroundColor = .systemRed
+                self?.runningStatusButton.snp.updateConstraints { make in
+                    make.width.equalTo(self!.buttonSize * 1.3)
+                    make.height.equalTo(self!.buttonSize * 1.3)
+                }
+                self?.view.layoutIfNeeded()
+            } completion: { _ in
+            }
+        case .cancelled, .failed, .ended:
+            UIView.animate(withDuration: 0.2) { [weak self] in
+                self?.runningStatusButton.layer.cornerRadius = (self!.buttonSize) / 2
+                self?.runningStatusButton.backgroundColor = .inverted
+                self?.runningStatusButton.snp.updateConstraints { make in
+                    make.width.equalTo(self!.buttonSize)
+                    make.height.equalTo(self!.buttonSize)
+                }
+                self?.view.layoutIfNeeded()
+            }
+        default:
+            return
         }
     }
     
@@ -213,7 +244,6 @@ extension RunningViewController {
         if timerSuspended {
             resumeTimer()
             runningStatusButton.setImage(UIImage(systemName: "pause.fill", withConfiguration: buttonImageConfig)!, for: .normal)
-            
         } else if timerTicking {
             suspendTimer()
             runningStatusButton.setImage(UIImage(systemName: "play.fill", withConfiguration: buttonImageConfig)!, for: .normal)
