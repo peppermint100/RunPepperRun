@@ -200,6 +200,7 @@ class RunningViewController: UIViewController {
                 }
                 self?.view.layoutIfNeeded()
             } completion: { [weak self] _ in
+                self?.running.pause()
                 let vc = ResultViewController()
                 vc.result = self?.running.getResults()
                 self?.navigationController?.pushViewController(vc, animated: true)

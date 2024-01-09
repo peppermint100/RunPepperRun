@@ -63,7 +63,7 @@ class ResultViewController: UIViewController {
     }
     
     private func setupActivities() {
-        activities = [.speed(0), .pace(0), .cadence(0), .caloriesBurned(0), .distance(0), .duration(0)]
+        activities = [.speed(self.result?.averageSpeed ?? 0), .pace(self.result?.averagePace ?? 0), .cadence(self.result?.numberOfSteps ?? 0), .caloriesBurned(self.result?.caloriesBurend ?? 0), .distance(self.result?.distance ?? 0), .duration(self.result?.duration ?? 0)]
     }
     
     private func setupActivityView() {

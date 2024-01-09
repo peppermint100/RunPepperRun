@@ -10,4 +10,10 @@ import Foundation
 
 struct RunningResult {
     let points: [Point]
+    let distance: Double
+    let duration: TimeInterval
+    let averageSpeed: Double
+    let averagePace: Double
+    let caloriesBurend: Double
+    let numberOfSteps: Int
 }
