@@ -11,6 +11,8 @@ import SnapKit
 
 class RunningViewController: UIViewController {
     
+    private let running = Running()
+    
     private var timer: DispatchSourceTimer?
     private var timerSuspended = true
     private var timerTicking: Bool {
@@ -54,10 +56,12 @@ class RunningViewController: UIViewController {
         setupTimerView()
         setupRunningStatusButton()
         setupTimer()
+        setupRunning()
     }
     
     private func setupNavigation() {
         navigationItem.title = "Running"
+        navigationItem.hidesBackButton = true
         navigationController?.navigationBar.prefersLargeTitles = true
     }
     
@@ -84,7 +88,7 @@ class RunningViewController: UIViewController {
     }
     
     private func setupActivities() {
-        activities = [.speed(0), .pace(0), .distance(0), .cadence(0), .caloriesBurned(0)]
+        activities = [.speed(0), .pace(0), .cadence(0), .caloriesBurned(0)]
     }
     
     private func setupActivityView() {
@@ -151,6 +155,7 @@ class RunningViewController: UIViewController {
             make.centerY.equalToSuperview()
         }
     }
+    
     private func setupTimerLabel() {
         timerView.addArrangedSubview(timerLabel)
         timerLabel.text = "00:00:00"
@@ -160,7 +165,7 @@ class RunningViewController: UIViewController {
     
     private func setupDistanceLabel(){
         timerView.addArrangedSubview(distanceLabel)
-        distanceLabel.text = "2.5km"
+        distanceLabel.text = "0km"
         distanceLabel.font = UIFont.systemFont(ofSize: 19, weight: .semibold)
         distanceLabel.textColor = .systemGray
     }
@@ -194,7 +199,10 @@ class RunningViewController: UIViewController {
                     make.height.equalTo(self!.buttonSize * 1.3)
                 }
                 self?.view.layoutIfNeeded()
-            } completion: { _ in
+            } completion: { [weak self] _ in
+                let vc = ResultViewController()
+                vc.result = self?.running.getResults()
+                self?.navigationController?.pushViewController(vc, animated: true)
             }
         case .cancelled, .failed, .ended:
             UIView.animate(withDuration: 0.2) { [weak self] in
@@ -244,19 +252,17 @@ extension RunningViewController {
         if timerSuspended {
             resumeTimer()
             runningStatusButton.setImage(UIImage(systemName: "pause.fill", withConfiguration: buttonImageConfig)!, for: .normal)
+            running.start()
         } else if timerTicking {
             suspendTimer()
             runningStatusButton.setImage(UIImage(systemName: "play.fill", withConfiguration: buttonImageConfig)!, for: .normal)
+            running.pause()
         }
     }
     
     private func timerTicks() {
         seconds += 1
-        let hours = seconds / 3600
-        let secondsLeft = seconds - (hours * 3600)
-        let minutes = secondsLeft / 60
-        let seconds = secondsLeft % 60
-        timerLabel.text = String(format: "%02d:%02d:%02d", hours, minutes, seconds)
+        timerLabel.text = seconds.formatToHHMMSS()
     }
     
     private func resumeTimer() {
@@ -276,5 +282,20 @@ extension RunningViewController {
         if timerSuspended { resumeTimer() }
         timerSuspended = true
         timer?.cancel()
+    }
+}
+
+extension RunningViewController: RunningDelegate {
+    private func setupRunning() {
+        running.delegate = self
+        running.start()
+    }
+    
+    func didUpdateRunningActivity(_ running: Running, distance: Double, speed: Double, pace: Double, caloriesBurned: Double, numberOfSteps: Int) {
+        DispatchQueue.main.async { [weak self] in
+            self?.activities = [.speed(speed), .pace(pace), .cadence(numberOfSteps), .caloriesBurned(caloriesBurned)]
+            self?.distanceLabel.text = distance.formatDistance()
+            self?.activityCollectionView.reloadData()
+        }
     }
 }
