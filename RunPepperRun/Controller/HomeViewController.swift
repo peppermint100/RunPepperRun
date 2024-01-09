@@ -141,8 +141,7 @@ class HomeViewController: UIViewController {
     
     @objc private func presentToRunningVC() {
         let vc = RunningViewController()
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: false)
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 

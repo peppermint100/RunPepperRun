@@ -7,6 +7,46 @@
 
 import UIKit
 
+extension Double {
+    func mpsToKph() -> Double {
+        return self * 1000 / 3600
+    }
+    
+    func metersToKilometers() -> Double {
+        return self / 1000
+    }
+    
+    func formatDistance() -> String {
+        return String(format: "%.1fkm", self.metersToKilometers())
+    }
+    
+    func formatCaloriesBurned() -> String {
+        return String(format: "%.2fcal", self)
+    }
+    
+    func formatSpeed() -> String {
+        return String(format: "%.2fkm/h", self.mpsToKph())
+    }
+    
+    func formatPace() -> String {
+        let secondsPerKilometer = self * 1000
+        let minutes = secondsPerKilometer / 60
+        let secondsLeft = secondsPerKilometer.truncatingRemainder(dividingBy: 60)
+        return String(format: "%d'%d\"", Int(minutes), Int(secondsLeft))
+    }
+
+}
+
+extension Int {
+    func formatToHHMMSS() -> String {
+        let hours = self / 3600
+        let secondsLeft = self - (hours * 3600)
+        let minutes = secondsLeft / 60
+        let seconds = secondsLeft % 60
+        return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
+    }
+}
+
 extension UIView {
     func drawLightGradientOnTop(tag: String) {
         let gradientLayer = CAGradientLayer()

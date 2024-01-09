@@ -9,6 +9,12 @@
 /* Begin PBXBuildFile section */
 		ACFD12E06E89F74AF1DBA685 /* Pods_RunPepperRun.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC2E6287CEEA40B1EF41A0B2 /* Pods_RunPepperRun.framework */; };
 		BA173A432B4406FA00C7F049 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA173A422B4406FA00C7F049 /* Extension.swift */; };
+		BA225CFA2B4BD3E800A637BA /* Running.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA225CF92B4BD3E800A637BA /* Running.swift */; };
+		BA225CFC2B4BD40F00A637BA /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA225CFB2B4BD40F00A637BA /* Location.swift */; };
+		BA225CFE2B4BD63D00A637BA /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA225CFD2B4BD63D00A637BA /* Point.swift */; };
+		BA225D002B4BD8AA00A637BA /* Motion.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA225CFF2B4BD8AA00A637BA /* Motion.swift */; };
+		BA225D022B4BED3B00A637BA /* MotionActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA225D012B4BED3B00A637BA /* MotionActivity.swift */; };
+		BA225D042B4BEE6600A637BA /* CaloriesCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA225D032B4BEE6600A637BA /* CaloriesCalculator.swift */; };
 		BA3A3B682B4915EF00DF1DE4 /* RunningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3A3B672B4915EF00DF1DE4 /* RunningViewController.swift */; };
 		BA3A3B6A2B492BC600DF1DE4 /* ActivityCellScollLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3A3B692B492BC600DF1DE4 /* ActivityCellScollLayout.swift */; };
 		BA5752C32B43DE5800686EB5 /* ActivityCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5752C22B43DE5800686EB5 /* ActivityCardCell.swift */; };
@@ -20,12 +26,21 @@
 		BAAF54DA2B21AD7200265237 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAF54D92B21AD7200265237 /* HomeViewController.swift */; };
 		BAD5B8242B465A3700A40AE0 /* RunningActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD5B8232B465A3700A40AE0 /* RunningActivity.swift */; };
 		BAD5B8262B46793100A40AE0 /* ActivityCellLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD5B8252B46793100A40AE0 /* ActivityCellLayout.swift */; };
+		BAED15A72B4D0B7100139F67 /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAED15A62B4D0B7100139F67 /* ResultViewController.swift */; };
+		BAED15A92B4D1B9F00139F67 /* DrawbleMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAED15A82B4D1B9F00139F67 /* DrawbleMapView.swift */; };
+		BAED15AC2B4D201100139F67 /* RunningResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAED15AB2B4D201100139F67 /* RunningResult.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1B48CF0FE7430AB0D12CEF4F /* Pods-RunPepperRun.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunPepperRun.release.xcconfig"; path = "Target Support Files/Pods-RunPepperRun/Pods-RunPepperRun.release.xcconfig"; sourceTree = "<group>"; };
 		88BCE0B9D707B2A31B771838 /* Pods-RunPepperRun.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunPepperRun.debug.xcconfig"; path = "Target Support Files/Pods-RunPepperRun/Pods-RunPepperRun.debug.xcconfig"; sourceTree = "<group>"; };
 		BA173A422B4406FA00C7F049 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		BA225CF92B4BD3E800A637BA /* Running.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Running.swift; sourceTree = "<group>"; };
+		BA225CFB2B4BD40F00A637BA /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		BA225CFD2B4BD63D00A637BA /* Point.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
+		BA225CFF2B4BD8AA00A637BA /* Motion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Motion.swift; sourceTree = "<group>"; };
+		BA225D012B4BED3B00A637BA /* MotionActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionActivity.swift; sourceTree = "<group>"; };
+		BA225D032B4BEE6600A637BA /* CaloriesCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaloriesCalculator.swift; sourceTree = "<group>"; };
 		BA3A3B672B4915EF00DF1DE4 /* RunningViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningViewController.swift; sourceTree = "<group>"; };
 		BA3A3B692B492BC600DF1DE4 /* ActivityCellScollLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityCellScollLayout.swift; sourceTree = "<group>"; };
 		BA5752C22B43DE5800686EB5 /* ActivityCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityCardCell.swift; sourceTree = "<group>"; };
@@ -40,6 +55,9 @@
 		BAAF54D92B21AD7200265237 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		BAD5B8232B465A3700A40AE0 /* RunningActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningActivity.swift; sourceTree = "<group>"; };
 		BAD5B8252B46793100A40AE0 /* ActivityCellLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityCellLayout.swift; sourceTree = "<group>"; };
+		BAED15A62B4D0B7100139F67 /* ResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
+		BAED15A82B4D1B9F00139F67 /* DrawbleMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawbleMapView.swift; sourceTree = "<group>"; };
+		BAED15AB2B4D201100139F67 /* RunningResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningResult.swift; sourceTree = "<group>"; };
 		FC2E6287CEEA40B1EF41A0B2 /* Pods_RunPepperRun.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RunPepperRun.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -76,6 +94,7 @@
 			isa = PBXGroup;
 			children = (
 				BA173A422B4406FA00C7F049 /* Extension.swift */,
+				BAED15A82B4D1B9F00139F67 /* DrawbleMapView.swift */,
 			);
 			path = Global;
 			sourceTree = "<group>";
@@ -85,6 +104,7 @@
 			children = (
 				BAAF54D92B21AD7200265237 /* HomeViewController.swift */,
 				BA3A3B672B4915EF00DF1DE4 /* RunningViewController.swift */,
+				BAED15A62B4D0B7100139F67 /* ResultViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -93,6 +113,13 @@
 			isa = PBXGroup;
 			children = (
 				BAD5B8232B465A3700A40AE0 /* RunningActivity.swift */,
+				BA225CF92B4BD3E800A637BA /* Running.swift */,
+				BA225CFB2B4BD40F00A637BA /* Location.swift */,
+				BA225CFD2B4BD63D00A637BA /* Point.swift */,
+				BA225CFF2B4BD8AA00A637BA /* Motion.swift */,
+				BA225D012B4BED3B00A637BA /* MotionActivity.swift */,
+				BA225D032B4BEE6600A637BA /* CaloriesCalculator.swift */,
+				BAED15AB2B4D201100139F67 /* RunningResult.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -268,13 +295,22 @@
 				BA3A3B6A2B492BC600DF1DE4 /* ActivityCellScollLayout.swift in Sources */,
 				BA173A432B4406FA00C7F049 /* Extension.swift in Sources */,
 				BAD5B8242B465A3700A40AE0 /* RunningActivity.swift in Sources */,
+				BA225D022B4BED3B00A637BA /* MotionActivity.swift in Sources */,
 				BAAF54C42B219A6F00265237 /* ViewController.swift in Sources */,
+				BA225CFE2B4BD63D00A637BA /* Point.swift in Sources */,
+				BA225D002B4BD8AA00A637BA /* Motion.swift in Sources */,
+				BAED15A92B4D1B9F00139F67 /* DrawbleMapView.swift in Sources */,
 				BAD5B8262B46793100A40AE0 /* ActivityCellLayout.swift in Sources */,
+				BAED15A72B4D0B7100139F67 /* ResultViewController.swift in Sources */,
 				BAAF54DA2B21AD7200265237 /* HomeViewController.swift in Sources */,
+				BA225CFA2B4BD3E800A637BA /* Running.swift in Sources */,
 				BAAF54C02B219A6F00265237 /* AppDelegate.swift in Sources */,
+				BAED15AC2B4D201100139F67 /* RunningResult.swift in Sources */,
 				BA5752C32B43DE5800686EB5 /* ActivityCardCell.swift in Sources */,
 				BA3A3B682B4915EF00DF1DE4 /* RunningViewController.swift in Sources */,
+				BA225CFC2B4BD40F00A637BA /* Location.swift in Sources */,
 				BAAF54C22B219A6F00265237 /* SceneDelegate.swift in Sources */,
+				BA225D042B4BEE6600A637BA /* CaloriesCalculator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

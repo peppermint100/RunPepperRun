@@ -49,7 +49,7 @@ class ActivityCardCell: UICollectionViewCell {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         label.textColor = .label
-        label.text = "!23123"
+        label.text = "0"
         label.textAlignment = .center
         return label
     }()
@@ -123,12 +123,10 @@ class ActivityCardCell: UICollectionViewCell {
             make.trailing.equalTo(valuesView.snp.trailing)
             make.top.equalTo(titleLabel.snp.bottom).offset(5)
         }
-        
-        super.updateConstraints()
     }
     
     func configure(with activity: RunningActivity) {
-        titleLabel.text = title(for: activity)
+        updateTitle(for: activity)
         subtitleLabel.text = subtitle(for: activity)
         iconImageView.image = UIImage(systemName: sfSymbol(for: activity))
         let iconColor = iconColor(for: activity)
@@ -136,27 +134,38 @@ class ActivityCardCell: UICollectionViewCell {
         iconCircleView.backgroundColor = iconColor.lighter()
     }
     
-    private func title(for activity: RunningActivity) -> String {
+    private func updateTitle(for activity: RunningActivity) {
         switch activity {
-        case .distance(let value):
-            return String(value)
         case .speed(let value):
-            return String(value)
+            if value == 0 { return }
+            titleLabel.text = value.formatSpeed()
+            break
         case .pace(let value):
-            return String(value)
+            if value == 0 { return }
+            print(value)
+            titleLabel.text = value.formatPace()
+            break
         case .caloriesBurned(let value):
-            return String(value)
+            if value == 0 { return }
+            titleLabel.text = value.formatCaloriesBurned()
+            break
         case .cadence(let value):
-            return String(value)
+            if value == 0 { return }
+            titleLabel.text = String(value)
+            break
         case .duration(let value):
-            return String(value)
+            if value == 0 { return }
+            titleLabel.text = Int(value).formatToHHMMSS()
+            break
+        case .distance(let value):
+            if value == 0 { return }
+            titleLabel.text = value.formatDistance()
+            break
         }
     }
     
     private func subtitle(for activity: RunningActivity) -> String {
         switch activity {
-        case .distance:
-            return "거리"
         case .speed:
             return "속도"
         case .pace:
@@ -167,13 +176,13 @@ class ActivityCardCell: UICollectionViewCell {
             return "발걸음 수"
         case .duration:
             return "시간"
+        case .distance:
+            return "거리"
         }
     }
     
     private func iconColor(for activity: RunningActivity) -> UIColor {
         switch activity {
-        case .distance:
-            return .systemYellow
         case .speed:
             return .systemGreen
         case .pace:
@@ -183,14 +192,14 @@ class ActivityCardCell: UICollectionViewCell {
         case .cadence:
             return .systemBlue
         case .duration:
-            return .systemPurple
+            return .systemCyan
+        case .distance:
+            return .systemBrown
         }
     }
         
     func sfSymbol(for activity: RunningActivity) -> String {
         switch activity {
-        case .distance:
-            return "figure.walk"
         case .speed:
             return "bolt.horizontal"
         case .pace:
@@ -199,8 +208,10 @@ class ActivityCardCell: UICollectionViewCell {
             return "flame"
         case .cadence:
             return "shoeprints.fill"
+        case .distance:
+            return "figure.walk"
         case .duration:
-            return "clock"
+            return "hourglass"
         }
     }
 }
