@@ -55,7 +55,7 @@ class Running: MotionDelegate {
         self.numberOfSteps = numberOfSteps ?? self.numberOfSteps
         self.averagePace = averagePace ?? self.averagePace
         self.speed = self.distance / now.timeIntervalSince(startDate)
-        self.caloriesBurned = caloriesCalculator.getCalories(speed: speed, duration: now.timeIntervalSince(lastUpdatedAt ?? now), motionActivity: motionActivity)
+        self.caloriesBurned += caloriesCalculator.getCalories(speed: speed, duration: now.timeIntervalSince(lastUpdatedAt ?? now), motionActivity: motionActivity)
         delegate?.didUpdateRunningActivity(self, distance: self.distance, speed: self.speed, pace: self.pace, caloriesBurned: self.caloriesBurned, numberOfSteps: self.numberOfSteps)
     }
 }

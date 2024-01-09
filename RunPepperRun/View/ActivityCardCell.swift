@@ -142,7 +142,6 @@ class ActivityCardCell: UICollectionViewCell {
             break
         case .pace(let value):
             if value == 0 { return }
-            print(value)
             titleLabel.text = value.formatPace()
             break
         case .caloriesBurned(let value):
