@@ -139,27 +139,27 @@ class ActivityCardCell: UICollectionViewCell {
         case .speed(let value):
             if value == 0 { return }
             titleLabel.text = value.formatSpeed()
-            break
+            return
         case .pace(let value):
             if value == 0 { return }
             titleLabel.text = value.formatPace()
-            break
+            return
         case .caloriesBurned(let value):
             if value == 0 { return }
             titleLabel.text = value.formatCaloriesBurned()
-            break
+            return
         case .cadence(let value):
             if value == 0 { return }
             titleLabel.text = String(value)
-            break
+            return
         case .duration(let value):
             if value == 0 { return }
             titleLabel.text = Int(value).formatToHHMMSS()
-            break
+            return
         case .distance(let value):
             if value == 0 { return }
             titleLabel.text = value.formatDistance()
-            break
+            return
         }
     }
     

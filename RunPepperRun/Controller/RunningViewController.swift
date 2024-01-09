@@ -88,7 +88,7 @@ class RunningViewController: UIViewController {
     }
     
     private func setupActivities() {
-        activities = [.speed(0), .pace(0), .cadence(0), .caloriesBurned(0)]
+        activities = [.speed(0), .cadence(0), .caloriesBurned(0), .pace(0)]
     }
     
     private func setupActivityView() {
@@ -294,7 +294,7 @@ extension RunningViewController: RunningDelegate {
     
     func didUpdateRunningActivity(_ running: Running, distance: Double, speed: Double, pace: Double, caloriesBurned: Double, numberOfSteps: Int) {
         DispatchQueue.main.async { [weak self] in
-            self?.activities = [.speed(speed), .pace(pace), .cadence(numberOfSteps), .caloriesBurned(caloriesBurned)]
+            self?.activities = [.speed(speed), .cadence(numberOfSteps), .caloriesBurned(caloriesBurned), .pace(pace)]
             self?.distanceLabel.text = distance.formatDistance()
             self?.activityCollectionView.reloadData()
         }
