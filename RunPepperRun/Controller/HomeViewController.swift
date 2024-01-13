@@ -38,7 +38,6 @@ class HomeViewController: UIViewController {
         setupActivityCollectionView()
         setupButtonView()
         setupStartButton()
-        setupLocationManager()
         handleLocationAuthorization()
     }
     
@@ -191,12 +190,7 @@ class HomeViewController: UIViewController {
 }
 
 // MARK: - 맵, 위치
-extension HomeViewController: CLLocationManagerDelegate, MKMapViewDelegate {
-    
-    private func setupLocationManager() {
-        locationManager.delegate = self
-    }
-    
+extension HomeViewController {
     private func handleLocationAuthorization() {
         switch locationManager.authorizationStatus {
         case .notDetermined, .restricted:
