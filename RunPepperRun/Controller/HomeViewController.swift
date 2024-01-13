@@ -8,6 +8,7 @@
 import UIKit
 import MapKit
 import SnapKit
+import CoreMotion
 
 class HomeViewController: UIViewController {
     
@@ -117,7 +118,7 @@ class HomeViewController: UIViewController {
         startButton.layer.cornerRadius = 10
         startButton.clipsToBounds = true
         startButton.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
-        startButton.addTarget(self, action: #selector(presentToRunningVC), for: .touchUpInside)
+        startButton.addTarget(self, action: #selector(didTapStartRunningButton), for: .touchUpInside)
         
         startButton.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(10)
@@ -139,9 +140,53 @@ class HomeViewController: UIViewController {
         }
     }
     
-    @objc private func presentToRunningVC() {
+    @objc private func didTapStartRunningButton() {
+        if checkAuthorizationsForRunning() {
+            presentToRunningVC()
+        } else {
+            makeOpenSettingsAlert()
+        }
+    }
+    
+    private func checkAuthorizationsForRunning() -> Bool {
+        switch locationManager.authorizationStatus {
+        case .notDetermined, .restricted, .denied:
+            return false
+        default:
+            break
+        }
+        
+        switch CMMotionActivityManager.authorizationStatus() {
+        case .notDetermined, .restricted, .denied:
+            return false
+        default:
+            break
+        }
+        
+        switch CMPedometer.authorizationStatus() {
+        case .notDetermined, .restricted, .denied:
+            return false
+        default:
+            break
+        }
+        
+        return true
+    }
+    
+    private func presentToRunningVC() {
         let vc = RunningViewController()
         navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    private func makeOpenSettingsAlert() {
+        let vc = UIAlertController(title: "권한 미허용", message: "러닝 루트 기록을 위해 위치, 동작 권한을 허용해주세요", preferredStyle: .alert)
+        let cancel = UIAlertAction(title: "취소", style: .cancel)
+        let openSettings = UIAlertAction(title: "설정", style: .default) { openSettingsAction in
+            UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+        }
+        vc.addAction(cancel)
+        vc.addAction(openSettings)
+        present(vc, animated: true)
     }
 }
 
