@@ -34,7 +34,6 @@ extension Double {
         let secondsLeft = secondsPerKilometer.truncatingRemainder(dividingBy: 60)
         return String(format: "%d'%d\"", Int(minutes), Int(secondsLeft))
     }
-
 }
 
 extension Int {

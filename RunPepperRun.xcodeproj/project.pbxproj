@@ -18,6 +18,7 @@
 		BA3A3B682B4915EF00DF1DE4 /* RunningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3A3B672B4915EF00DF1DE4 /* RunningViewController.swift */; };
 		BA3A3B6A2B492BC600DF1DE4 /* RunningFactorCellScrollLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3A3B692B492BC600DF1DE4 /* RunningFactorCellScrollLayout.swift */; };
 		BA5752C32B43DE5800686EB5 /* RunningFactorCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5752C22B43DE5800686EB5 /* RunningFactorCardCell.swift */; };
+		BA7FE2092B54E4F800FADA40 /* RunningStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7FE2082B54E4F800FADA40 /* RunningStatusView.swift */; };
 		BAAF54C02B219A6F00265237 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAF54BF2B219A6F00265237 /* AppDelegate.swift */; };
 		BAAF54C22B219A6F00265237 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAF54C12B219A6F00265237 /* SceneDelegate.swift */; };
 		BAAF54C42B219A6F00265237 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAF54C32B219A6F00265237 /* ViewController.swift */; };
@@ -44,6 +45,7 @@
 		BA3A3B672B4915EF00DF1DE4 /* RunningViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningViewController.swift; sourceTree = "<group>"; };
 		BA3A3B692B492BC600DF1DE4 /* RunningFactorCellScrollLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningFactorCellScrollLayout.swift; sourceTree = "<group>"; };
 		BA5752C22B43DE5800686EB5 /* RunningFactorCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningFactorCardCell.swift; sourceTree = "<group>"; };
+		BA7FE2082B54E4F800FADA40 /* RunningStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningStatusView.swift; sourceTree = "<group>"; };
 		BAAD1B5C2B25504B00296ED8 /* Route1.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Route1.gpx; sourceTree = "<group>"; };
 		BAAF54BC2B219A6F00265237 /* RunPepperRun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RunPepperRun.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAAF54BF2B219A6F00265237 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 				BA5752C22B43DE5800686EB5 /* RunningFactorCardCell.swift */,
 				BAD5B8252B46793100A40AE0 /* RunningFactorCellLayout.swift */,
 				BA3A3B692B492BC600DF1DE4 /* RunningFactorCellScrollLayout.swift */,
+				BA7FE2082B54E4F800FADA40 /* RunningStatusView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -302,6 +305,7 @@
 				BAED15A92B4D1B9F00139F67 /* DrawbleMapView.swift in Sources */,
 				BAD5B8262B46793100A40AE0 /* RunningFactorCellLayout.swift in Sources */,
 				BAED15A72B4D0B7100139F67 /* ResultViewController.swift in Sources */,
+				BA7FE2092B54E4F800FADA40 /* RunningStatusView.swift in Sources */,
 				BAAF54DA2B21AD7200265237 /* HomeViewController.swift in Sources */,
 				BA225CFA2B4BD3E800A637BA /* Running.swift in Sources */,
 				BAAF54C02B219A6F00265237 /* AppDelegate.swift in Sources */,

@@ -10,7 +10,6 @@ import MapKit
 import SnapKit
 
 class RunningViewController: UIViewController {
-    
     private let running = Running()
     
     private var timer: DispatchSourceTimer?
@@ -22,28 +21,16 @@ class RunningViewController: UIViewController {
         return timer == nil || (timerSuspended && seconds == 0)
     }
     private var seconds = 0
-    private let buttonImageConfig = UIImage.SymbolConfiguration(pointSize: 26)
+    private var runningFactors: [RunningFactor] = []
     
     private let stackView = UIStackView()
+    
     private let mapView = MKMapView()
     private let runningFactorsCollectionView: UICollectionView = {
         return UICollectionView(frame: .zero, collectionViewLayout: RunningFactorCellScrollLayout())
     }()
+    private let runningStatusView = RunningStatusView()
     
-    private let runningStatusView = UIView()
-    private var runningFactors: [RunningFactor] = []
-    
-    private let timerView = UIStackView()
-    private let timerIndicatorView = UIView()
-    private var timerIndicatorIcon = UIImageView()
-    private let timerIndicatorLabel = UILabel()
-    private let timerLabel = UILabel()
-    private let distanceLabel = UILabel()
-    
-    private let runningStatusButtonView = UIView()
-    private let runningStatusButton = UIButton()
-    private let buttonSize: CGFloat = 80
-
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
@@ -52,9 +39,7 @@ class RunningViewController: UIViewController {
         setupMapView()
         setupRunningFactors()
         setupRunningFactorsView()
-        setupRunnginStatusView()
-        setupTimerView()
-        setupRunningStatusButton()
+        setupRunningStatusView()
         setupTimer()
         setupRunning()
     }
@@ -98,128 +83,18 @@ class RunningViewController: UIViewController {
         runningFactorsCollectionView.dataSource = self
         runningFactorsCollectionView.showsHorizontalScrollIndicator = false
         runningFactorsCollectionView.snp.makeConstraints { make in
-            make.height.equalTo(stackView.snp.height).multipliedBy(0.2)
-        }
-    }
-    
-    private func setupRunnginStatusView() {
-        stackView.addArrangedSubview(runningStatusView)
-        runningStatusView.backgroundColor = .secondarySystemBackground
-        runningStatusView.layer.cornerRadius = 10
-        runningStatusView.clipsToBounds = true
-        runningStatusView.snp.makeConstraints { make in
             make.height.equalTo(stackView.snp.height).offset(-8).multipliedBy(0.2)
         }
     }
     
-    private func setupTimerView() {
-        runningStatusView.addSubview(timerView)
-        timerView.axis = .vertical
-        timerView.distribution = .fillEqually
+    private func setupRunningStatusView() {
+        stackView.addArrangedSubview(runningStatusView)
+        runningStatusView.delegate = self
+        runningStatusView.snp.makeConstraints { make in
+            make.height.equalTo(stackView.snp.height).offset(-8).multipliedBy(0.2)
+        }
+    }
         
-        timerView.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(30)
-            make.centerY.equalToSuperview()
-        }
-        setupTimerIndicatorView()
-        setupTimerLabel()
-        setupDistanceLabel()
-    }
-    
-    private func setupTimerIndicatorView() {
-        timerView.addArrangedSubview(timerIndicatorView)
-        timerIndicatorView.addSubview(timerIndicatorIcon)
-        timerIndicatorView.addSubview(timerIndicatorLabel)
-        setupTimerIndicatorIcon()
-        setupTimerIndicatorLabel()
-    }
-    
-    private func setupTimerIndicatorIcon() {
-        let image = UIImage(systemName: "stopwatch")
-        timerIndicatorIcon.tintColor = .systemGray
-        timerIndicatorIcon.image = image
-        timerIndicatorIcon.contentMode = .scaleAspectFit
-        timerIndicatorIcon.snp.makeConstraints { make in
-            make.leading.equalToSuperview()
-            make.width.lessThanOrEqualToSuperview().multipliedBy(0.2)
-            make.centerY.equalToSuperview()
-        }
-    }
-    
-    private func setupTimerIndicatorLabel() {
-        timerIndicatorLabel.text = "Time"
-        timerIndicatorLabel.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
-        timerIndicatorLabel.textColor = .systemGray
-        timerIndicatorLabel.snp.makeConstraints { make in
-            make.leading.equalTo(timerIndicatorIcon.snp.trailing).offset(4)
-            make.centerY.equalToSuperview()
-        }
-    }
-    
-    private func setupTimerLabel() {
-        timerView.addArrangedSubview(timerLabel)
-        timerLabel.text = "00:00:00"
-        timerLabel.font = UIFont.systemFont(ofSize: 28, weight: .bold)
-        timerLabel.textColor = .label
-    }
-    
-    private func setupDistanceLabel(){
-        timerView.addArrangedSubview(distanceLabel)
-        distanceLabel.text = "0km"
-        distanceLabel.font = UIFont.systemFont(ofSize: 19, weight: .semibold)
-        distanceLabel.textColor = .systemGray
-    }
-    
-    private func setupRunningStatusButton() {
-        runningStatusView.addSubview(runningStatusButton)
-        runningStatusButton.setImage(UIImage(systemName: "pause.fill", withConfiguration: buttonImageConfig)!, for: .normal)
-        runningStatusButton.layer.cornerRadius = buttonSize / 2
-        runningStatusButton.clipsToBounds = true
-        runningStatusButton.backgroundColor = .inverted
-        runningStatusButton.tintColor = .systemBackground
-        runningStatusButton.addTarget(self, action: #selector(onTapRunningStatusButton), for: .touchUpInside)
-        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(onLongPressRunningStatusButton(_:)))
-        runningStatusButton.addGestureRecognizer(longPressGesture)
-        runningStatusButton.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
-            make.trailing.lessThanOrEqualToSuperview().offset(-25)
-            make.width.equalTo(buttonSize)
-            make.height.equalTo(buttonSize)
-        }
-    }
-    
-    @objc private func onLongPressRunningStatusButton(_ gesture: UIGestureRecognizer) {
-        switch gesture.state {
-        case .began:
-            UIView.animate(withDuration: 0.6) { [weak self] in
-                self?.runningStatusButton.layer.cornerRadius = (self!.buttonSize * 1.3) / 2
-                self?.runningStatusButton.backgroundColor = .systemRed
-                self?.runningStatusButton.snp.updateConstraints { make in
-                    make.width.equalTo(self!.buttonSize * 1.3)
-                    make.height.equalTo(self!.buttonSize * 1.3)
-                }
-                self?.view.layoutIfNeeded()
-            } completion: { [weak self] _ in
-                self?.running.pause()
-                let vc = ResultViewController()
-                vc.result = self?.running.getResults()
-                self?.navigationController?.pushViewController(vc, animated: true)
-            }
-        case .cancelled, .failed, .ended:
-            UIView.animate(withDuration: 0.2) { [weak self] in
-                self?.runningStatusButton.layer.cornerRadius = (self!.buttonSize) / 2
-                self?.runningStatusButton.backgroundColor = .inverted
-                self?.runningStatusButton.snp.updateConstraints { make in
-                    make.width.equalTo(self!.buttonSize)
-                    make.height.equalTo(self!.buttonSize)
-                }
-                self?.view.layoutIfNeeded()
-            }
-        default:
-            return
-        }
-    }
-    
     deinit {
         cancelTimer()
     }
@@ -238,6 +113,21 @@ extension RunningViewController: UICollectionViewDataSource, UICollectionViewDel
     }
 }
 
+extension RunningViewController: RunningDelegate {
+    private func setupRunning() {
+        running.delegate = self
+        running.start()
+    }
+    
+    func didUpdateRunningActivity(_ running: Running, distance: Double, speed: Double, pace: Double, caloriesBurned: Double, numberOfSteps: Int) {
+        DispatchQueue.main.async { [weak self] in
+            self?.runningFactors = [.speed(speed), .numberOfSteps(numberOfSteps), .caloriesBurned(caloriesBurned), .pace(pace)]
+            self?.runningStatusView.distance = distance
+            self?.runningFactorsCollectionView.reloadData()
+        }
+    }
+}
+
 // MARK: - Timer
 extension RunningViewController {
     private func setupTimer() {
@@ -249,21 +139,9 @@ extension RunningViewController {
         resumeTimer()
     }
     
-    @objc private func onTapRunningStatusButton() {
-        if timerSuspended {
-            resumeTimer()
-            runningStatusButton.setImage(UIImage(systemName: "pause.fill", withConfiguration: buttonImageConfig)!, for: .normal)
-            running.start()
-        } else if timerTicking {
-            suspendTimer()
-            runningStatusButton.setImage(UIImage(systemName: "play.fill", withConfiguration: buttonImageConfig)!, for: .normal)
-            running.pause()
-        }
-    }
-    
     private func timerTicks() {
         seconds += 1
-        timerLabel.text = seconds.formatToHHMMSS()
+        runningStatusView.seconds = seconds
     }
     
     private func resumeTimer() {
@@ -286,17 +164,23 @@ extension RunningViewController {
     }
 }
 
-extension RunningViewController: RunningDelegate {
-    private func setupRunning() {
-        running.delegate = self
-        running.start()
+extension RunningViewController: RunningStatusViewDelegate {
+    func didTapRunningStatusButton(_ view: RunningStatusView) {
+        if timerSuspended {
+            resumeTimer()
+            runningStatusView.buttonIcon = UIImage(systemName: "pause.fill")!
+            running.start()
+        } else if timerTicking {
+            suspendTimer()
+            runningStatusView.buttonIcon = UIImage(systemName: "play.fill")!
+            running.pause()
+        }
     }
     
-    func didUpdateRunningActivity(_ running: Running, distance: Double, speed: Double, pace: Double, caloriesBurned: Double, numberOfSteps: Int) {
-        DispatchQueue.main.async { [weak self] in
-            self?.runningFactors = [.speed(speed), .numberOfSteps(numberOfSteps), .caloriesBurned(caloriesBurned), .pace(pace)]
-            self?.distanceLabel.text = distance.formatDistance()
-            self?.runningFactorsCollectionView.reloadData()
-        }
+    func didLongPressRunningStatusButtonCompleted(_ view: RunningStatusView) {
+        running.pause()
+        let vc = ResultViewController()
+        vc.result = running.getResults()
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
