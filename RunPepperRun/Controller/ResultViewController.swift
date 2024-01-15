@@ -93,10 +93,10 @@ class ResultViewController: UIViewController {
     private func setupFinishButton() {
         stackView.addArrangedSubview(finishButton)
         finishButton.backgroundColor = .secondarySystemBackground
-        finishButton.tintColor = .label
         finishButton.layer.cornerRadius = 10
         finishButton.clipsToBounds = true
         finishButton.setTitle("종료하고 돌아가기", for: .normal)
+        finishButton.setTitleColor(.label, for: .normal)
         finishButton.addTarget(self, action: #selector(showAlertToSave), for: .touchUpInside)
         finishButton.snp.makeConstraints { make in
             make.height.equalTo(stackView.snp.height).offset(-8).multipliedBy(0.1)
