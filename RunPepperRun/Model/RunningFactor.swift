@@ -7,11 +7,12 @@
 
 import Foundation
 
-enum RunningActivity {
+
+enum RunningFactor {
     case distance(Double)
     case speed(Double)
     case pace(Double)
     case caloriesBurned(Double)
-    case cadence(Int)
+    case numberOfSteps(Int)
     case duration(TimeInterval)
 }

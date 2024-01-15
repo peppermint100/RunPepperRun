@@ -14,12 +14,12 @@ class ResultViewController: UIViewController {
     
     private let stackView = UIStackView()
     private let mapView = MKMapView()
-    private let activityCollectionView: UICollectionView = {
-        return UICollectionView(frame: .zero, collectionViewLayout: ActivityCellScollLayout())
+    private let runningFactorsCollectionView: UICollectionView = {
+        return UICollectionView(frame: .zero, collectionViewLayout: RunningFactorCellScrollLayout())
     }()
     
     private let finishButton = UIButton()
-    private var activities: [RunningActivity] = []
+    private var runningFactors: [RunningFactor] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,8 +27,8 @@ class ResultViewController: UIViewController {
         setupNavigation()
         setupStackView()
         setupMapView()
-        setupActivities()
-        setupActivityView()
+        setupRunningFactors()
+        setupRunningFactorsView()
         setupFinishButton()
     }
     
@@ -62,17 +62,17 @@ class ResultViewController: UIViewController {
         }
     }
     
-    private func setupActivities() {
-        activities = [.speed(self.result?.averageSpeed ?? 0), .pace(self.result?.averagePace ?? 0), .cadence(self.result?.numberOfSteps ?? 0), .caloriesBurned(self.result?.caloriesBurend ?? 0), .distance(self.result?.distance ?? 0), .duration(self.result?.duration ?? 0)]
+    private func setupRunningFactors() {
+        runningFactors = [.speed(self.result?.averageSpeed ?? 0), .pace(self.result?.averagePace ?? 0), .numberOfSteps(self.result?.numberOfSteps ?? 0), .caloriesBurned(self.result?.caloriesBurend ?? 0), .distance(self.result?.distance ?? 0), .duration(self.result?.duration ?? 0)]
     }
     
-    private func setupActivityView() {
-        stackView.addArrangedSubview(activityCollectionView)
-        activityCollectionView.register(ActivityCardCell.self, forCellWithReuseIdentifier: ActivityCardCell.identifier)
-        activityCollectionView.delegate = self
-        activityCollectionView.dataSource = self
-        activityCollectionView.showsHorizontalScrollIndicator = false
-        activityCollectionView.snp.makeConstraints { make in
+    private func setupRunningFactorsView() {
+        stackView.addArrangedSubview(runningFactorsCollectionView)
+        runningFactorsCollectionView.register(RunningFactorCardCell.self, forCellWithReuseIdentifier: RunningFactorCardCell.identifier)
+        runningFactorsCollectionView.delegate = self
+        runningFactorsCollectionView.dataSource = self
+        runningFactorsCollectionView.showsHorizontalScrollIndicator = false
+        runningFactorsCollectionView.snp.makeConstraints { make in
             make.height.equalTo(stackView.snp.height).multipliedBy(0.2)
         }
     }
@@ -115,12 +115,12 @@ class ResultViewController: UIViewController {
 
 extension ResultViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return activities.count
+        return runningFactors.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ActivityCardCell.identifier, for: indexPath) as! ActivityCardCell
-        let activity = activities[indexPath.row]
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RunningFactorCardCell.identifier, for: indexPath) as! RunningFactorCardCell
+        let activity = runningFactors[indexPath.row]
         cell.configure(with: activity)
         return cell
     }

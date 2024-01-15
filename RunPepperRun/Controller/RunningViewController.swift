@@ -26,12 +26,12 @@ class RunningViewController: UIViewController {
     
     private let stackView = UIStackView()
     private let mapView = MKMapView()
-    private let activityCollectionView: UICollectionView = {
-        return UICollectionView(frame: .zero, collectionViewLayout: ActivityCellScollLayout())
+    private let runningFactorsCollectionView: UICollectionView = {
+        return UICollectionView(frame: .zero, collectionViewLayout: RunningFactorCellScrollLayout())
     }()
     
     private let runningStatusView = UIView()
-    private var activities: [RunningActivity] = []
+    private var runningFactors: [RunningFactor] = []
     
     private let timerView = UIStackView()
     private let timerIndicatorView = UIView()
@@ -50,8 +50,8 @@ class RunningViewController: UIViewController {
         setupNavigation()
         setupStackView()
         setupMapView()
-        setupActivities()
-        setupActivityView()
+        setupRunningFactors()
+        setupRunningFactorsView()
         setupRunnginStatusView()
         setupTimerView()
         setupRunningStatusButton()
@@ -87,17 +87,17 @@ class RunningViewController: UIViewController {
         }
     }
     
-    private func setupActivities() {
-        activities = [.speed(0), .cadence(0), .caloriesBurned(0), .pace(0)]
+    private func setupRunningFactors() {
+        runningFactors = [.speed(0), .numberOfSteps(0), .caloriesBurned(0), .pace(0)]
     }
     
-    private func setupActivityView() {
-        stackView.addArrangedSubview(activityCollectionView)
-        activityCollectionView.register(ActivityCardCell.self, forCellWithReuseIdentifier: ActivityCardCell.identifier)
-        activityCollectionView.delegate = self
-        activityCollectionView.dataSource = self
-        activityCollectionView.showsHorizontalScrollIndicator = false
-        activityCollectionView.snp.makeConstraints { make in
+    private func setupRunningFactorsView() {
+        stackView.addArrangedSubview(runningFactorsCollectionView)
+        runningFactorsCollectionView.register(RunningFactorCardCell.self, forCellWithReuseIdentifier: RunningFactorCardCell.identifier)
+        runningFactorsCollectionView.delegate = self
+        runningFactorsCollectionView.dataSource = self
+        runningFactorsCollectionView.showsHorizontalScrollIndicator = false
+        runningFactorsCollectionView.snp.makeConstraints { make in
             make.height.equalTo(stackView.snp.height).multipliedBy(0.2)
         }
     }
@@ -227,12 +227,12 @@ class RunningViewController: UIViewController {
 
 extension RunningViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return activities.count
+        return runningFactors.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ActivityCardCell.identifier, for: indexPath) as! ActivityCardCell
-        let activity = activities[indexPath.row]
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RunningFactorCardCell.identifier, for: indexPath) as! RunningFactorCardCell
+        let activity = runningFactors[indexPath.row]
         cell.configure(with: activity)
         return cell
     }
@@ -294,9 +294,9 @@ extension RunningViewController: RunningDelegate {
     
     func didUpdateRunningActivity(_ running: Running, distance: Double, speed: Double, pace: Double, caloriesBurned: Double, numberOfSteps: Int) {
         DispatchQueue.main.async { [weak self] in
-            self?.activities = [.speed(speed), .cadence(numberOfSteps), .caloriesBurned(caloriesBurned), .pace(pace)]
+            self?.runningFactors = [.speed(speed), .numberOfSteps(numberOfSteps), .caloriesBurned(caloriesBurned), .pace(pace)]
             self?.distanceLabel.text = distance.formatDistance()
-            self?.activityCollectionView.reloadData()
+            self?.runningFactorsCollectionView.reloadData()
         }
     }
 }

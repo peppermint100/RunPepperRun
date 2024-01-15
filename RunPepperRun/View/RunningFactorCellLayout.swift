@@ -7,14 +7,14 @@
 
 import UIKit
 
-class ActivityCellLayout: UICollectionViewFlowLayout {
+class RunningFactorCellLayout: UICollectionViewFlowLayout {
     
     override init() {
         super.init()
     }
     
     required init(coder: NSCoder) {
-        fatalError("ActivityCellLayout 생성 실패")
+        fatalError("RunningFactorCellLayout 생성 실패")
     }
     
     override func prepare() {

@@ -16,13 +16,13 @@ class HomeViewController: UIViewController {
     
     private let locationManager = CLLocationManager()
     
-    private var activities: [RunningActivity] = []
+    private var runningFactors: [RunningFactor] = []
     
     private let stackView = UIStackView()
     private let mapView = MKMapView()
-    private var activityCollectionView: UICollectionView = {
-        let activityCollectionViewLayout = ActivityCellLayout()
-        return UICollectionView(frame: .zero, collectionViewLayout: activityCollectionViewLayout)
+    private var runningFactosCollectionView: UICollectionView = {
+        let layout = RunningFactorCellLayout()
+        return UICollectionView(frame: .zero, collectionViewLayout: layout)
     }()
     private let buttonView = UIView()
     private let startButton = UIButton()
@@ -34,8 +34,8 @@ class HomeViewController: UIViewController {
         setupStackView()
         setupNavigationBar()
         setupMapView()
-        setupActivities()
-        setupActivityCollectionView()
+        setupRunningFactors()
+        setupRunningFactorsCollectionView()
         setupButtonView()
         setupStartButton()
         handleLocationAuthorization()
@@ -58,8 +58,8 @@ class HomeViewController: UIViewController {
     }
     
     // TODO: - Setting Feature에서 추가 개발
-    private func getRunningActivitiesForHomeVC() -> [RunningActivity] {
-        let activities: [RunningActivity] = [.speed(36), .cadence(10), .caloriesBurned(224)]
+    private func getRunningActivitiesForHomeVC() -> [RunningFactor] {
+        let activities: [RunningFactor] = [.speed(36), .numberOfSteps(10), .caloriesBurned(224)]
         return activities
     }
     
@@ -86,18 +86,18 @@ class HomeViewController: UIViewController {
         }
     }
     
-    private func setupActivities() {
-        activities = getRunningActivitiesForHomeVC()
+    private func setupRunningFactors() {
+        runningFactors = getRunningActivitiesForHomeVC()
     }
     
-    private func setupActivityCollectionView() {
-        stackView.addArrangedSubview(activityCollectionView)
-        activityCollectionView.register(ActivityCardCell.self, forCellWithReuseIdentifier: ActivityCardCell.identifier)
-        activityCollectionView.delegate = self
-        activityCollectionView.dataSource = self
-        activityCollectionView.showsHorizontalScrollIndicator = false
+    private func setupRunningFactorsCollectionView() {
+        stackView.addArrangedSubview(runningFactosCollectionView)
+        runningFactosCollectionView.register(RunningFactorCardCell.self, forCellWithReuseIdentifier: RunningFactorCardCell.identifier)
+        runningFactosCollectionView.delegate = self
+        runningFactosCollectionView.dataSource = self
+        runningFactosCollectionView.showsHorizontalScrollIndicator = false
         
-        activityCollectionView.snp.makeConstraints { make in
+        runningFactosCollectionView.snp.makeConstraints { make in
             make.height.equalTo(stackView.snp.height).offset(-10).multipliedBy(0.28)
         }
     }
@@ -211,12 +211,12 @@ extension HomeViewController {
 // MARK: - CollectionView
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return activities.count
+        return runningFactors.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ActivityCardCell.identifier, for: indexPath) as! ActivityCardCell
-        let activity = activities[indexPath.row]
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RunningFactorCardCell.identifier, for: indexPath) as! RunningFactorCardCell
+        let activity = runningFactors[indexPath.row]
         cell.configure(with: activity)
         return cell
     }

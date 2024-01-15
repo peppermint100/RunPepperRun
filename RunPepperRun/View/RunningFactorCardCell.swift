@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class ActivityCardCell: UICollectionViewCell {
+class RunningFactorCardCell: UICollectionViewCell {
     
     static let identifier = "ActivityCardCell"
     let circleSize: CGFloat = 40
@@ -69,7 +69,7 @@ class ActivityCardCell: UICollectionViewCell {
     }
     
     required init(coder: NSCoder) {
-        fatalError("ActivityCardView 생성 실패")
+        fatalError("RunningFactorCardCell 생성 실패")
     }
     
     private func setupUI() {
@@ -125,7 +125,7 @@ class ActivityCardCell: UICollectionViewCell {
         }
     }
     
-    func configure(with activity: RunningActivity) {
+    func configure(with activity: RunningFactor) {
         updateTitle(for: activity)
         subtitleLabel.text = subtitle(for: activity)
         iconImageView.image = UIImage(systemName: sfSymbol(for: activity))
@@ -134,7 +134,7 @@ class ActivityCardCell: UICollectionViewCell {
         iconCircleView.backgroundColor = iconColor.lighter()
     }
     
-    private func updateTitle(for activity: RunningActivity) {
+    private func updateTitle(for activity: RunningFactor) {
         switch activity {
         case .speed(let value):
             if value == 0 { return }
@@ -148,7 +148,7 @@ class ActivityCardCell: UICollectionViewCell {
             if value == 0 { return }
             titleLabel.text = value.formatCaloriesBurned()
             return
-        case .cadence(let value):
+        case .numberOfSteps(let value):
             if value == 0 { return }
             titleLabel.text = String(value)
             return
@@ -163,7 +163,7 @@ class ActivityCardCell: UICollectionViewCell {
         }
     }
     
-    private func subtitle(for activity: RunningActivity) -> String {
+    private func subtitle(for activity: RunningFactor) -> String {
         switch activity {
         case .speed:
             return "속도"
@@ -171,7 +171,7 @@ class ActivityCardCell: UICollectionViewCell {
             return "페이스"
         case .caloriesBurned:
             return "소모 칼로리"
-        case .cadence:
+        case .numberOfSteps:
             return "발걸음 수"
         case .duration:
             return "시간"
@@ -180,7 +180,7 @@ class ActivityCardCell: UICollectionViewCell {
         }
     }
     
-    private func iconColor(for activity: RunningActivity) -> UIColor {
+    private func iconColor(for activity: RunningFactor) -> UIColor {
         switch activity {
         case .speed:
             return .systemGreen
@@ -188,7 +188,7 @@ class ActivityCardCell: UICollectionViewCell {
             return .systemOrange
         case .caloriesBurned:
             return .systemRed
-        case .cadence:
+        case .numberOfSteps:
             return .systemBlue
         case .duration:
             return .systemCyan
@@ -197,7 +197,7 @@ class ActivityCardCell: UICollectionViewCell {
         }
     }
         
-    func sfSymbol(for activity: RunningActivity) -> String {
+    func sfSymbol(for activity: RunningFactor) -> String {
         switch activity {
         case .speed:
             return "bolt.horizontal"
@@ -205,7 +205,7 @@ class ActivityCardCell: UICollectionViewCell {
             return "stopwatch"
         case .caloriesBurned:
             return "flame"
-        case .cadence:
+        case .numberOfSteps:
             return "shoeprints.fill"
         case .distance:
             return "figure.walk"
