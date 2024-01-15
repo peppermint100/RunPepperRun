@@ -137,27 +137,21 @@ class RunningFactorCardCell: UICollectionViewCell {
     private func updateTitle(for activity: RunningFactor) {
         switch activity {
         case .speed(let value):
-            if value == 0 { return }
             titleLabel.text = value.formatSpeed()
             return
         case .pace(let value):
-            if value == 0 { return }
             titleLabel.text = value.formatPace()
             return
         case .caloriesBurned(let value):
-            if value == 0 { return }
             titleLabel.text = value.formatCaloriesBurned()
             return
         case .numberOfSteps(let value):
-            if value == 0 { return }
             titleLabel.text = String(value)
             return
         case .duration(let value):
-            if value == 0 { return }
             titleLabel.text = Int(value).formatToHHMMSS()
             return
         case .distance(let value):
-            if value == 0 { return }
             titleLabel.text = value.formatDistance()
             return
         }
