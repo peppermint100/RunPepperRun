@@ -54,11 +54,24 @@ class ResultViewController: UIViewController {
         mapView.delegate = self
         mapView.layer.cornerRadius = 10
         mapView.clipsToBounds = true
-        mapView.drawRoute(points: result?.points ?? [])
-        mapView.drawPinAt(point: result?.points.first, title: "시작")
-        mapView.drawPinAt(point: result?.points.last, title: "종료")
+        
         mapView.snp.makeConstraints { make in
             make.height.equalTo(stackView.snp.height).offset(-8).multipliedBy(0.7)
+        }
+        
+        guard let result = result else { return }
+        
+        do {
+            try mapView.drawRoute(points: result.points)
+        } catch let error as MapViewDrawbleError {
+            mapView.drawMessageOverlay(error.description)
+        } catch {
+            return
+        }
+        
+        if let startPoint = result.points.first, let endPoint = result.points.last, startPoint != endPoint {
+            mapView.drawPinAt(point: startPoint, title: "시작")
+            mapView.drawPinAt(point: result.points.last ?? startPoint, title: "종료")
         }
     }
     

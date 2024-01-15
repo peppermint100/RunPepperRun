@@ -48,7 +48,11 @@ class Running: MotionDelegate {
     
     func getResults() -> RunningResult {
         let averageSpeed = speedArray.reduce(0.0, +) / Double(speedArray.count)
-        return RunningResult(points: location?.pointsCompacted() ?? [], distance: self.distance, duration: self.distance, averageSpeed: averageSpeed, averagePace: self.averagePace, caloriesBurend: self.caloriesBurned, numberOfSteps: self.numberOfSteps)
+        return RunningResult(
+            points: location?.pointsCompacted() ?? [], distance: self.distance,
+            duration: self.distance, averageSpeed: averageSpeed,
+            averagePace: self.averagePace, caloriesBurend: self.caloriesBurned,
+            numberOfSteps: self.numberOfSteps, startDate: startDate, endDate: Date())
     }
     
     func didUpdateMotion(_ motion: Motion?, distance: Double?, pace: Double?, averagePace: Double?, motionActivity: MotionActivity, numberOfSteps: Int?, lastUpdatedAt: Date?) {
