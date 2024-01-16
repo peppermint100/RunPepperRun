@@ -66,6 +66,7 @@ class ResultViewController: UIViewController {
         } catch let error as MapViewDrawbleError {
             mapView.drawMessageOverlay(error.description)
         } catch {
+            print(error.localizedDescription)
             return
         }
         

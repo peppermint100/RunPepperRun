@@ -49,7 +49,6 @@ class RunningFactorCardCell: UICollectionViewCell {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         label.textColor = .label
-        label.text = "0"
         label.textAlignment = .center
         return label
     }()
