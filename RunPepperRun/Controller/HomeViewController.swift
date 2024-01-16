@@ -1,0 +1,223 @@
+//
+//  RunningViewController.swift
+//  RunPepperRun
+//
+//  Created by peppermint100 on 12/7/23.
+//
+
+import UIKit
+import MapKit
+import SnapKit
+import CoreMotion
+
+class HomeViewController: UIViewController {
+    
+    private let mapViewTag = "mapViewTag"
+    
+    private let locationManager = CLLocationManager()
+    
+    private var runningFactors: [RunningFactor] = []
+    
+    private let stackView = UIStackView()
+    private let mapView = MKMapView()
+    private var runningFactosCollectionView: UICollectionView = {
+        let layout = RunningFactorCellLayout()
+        return UICollectionView(frame: .zero, collectionViewLayout: layout)
+    }()
+    private let buttonView = UIView()
+    private let startButton = UIButton()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.addSubview(stackView)
+        view.backgroundColor = .systemBackground
+        setupStackView()
+        setupNavigationBar()
+        setupMapView()
+        setupRunningFactors()
+        setupRunningFactorsCollectionView()
+        setupButtonView()
+        setupStartButton()
+        handleLocationAuthorization()
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        drawGradientOnMap()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        drawGradientOnMap()
+    }
+    
+    // MARK: - 네비게이션 바 세팅
+    private func setupNavigationBar() {
+        navigationItem.title = "Home"
+        navigationController?.navigationBar.prefersLargeTitles = true
+    }
+    
+    // TODO: - Setting Feature에서 추가 개발
+    private func getRunningActivitiesForHomeVC() -> [RunningFactor] {
+        let activities: [RunningFactor] = [.speed(36), .numberOfSteps(10), .caloriesBurned(224)]
+        return activities
+    }
+    
+    // MARK: - UI 세팅
+    private func setupStackView() {
+        stackView.axis = .vertical
+        stackView.spacing = 10
+        stackView.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide)
+            make.leading.equalToSuperview().offset(15)
+            make.trailing.equalToSuperview().offset(-15)
+            make.bottom.equalTo(view.safeAreaLayoutGuide)
+        }
+    }
+    private func setupMapView() {
+        stackView.addArrangedSubview(mapView)
+        mapView.userTrackingMode = .follow
+        mapView.showsUserLocation = true
+        mapView.layer.cornerRadius = 10
+        mapView.clipsToBounds = true
+        mapView.snp.makeConstraints { make in
+            make.height.equalTo(stackView.snp.height).offset(-10).multipliedBy(0.6)
+            make.leading.trailing.top.equalToSuperview()
+        }
+    }
+    
+    private func setupRunningFactors() {
+        runningFactors = getRunningActivitiesForHomeVC()
+    }
+    
+    private func setupRunningFactorsCollectionView() {
+        stackView.addArrangedSubview(runningFactosCollectionView)
+        runningFactosCollectionView.register(RunningFactorCardCell.self, forCellWithReuseIdentifier: RunningFactorCardCell.identifier)
+        runningFactosCollectionView.delegate = self
+        runningFactosCollectionView.dataSource = self
+        runningFactosCollectionView.showsHorizontalScrollIndicator = false
+        
+        runningFactosCollectionView.snp.makeConstraints { make in
+            make.height.equalTo(stackView.snp.height).offset(-10).multipliedBy(0.28)
+        }
+    }
+    
+    private func setupButtonView() {
+        stackView.addArrangedSubview(buttonView)
+        buttonView.snp.makeConstraints { make in
+            make.height.equalTo(stackView.snp.height).multipliedBy(0.12)
+        }
+    }
+    
+    private func setupStartButton() {
+        buttonView.addSubview(startButton)
+        startButton.setTitle("러닝 시작하기", for: .normal)
+        startButton.setTitleColor(.label, for: .normal)
+        startButton.backgroundColor = .secondarySystemBackground
+        startButton.layer.cornerRadius = 10
+        startButton.clipsToBounds = true
+        startButton.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
+        startButton.addTarget(self, action: #selector(didTapStartRunningButton), for: .touchUpInside)
+        
+        startButton.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(10)
+            make.trailing.equalToSuperview().offset(-10)
+            make.top.equalToSuperview()
+            make.bottom.equalToSuperview().offset(-15)
+        }
+    }
+    
+    private func drawGradientOnMap() {
+        if traitCollection.userInterfaceStyle == .light {
+            mapView.drawLightGradientOnTop(tag: mapViewTag)
+        } else {
+            mapView.layer.sublayers?.forEach({ layer in
+                if layer.name == mapViewTag {
+                    layer.removeFromSuperlayer()
+                }
+            })
+        }
+    }
+    
+    @objc private func didTapStartRunningButton() {
+        if checkAuthorizationsForRunning() {
+            presentToRunningVC()
+        } else {
+            makeOpenSettingsAlert()
+        }
+    }
+    
+    private func checkAuthorizationsForRunning() -> Bool {
+        switch locationManager.authorizationStatus {
+        case .notDetermined, .restricted, .denied:
+            return false
+        default:
+            break
+        }
+        
+        switch CMMotionActivityManager.authorizationStatus() {
+        case .notDetermined, .restricted, .denied:
+            return false
+        default:
+            break
+        }
+        
+        switch CMPedometer.authorizationStatus() {
+        case .notDetermined, .restricted, .denied:
+            return false
+        default:
+            break
+        }
+        
+        return true
+    }
+    
+    private func presentToRunningVC() {
+        let vc = RunningViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    private func makeOpenSettingsAlert() {
+        let vc = UIAlertController(title: "권한 미허용", message: "러닝 루트 기록을 위해 위치, 동작 권한을 허용해주세요", preferredStyle: .alert)
+        let cancel = UIAlertAction(title: "취소", style: .cancel)
+        let openSettings = UIAlertAction(title: "설정", style: .default) { openSettingsAction in
+            UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+        }
+        vc.addAction(cancel)
+        vc.addAction(openSettings)
+        present(vc, animated: true)
+    }
+}
+
+// MARK: - 맵, 위치
+extension HomeViewController {
+    private func handleLocationAuthorization() {
+        switch locationManager.authorizationStatus {
+        case .notDetermined, .restricted:
+            locationManager.requestWhenInUseAuthorization()
+        default:
+            break
+        }
+        
+        switch locationManager.accuracyAuthorization {
+        case .reducedAccuracy:
+            locationManager.requestTemporaryFullAccuracyAuthorization(withPurposeKey: "Allow Full Accuracy")
+        default:
+            break
+        }
+    }
+}
+
+// MARK: - CollectionView
+extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return runningFactors.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RunningFactorCardCell.identifier, for: indexPath) as! RunningFactorCardCell
+        let activity = runningFactors[indexPath.row]
+        cell.configure(with: activity)
+        return cell
+    }
+}
