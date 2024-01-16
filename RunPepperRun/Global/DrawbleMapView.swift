@@ -26,10 +26,11 @@ protocol MapViewDrawble {
 }
 
 extension MKMapView: MapViewDrawble {
+    private static let minimumPointsToDrawMaps = 3
     func drawRoute(points: [Point]) throws {
         let count = points.count
         
-        if count < 3 {
+        if count < MKMapView.minimumPointsToDrawMaps {
             throw MapViewDrawbleError.lackOfPointsToDrawRoute
         }
         
