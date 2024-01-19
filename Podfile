@@ -9,5 +9,9 @@ target 'RunPepperRun' do
   pod 'Firebase/Core'
   pod 'Firebase/Auth'
   pod 'GoogleSignIn'
+<<<<<<< HEAD
   pod 'Firebase/Firestore'
+=======
+
+>>>>>>> e5784c0 ([Build] Firebase Auth 의존성 추가)
 end
