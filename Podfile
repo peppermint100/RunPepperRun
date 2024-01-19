@@ -6,5 +6,8 @@ target 'RunPepperRun' do
   use_frameworks!
   # Pods for RunPepperRun
   pod 'SnapKit', '~> 5.0.0'
+  pod 'Firebase/Core'
+  pod 'Firebase/Auth'
+  pod 'GoogleSignIn'
 
 end
