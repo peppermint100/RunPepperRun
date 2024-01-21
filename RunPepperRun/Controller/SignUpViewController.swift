@@ -104,7 +104,6 @@ class SignUpViewController: UIViewController {
         guard let clientID = FirebaseApp.app()?.options.clientID else { return }
         let config = GIDConfiguration(clientID: clientID)
         GIDSignIn.sharedInstance.configuration = config
-        // Start the sign in flow!
         GIDSignIn.sharedInstance.signIn(withPresenting: self) { [unowned self] result, error in
             guard error == nil else { return }
             guard let user = result?.user, let idToken = user.idToken?.tokenString
@@ -112,11 +111,19 @@ class SignUpViewController: UIViewController {
             
             let credential = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: user.accessToken.tokenString)
             
-            Auth.auth().signIn(with: credential) {[weak self] result, error in
-                guard error == nil else { return }
-                let vc = OnBoardingViewController()
-                vc.modalPresentationStyle = .fullScreen
-                self?.present(vc, animated: true)
+            Auth.auth().signIn(with: credential) { [weak self] result, error in
+                guard error == nil, let result = result, let email = result.user.email else { return }
+                UserManager.shared.exists(email: email) { [weak self] exists in
+                    if exists {
+                        let nvc = UINavigationController(rootViewController: HomeViewController())
+                        nvc.modalPresentationStyle = .fullScreen
+                        self?.present(nvc, animated: true)
+                    } else {
+                        let vc = OnboardingViewController()
+                        vc.modalPresentationStyle = .fullScreen
+                        self?.present(vc, animated: true)
+                    }
+                }
             }
         }
     }

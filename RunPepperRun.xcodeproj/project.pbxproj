@@ -19,9 +19,10 @@
 		BA3A3B6A2B492BC600DF1DE4 /* RunningFactorCellScrollLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3A3B692B492BC600DF1DE4 /* RunningFactorCellScrollLayout.swift */; };
 		BA5752C32B43DE5800686EB5 /* RunningFactorCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5752C22B43DE5800686EB5 /* RunningFactorCardCell.swift */; };
 		BA7FE2092B54E4F800FADA40 /* RunningStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7FE2082B54E4F800FADA40 /* RunningStatusView.swift */; };
-		BA8698172B5A3B5C009D8C75 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8698162B5A3B5C009D8C75 /* User.swift */; };
-		BA8698192B5A87AE009D8C75 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8698182B5A87AE009D8C75 /* FirebaseManager.swift */; };
-		BA86981F2B5A8C20009D8C75 /* OnBoardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA86981E2B5A8C20009D8C75 /* OnBoardingViewController.swift */; };
+		BA8698172B5A3B5C009D8C75 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8698162B5A3B5C009D8C75 /* UserManager.swift */; };
+		BA86981F2B5A8C20009D8C75 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA86981E2B5A8C20009D8C75 /* OnboardingViewController.swift */; };
+		BA8698232B5AC497009D8C75 /* OnboardingCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8698222B5AC497009D8C75 /* OnboardingCollectionViewLayout.swift */; };
+		BA8698252B5B4653009D8C75 /* OnboardingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8698242B5B4653009D8C75 /* OnboardingCollectionViewCell.swift */; };
 		BAAF54C02B219A6F00265237 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAF54BF2B219A6F00265237 /* AppDelegate.swift */; };
 		BAAF54C22B219A6F00265237 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAF54C12B219A6F00265237 /* SceneDelegate.swift */; };
 		BAAF54C42B219A6F00265237 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAF54C32B219A6F00265237 /* ViewController.swift */; };
@@ -52,9 +53,10 @@
 		BA5752C22B43DE5800686EB5 /* RunningFactorCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningFactorCardCell.swift; sourceTree = "<group>"; };
 		BA7FE2082B54E4F800FADA40 /* RunningStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningStatusView.swift; sourceTree = "<group>"; };
 		BA8698152B5A2753009D8C75 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
-		BA8698162B5A3B5C009D8C75 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		BA8698182B5A87AE009D8C75 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
-		BA86981E2B5A8C20009D8C75 /* OnBoardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingViewController.swift; sourceTree = "<group>"; };
+		BA8698162B5A3B5C009D8C75 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
+		BA86981E2B5A8C20009D8C75 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		BA8698222B5AC497009D8C75 /* OnboardingCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCollectionViewLayout.swift; sourceTree = "<group>"; };
+		BA8698242B5B4653009D8C75 /* OnboardingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCollectionViewCell.swift; sourceTree = "<group>"; };
 		BAAD1B5C2B25504B00296ED8 /* Route1.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Route1.gpx; sourceTree = "<group>"; };
 		BAAF54BC2B219A6F00265237 /* RunPepperRun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RunPepperRun.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAAF54BF2B219A6F00265237 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -119,7 +121,7 @@
 				BA3A3B672B4915EF00DF1DE4 /* RunningViewController.swift */,
 				BAED15A62B4D0B7100139F67 /* ResultViewController.swift */,
 				BAF701BB2B5A074C000DB059 /* SignUpViewController.swift */,
-				BA86981E2B5A8C20009D8C75 /* OnBoardingViewController.swift */,
+				BA86981E2B5A8C20009D8C75 /* OnboardingViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -135,8 +137,7 @@
 				BA225D012B4BED3B00A637BA /* MotionActivity.swift */,
 				BA225D032B4BEE6600A637BA /* CaloriesCalculator.swift */,
 				BAED15AB2B4D201100139F67 /* RunningResult.swift */,
-				BA8698162B5A3B5C009D8C75 /* User.swift */,
-				BA8698182B5A87AE009D8C75 /* FirebaseManager.swift */,
+				BA8698162B5A3B5C009D8C75 /* UserManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -148,6 +149,8 @@
 				BAD5B8252B46793100A40AE0 /* RunningFactorCellLayout.swift */,
 				BA3A3B692B492BC600DF1DE4 /* RunningFactorCellScrollLayout.swift */,
 				BA7FE2082B54E4F800FADA40 /* RunningStatusView.swift */,
+				BA8698222B5AC497009D8C75 /* OnboardingCollectionViewLayout.swift */,
+				BA8698242B5B4653009D8C75 /* OnboardingCollectionViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -317,14 +320,14 @@
 				BA173A432B4406FA00C7F049 /* Extension.swift in Sources */,
 				BAD5B8242B465A3700A40AE0 /* RunningFactor.swift in Sources */,
 				BA225D022B4BED3B00A637BA /* MotionActivity.swift in Sources */,
-				BA86981F2B5A8C20009D8C75 /* OnBoardingViewController.swift in Sources */,
+				BA86981F2B5A8C20009D8C75 /* OnboardingViewController.swift in Sources */,
 				BAAF54C42B219A6F00265237 /* ViewController.swift in Sources */,
 				BA225CFE2B4BD63D00A637BA /* Point.swift in Sources */,
 				BA225D002B4BD8AA00A637BA /* Motion.swift in Sources */,
 				BAED15A92B4D1B9F00139F67 /* DrawbleMapView.swift in Sources */,
 				BAD5B8262B46793100A40AE0 /* RunningFactorCellLayout.swift in Sources */,
 				BAED15A72B4D0B7100139F67 /* ResultViewController.swift in Sources */,
-				BA8698172B5A3B5C009D8C75 /* User.swift in Sources */,
+				BA8698172B5A3B5C009D8C75 /* UserManager.swift in Sources */,
 				BA7FE2092B54E4F800FADA40 /* RunningStatusView.swift in Sources */,
 				BAAF54DA2B21AD7200265237 /* HomeViewController.swift in Sources */,
 				BA225CFA2B4BD3E800A637BA /* Running.swift in Sources */,
@@ -332,11 +335,12 @@
 				BAED15AC2B4D201100139F67 /* RunningResult.swift in Sources */,
 				BAF701BC2B5A074C000DB059 /* SignUpViewController.swift in Sources */,
 				BA5752C32B43DE5800686EB5 /* RunningFactorCardCell.swift in Sources */,
+				BA8698232B5AC497009D8C75 /* OnboardingCollectionViewLayout.swift in Sources */,
 				BA3A3B682B4915EF00DF1DE4 /* RunningViewController.swift in Sources */,
 				BA225CFC2B4BD40F00A637BA /* Location.swift in Sources */,
-				BA8698192B5A87AE009D8C75 /* FirebaseManager.swift in Sources */,
 				BAAF54C22B219A6F00265237 /* SceneDelegate.swift in Sources */,
 				BA225D042B4BEE6600A637BA /* CaloriesCalculator.swift in Sources */,
+				BA8698252B5B4653009D8C75 /* OnboardingCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -511,7 +515,7 @@
 		};
 		BAAF54D22B219A7000265237 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 88BCE0B9D707B2A31B771838 /* Pods-RunPepperRun.debug.xcconfig */;
+			baseConfigurationReference = 1B48CF0FE7430AB0D12CEF4F /* Pods-RunPepperRun.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

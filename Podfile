@@ -9,5 +9,5 @@ target 'RunPepperRun' do
   pod 'Firebase/Core'
   pod 'Firebase/Auth'
   pod 'GoogleSignIn'
-
+  pod 'Firebase/Firestore'
 end
