@@ -9,16 +9,6 @@ import Foundation
 import FirebaseAuth
 import FirebaseFirestore
 
-struct User: Codable {
-    let nickname: String
-    let weight: Double
-}
-
-enum FirestoreCollection: String {
-    case user
-    case history
-}
-
 enum UserError: Error {
     case unauthenticated
 }
