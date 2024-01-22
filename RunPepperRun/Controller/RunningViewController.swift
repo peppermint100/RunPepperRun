@@ -108,7 +108,7 @@ extension RunningViewController: UICollectionViewDataSource, UICollectionViewDel
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RunningStatCardCell.identifier, for: indexPath) as! RunningStatCardCell
         let stat = runningStats[indexPath.row]
-        cell.configure(with: stats)
+        cell.configure(with: stat)
         return cell
     }
 }
