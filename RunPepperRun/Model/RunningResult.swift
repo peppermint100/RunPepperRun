@@ -14,7 +14,7 @@ struct RunningResult {
     let duration: TimeInterval
     let averageSpeed: Double
     let averagePace: Double
-    let caloriesBurend: Double
+    let caloriesBurned: Double
     let numberOfSteps: Int
     let startDate: Date
     let endDate: Date
