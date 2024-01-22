@@ -9,9 +9,6 @@ import Foundation
 import FirebaseAuth
 import FirebaseFirestore
 
-enum UserError: Error {
-    case unauthenticated
-}
 
 class UserManager {
     static let shared = UserManager()

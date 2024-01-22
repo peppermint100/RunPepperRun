@@ -77,7 +77,7 @@ class ResultViewController: UIViewController {
     }
     
     private func setupRunningStats() {
-        runningStats = [.speed(self.result?.averageSpeed ?? 0), .pace(self.result?.averagePace ?? 0), .numberOfSteps(self.result?.numberOfSteps ?? 0), .caloriesBurned(self.result?.caloriesBurend ?? 0), .distance(self.result?.distance ?? 0), .duration(self.result?.duration ?? 0)]
+        runningStats = [.speed(self.result?.averageSpeed ?? 0), .pace(self.result?.averagePace ?? 0), .numberOfSteps(self.result?.numberOfSteps ?? 0), .caloriesBurned(self.result?.caloriesBurned ?? 0), .distance(self.result?.distance ?? 0), .duration(self.result?.duration ?? 0)]
     }
     
     private func setupRunningStatsView() {
@@ -119,7 +119,20 @@ class ResultViewController: UIViewController {
     }
     
     private func saveRunning() {
-        print("러닝 저장...")
+        guard let result = result else { return }
+        let components = Calendar.current.dateComponents(
+            [.year, .month, .day],
+            from: result.endDate)
+        guard let year = components.year, let month = components.month, let day = components.day else { return }
+        
+        let history = History(
+            averageSpeed: result.averageSpeed, averagePace: result.averagePace, distance: result.distance,
+            caloriesBurned: result.caloriesBurned, numberOfSteps: result.numberOfSteps,
+            locations: result.points,
+            startDate: result.startDate, endDate: result.endDate,
+            year: year, month: month, day: day)
+        
+        HistoryManager.shared.createHistory(history, completion: nil)
     }
     
     private func popToHomeVC() {
