@@ -8,7 +8,7 @@
 import Foundation
 
 
-enum RunningFactor {
+enum RunningStat {
     case distance(Double)
     case speed(Double)
     case pace(Double)

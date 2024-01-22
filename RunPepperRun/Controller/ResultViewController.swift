@@ -15,11 +15,11 @@ class ResultViewController: UIViewController {
     private let stackView = UIStackView()
     private let mapView = MKMapView()
     private let runningFactorsCollectionView: UICollectionView = {
-        return UICollectionView(frame: .zero, collectionViewLayout: RunningFactorCellScrollLayout())
+        return UICollectionView(frame: .zero, collectionViewLayout: RunningStatCellScrollLayout())
     }()
     
     private let finishButton = UIButton()
-    private var runningFactors: [RunningFactor] = []
+    private var runningStats: [RunningStat] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,8 +27,8 @@ class ResultViewController: UIViewController {
         setupNavigation()
         setupStackView()
         setupMapView()
-        setupRunningFactors()
-        setupRunningFactorsView()
+        setupRunningStats()
+        setupRunningStatsView()
         setupFinishButton()
     }
     
@@ -76,13 +76,13 @@ class ResultViewController: UIViewController {
         }
     }
     
-    private func setupRunningFactors() {
-        runningFactors = [.speed(self.result?.averageSpeed ?? 0), .pace(self.result?.averagePace ?? 0), .numberOfSteps(self.result?.numberOfSteps ?? 0), .caloriesBurned(self.result?.caloriesBurend ?? 0), .distance(self.result?.distance ?? 0), .duration(self.result?.duration ?? 0)]
+    private func setupRunningStats() {
+        runningStats = [.speed(self.result?.averageSpeed ?? 0), .pace(self.result?.averagePace ?? 0), .numberOfSteps(self.result?.numberOfSteps ?? 0), .caloriesBurned(self.result?.caloriesBurend ?? 0), .distance(self.result?.distance ?? 0), .duration(self.result?.duration ?? 0)]
     }
     
-    private func setupRunningFactorsView() {
+    private func setupRunningStatsView() {
         stackView.addArrangedSubview(runningFactorsCollectionView)
-        runningFactorsCollectionView.register(RunningFactorCardCell.self, forCellWithReuseIdentifier: RunningFactorCardCell.identifier)
+        runningFactorsCollectionView.register(RunningStatCardCell.self, forCellWithReuseIdentifier: RunningStatCardCell.identifier)
         runningFactorsCollectionView.delegate = self
         runningFactorsCollectionView.dataSource = self
         runningFactorsCollectionView.showsHorizontalScrollIndicator = false
@@ -129,13 +129,13 @@ class ResultViewController: UIViewController {
 
 extension ResultViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return runningFactors.count
+        return runningStats.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RunningFactorCardCell.identifier, for: indexPath) as! RunningFactorCardCell
-        let activity = runningFactors[indexPath.row]
-        cell.configure(with: activity)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RunningStatCardCell.identifier, for: indexPath) as! RunningStatCardCell
+        let runningStat = runningStats[indexPath.row]
+        cell.configure(with: runningStat)
         return cell
     }
 }

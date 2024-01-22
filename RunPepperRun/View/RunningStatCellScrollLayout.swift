@@ -7,14 +7,14 @@
 
 import UIKit
 
-class RunningFactorCellScrollLayout: UICollectionViewFlowLayout {
+class RunningStatCellScrollLayout: UICollectionViewFlowLayout {
     
     override init() {
         super.init()
     }
     
     required init(coder: NSCoder) {
-        fatalError("RunningFactorCellScrollLayout 생성 실패")
+        fatalError("RunningStatCellScrollLayout 생성 실패")
     }
     
     override func prepare() {
