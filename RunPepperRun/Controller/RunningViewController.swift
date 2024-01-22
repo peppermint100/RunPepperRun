@@ -68,7 +68,7 @@ class RunningViewController: UIViewController {
         mapView.layer.cornerRadius = 10
         mapView.clipsToBounds = true
         mapView.snp.makeConstraints { make in
-            make.height.equalTo(stackView.snp.height).offset(-8).multipliedBy(0.6)
+            make.height.equalTo(stackView.snp.height).multipliedBy(0.6)
         }
     }
     
@@ -83,7 +83,7 @@ class RunningViewController: UIViewController {
         runningStatCollectionView.dataSource = self
         runningStatCollectionView.showsHorizontalScrollIndicator = false
         runningStatCollectionView.snp.makeConstraints { make in
-            make.height.equalTo(stackView.snp.height).offset(-8).multipliedBy(0.2)
+            make.height.equalTo(stackView.snp.height).multipliedBy(0.2)
         }
     }
     
@@ -91,7 +91,7 @@ class RunningViewController: UIViewController {
         stackView.addArrangedSubview(runningStatusView)
         runningStatusView.delegate = self
         runningStatusView.snp.makeConstraints { make in
-            make.height.equalTo(stackView.snp.height).offset(-8).multipliedBy(0.2)
+            make.height.equalTo(stackView.snp.height).offset(-16).multipliedBy(0.2)
         }
     }
         
