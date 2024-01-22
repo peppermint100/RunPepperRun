@@ -59,7 +59,7 @@ class HomeViewController: UIViewController {
     
     // TODO: - Setting Feature에서 추가 개발
     private func getRunningActivitiesForHomeVC() -> [RunningStat] {
-        return [RunningStat] = [.speed(36), .numberOfSteps(10), .caloriesBurned(224)]
+        return [.speed(36), .numberOfSteps(10), .caloriesBurned(224)]
     }
     
     // MARK: - UI 세팅
