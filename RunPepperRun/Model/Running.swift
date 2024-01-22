@@ -67,4 +67,3 @@ class Running: MotionDelegate {
         delegate?.didUpdateRunningStats(self, distance: self.distance, speed: self.speed, pace: self.pace, caloriesBurned: self.caloriesBurned, numberOfSteps: self.numberOfSteps)
     }
 }
-

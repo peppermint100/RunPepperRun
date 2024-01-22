@@ -19,8 +19,6 @@ class HistoryManager {
             completion?(true)
         } catch {
             print("러닝 내역을 저장하는데 실패했습니다.")
-            print(error.localizedDescription)
-            print(String(describing: error)) // <- ✅ Use this for debuging!
             completion?(false)
         }
     }
