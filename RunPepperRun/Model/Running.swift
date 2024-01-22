@@ -8,7 +8,7 @@
 import Foundation
 
 protocol RunningDelegate {
-    func didUpdateRunningActivity(_ running: Running, distance: Double, speed: Double, pace: Double, caloriesBurned: Double, numberOfSteps: Int)
+    func didUpdateRunningStats(_ running: Running, distance: Double, speed: Double, pace: Double, caloriesBurned: Double, numberOfSteps: Int)
 }
 
 class Running: MotionDelegate {
@@ -64,7 +64,7 @@ class Running: MotionDelegate {
         self.speed = self.distance / now.timeIntervalSince(startDate)
         speedArray.append(self.speed)
         self.caloriesBurned += caloriesCalculator.getCalories(speed: speed, duration: now.timeIntervalSince(lastUpdatedAt ?? now), motionActivity: motionActivity)
-        delegate?.didUpdateRunningActivity(self, distance: self.distance, speed: self.speed, pace: self.pace, caloriesBurned: self.caloriesBurned, numberOfSteps: self.numberOfSteps)
+        delegate?.didUpdateRunningStats(self, distance: self.distance, speed: self.speed, pace: self.pace, caloriesBurned: self.caloriesBurned, numberOfSteps: self.numberOfSteps)
     }
 }
 

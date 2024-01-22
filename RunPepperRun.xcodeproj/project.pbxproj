@@ -16,8 +16,8 @@
 		BA225D022B4BED3B00A637BA /* MotionActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA225D012B4BED3B00A637BA /* MotionActivity.swift */; };
 		BA225D042B4BEE6600A637BA /* CaloriesCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA225D032B4BEE6600A637BA /* CaloriesCalculator.swift */; };
 		BA3A3B682B4915EF00DF1DE4 /* RunningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3A3B672B4915EF00DF1DE4 /* RunningViewController.swift */; };
-		BA3A3B6A2B492BC600DF1DE4 /* RunningFactorCellScrollLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3A3B692B492BC600DF1DE4 /* RunningFactorCellScrollLayout.swift */; };
-		BA5752C32B43DE5800686EB5 /* RunningFactorCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5752C22B43DE5800686EB5 /* RunningFactorCardCell.swift */; };
+		BA3A3B6A2B492BC600DF1DE4 /* RunningStatCellScrollLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3A3B692B492BC600DF1DE4 /* RunningStatCellScrollLayout.swift */; };
+		BA5752C32B43DE5800686EB5 /* RunningStatCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5752C22B43DE5800686EB5 /* RunningStatCardCell.swift */; };
 		BA7FE2092B54E4F800FADA40 /* RunningStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7FE2082B54E4F800FADA40 /* RunningStatusView.swift */; };
 		BAAF54C02B219A6F00265237 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAF54BF2B219A6F00265237 /* AppDelegate.swift */; };
 		BAAF54C22B219A6F00265237 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAF54C12B219A6F00265237 /* SceneDelegate.swift */; };
@@ -25,8 +25,8 @@
 		BAAF54C92B219A7000265237 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BAAF54C82B219A7000265237 /* Assets.xcassets */; };
 		BAAF54CC2B219A7000265237 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BAAF54CA2B219A7000265237 /* LaunchScreen.storyboard */; };
 		BAAF54DA2B21AD7200265237 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAF54D92B21AD7200265237 /* HomeViewController.swift */; };
-		BAD5B8242B465A3700A40AE0 /* RunningFactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD5B8232B465A3700A40AE0 /* RunningFactor.swift */; };
-		BAD5B8262B46793100A40AE0 /* RunningFactorCellLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD5B8252B46793100A40AE0 /* RunningFactorCellLayout.swift */; };
+		BAD5B8242B465A3700A40AE0 /* RunningStat.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD5B8232B465A3700A40AE0 /* RunningStat.swift */; };
+		BAD5B8262B46793100A40AE0 /* RunningStatCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD5B8252B46793100A40AE0 /* RunningStatCollectionViewLayout.swift */; };
 		BAED15A72B4D0B7100139F67 /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAED15A62B4D0B7100139F67 /* ResultViewController.swift */; };
 		BAED15A92B4D1B9F00139F67 /* DrawbleMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAED15A82B4D1B9F00139F67 /* DrawbleMapView.swift */; };
 		BAED15AC2B4D201100139F67 /* RunningResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAED15AB2B4D201100139F67 /* RunningResult.swift */; };
@@ -43,8 +43,8 @@
 		BA225D012B4BED3B00A637BA /* MotionActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionActivity.swift; sourceTree = "<group>"; };
 		BA225D032B4BEE6600A637BA /* CaloriesCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaloriesCalculator.swift; sourceTree = "<group>"; };
 		BA3A3B672B4915EF00DF1DE4 /* RunningViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningViewController.swift; sourceTree = "<group>"; };
-		BA3A3B692B492BC600DF1DE4 /* RunningFactorCellScrollLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningFactorCellScrollLayout.swift; sourceTree = "<group>"; };
-		BA5752C22B43DE5800686EB5 /* RunningFactorCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningFactorCardCell.swift; sourceTree = "<group>"; };
+		BA3A3B692B492BC600DF1DE4 /* RunningStatCellScrollLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningStatCellScrollLayout.swift; sourceTree = "<group>"; };
+		BA5752C22B43DE5800686EB5 /* RunningStatCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningStatCardCell.swift; sourceTree = "<group>"; };
 		BA7FE2082B54E4F800FADA40 /* RunningStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningStatusView.swift; sourceTree = "<group>"; };
 		BAAD1B5C2B25504B00296ED8 /* Route1.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Route1.gpx; sourceTree = "<group>"; };
 		BAAF54BC2B219A6F00265237 /* RunPepperRun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RunPepperRun.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -55,8 +55,8 @@
 		BAAF54CB2B219A7000265237 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BAAF54CD2B219A7000265237 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BAAF54D92B21AD7200265237 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		BAD5B8232B465A3700A40AE0 /* RunningFactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningFactor.swift; sourceTree = "<group>"; };
-		BAD5B8252B46793100A40AE0 /* RunningFactorCellLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningFactorCellLayout.swift; sourceTree = "<group>"; };
+		BAD5B8232B465A3700A40AE0 /* RunningStat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningStat.swift; sourceTree = "<group>"; };
+		BAD5B8252B46793100A40AE0 /* RunningStatCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningStatCollectionViewLayout.swift; sourceTree = "<group>"; };
 		BAED15A62B4D0B7100139F67 /* ResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
 		BAED15A82B4D1B9F00139F67 /* DrawbleMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawbleMapView.swift; sourceTree = "<group>"; };
 		BAED15AB2B4D201100139F67 /* RunningResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningResult.swift; sourceTree = "<group>"; };
@@ -114,7 +114,7 @@
 		BA64A2A12B42CEEA0004E55E /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				BAD5B8232B465A3700A40AE0 /* RunningFactor.swift */,
+				BAD5B8232B465A3700A40AE0 /* RunningStat.swift */,
 				BA225CF92B4BD3E800A637BA /* Running.swift */,
 				BA225CFB2B4BD40F00A637BA /* Location.swift */,
 				BA225CFD2B4BD63D00A637BA /* Point.swift */,
@@ -129,9 +129,9 @@
 		BA64A2A22B42CEED0004E55E /* View */ = {
 			isa = PBXGroup;
 			children = (
-				BA5752C22B43DE5800686EB5 /* RunningFactorCardCell.swift */,
-				BAD5B8252B46793100A40AE0 /* RunningFactorCellLayout.swift */,
-				BA3A3B692B492BC600DF1DE4 /* RunningFactorCellScrollLayout.swift */,
+				BA5752C22B43DE5800686EB5 /* RunningStatCardCell.swift */,
+				BAD5B8252B46793100A40AE0 /* RunningStatCollectionViewLayout.swift */,
+				BA3A3B692B492BC600DF1DE4 /* RunningStatCellScrollLayout.swift */,
 				BA7FE2082B54E4F800FADA40 /* RunningStatusView.swift */,
 			);
 			path = View;
@@ -295,22 +295,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BA3A3B6A2B492BC600DF1DE4 /* RunningFactorCellScrollLayout.swift in Sources */,
+				BA3A3B6A2B492BC600DF1DE4 /* RunningStatCellScrollLayout.swift in Sources */,
 				BA173A432B4406FA00C7F049 /* Extension.swift in Sources */,
-				BAD5B8242B465A3700A40AE0 /* RunningFactor.swift in Sources */,
+				BAD5B8242B465A3700A40AE0 /* RunningStat.swift in Sources */,
 				BA225D022B4BED3B00A637BA /* MotionActivity.swift in Sources */,
 				BAAF54C42B219A6F00265237 /* ViewController.swift in Sources */,
 				BA225CFE2B4BD63D00A637BA /* Point.swift in Sources */,
 				BA225D002B4BD8AA00A637BA /* Motion.swift in Sources */,
 				BAED15A92B4D1B9F00139F67 /* DrawbleMapView.swift in Sources */,
-				BAD5B8262B46793100A40AE0 /* RunningFactorCellLayout.swift in Sources */,
+				BAD5B8262B46793100A40AE0 /* RunningStatCollectionViewLayout.swift in Sources */,
 				BAED15A72B4D0B7100139F67 /* ResultViewController.swift in Sources */,
 				BA7FE2092B54E4F800FADA40 /* RunningStatusView.swift in Sources */,
 				BAAF54DA2B21AD7200265237 /* HomeViewController.swift in Sources */,
 				BA225CFA2B4BD3E800A637BA /* Running.swift in Sources */,
 				BAAF54C02B219A6F00265237 /* AppDelegate.swift in Sources */,
 				BAED15AC2B4D201100139F67 /* RunningResult.swift in Sources */,
-				BA5752C32B43DE5800686EB5 /* RunningFactorCardCell.swift in Sources */,
+				BA5752C32B43DE5800686EB5 /* RunningStatCardCell.swift in Sources */,
 				BA3A3B682B4915EF00DF1DE4 /* RunningViewController.swift in Sources */,
 				BA225CFC2B4BD40F00A637BA /* Location.swift in Sources */,
 				BAAF54C22B219A6F00265237 /* SceneDelegate.swift in Sources */,

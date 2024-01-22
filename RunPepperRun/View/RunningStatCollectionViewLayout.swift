@@ -7,7 +7,7 @@
 
 import UIKit
 
-class RunningFactorCellLayout: UICollectionViewFlowLayout {
+class RunningStatCollectionViewLayout: UICollectionViewFlowLayout {
     
     override init() {
         super.init()
