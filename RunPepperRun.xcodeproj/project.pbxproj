@@ -45,6 +45,7 @@
 		88BCE0B9D707B2A31B771838 /* Pods-RunPepperRun.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunPepperRun.debug.xcconfig"; path = "Target Support Files/Pods-RunPepperRun/Pods-RunPepperRun.debug.xcconfig"; sourceTree = "<group>"; };
 		BA0AE6882B5D533600433C80 /* FirestoreCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreCollection.swift; sourceTree = "<group>"; };
 		BA0AE68A2B5D534F00433C80 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		BA0AE68C2B5E1AEA00433C80 /* Config2.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config2.xcconfig; sourceTree = "<group>"; };
 		BA173A422B4406FA00C7F049 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		BA225CF92B4BD3E800A637BA /* Running.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Running.swift; sourceTree = "<group>"; };
 		BA225CFB2B4BD40F00A637BA /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
@@ -56,7 +57,6 @@
 		BA3A3B692B492BC600DF1DE4 /* RunningFactorCellScrollLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningFactorCellScrollLayout.swift; sourceTree = "<group>"; };
 		BA5752C22B43DE5800686EB5 /* RunningFactorCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningFactorCardCell.swift; sourceTree = "<group>"; };
 		BA7FE2082B54E4F800FADA40 /* RunningStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningStatusView.swift; sourceTree = "<group>"; };
-		BA8698152B5A2753009D8C75 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		BA8698162B5A3B5C009D8C75 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		BA86981E2B5A8C20009D8C75 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		BA8698222B5AC497009D8C75 /* OnboardingCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCollectionViewLayout.swift; sourceTree = "<group>"; };
@@ -202,7 +202,7 @@
 				BAAF54C32B219A6F00265237 /* ViewController.swift */,
 				BAAF54C82B219A7000265237 /* Assets.xcassets */,
 				BAAD1B5C2B25504B00296ED8 /* Route1.gpx */,
-				BA8698152B5A2753009D8C75 /* Config.xcconfig */,
+				BA0AE68C2B5E1AEA00433C80 /* Config2.xcconfig */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -368,7 +368,7 @@
 /* Begin XCBuildConfiguration section */
 		BAAF54CE2B219A7000265237 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BA8698152B5A2753009D8C75 /* Config.xcconfig */;
+			baseConfigurationReference = BA0AE68C2B5E1AEA00433C80 /* Config2.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -433,7 +433,7 @@
 		};
 		BAAF54CF2B219A7000265237 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BA8698152B5A2753009D8C75 /* Config.xcconfig */;
+			baseConfigurationReference = BA0AE68C2B5E1AEA00433C80 /* Config2.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
