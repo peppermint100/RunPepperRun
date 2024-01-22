@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class RunningFactorCardCell: UICollectionViewCell {
+class RunningStatCardCell: UICollectionViewCell {
     
     static let identifier = "ActivityCardCell"
     let circleSize: CGFloat = 40
@@ -124,7 +124,7 @@ class RunningFactorCardCell: UICollectionViewCell {
         }
     }
     
-    func configure(with activity: RunningFactor) {
+    func configure(with activity: RunningStat) {
         updateTitle(for: activity)
         subtitleLabel.text = subtitle(for: activity)
         iconImageView.image = UIImage(systemName: sfSymbol(for: activity))
@@ -133,7 +133,7 @@ class RunningFactorCardCell: UICollectionViewCell {
         iconCircleView.backgroundColor = iconColor.lighter()
     }
     
-    private func updateTitle(for activity: RunningFactor) {
+    private func updateTitle(for activity: RunningStat) {
         switch activity {
         case .speed(let value):
             titleLabel.text = value.formatSpeed()
@@ -156,7 +156,7 @@ class RunningFactorCardCell: UICollectionViewCell {
         }
     }
     
-    private func subtitle(for activity: RunningFactor) -> String {
+    private func subtitle(for activity: RunningStat) -> String {
         switch activity {
         case .speed:
             return "속도"
@@ -173,7 +173,7 @@ class RunningFactorCardCell: UICollectionViewCell {
         }
     }
     
-    private func iconColor(for activity: RunningFactor) -> UIColor {
+    private func iconColor(for activity: RunningStat) -> UIColor {
         switch activity {
         case .speed:
             return .systemGreen
@@ -190,7 +190,7 @@ class RunningFactorCardCell: UICollectionViewCell {
         }
     }
         
-    func sfSymbol(for activity: RunningFactor) -> String {
+    func sfSymbol(for activity: RunningStat) -> String {
         switch activity {
         case .speed:
             return "bolt.horizontal"

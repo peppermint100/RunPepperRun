@@ -21,13 +21,13 @@ class RunningViewController: UIViewController {
         return timer == nil || (timerSuspended && seconds == 0)
     }
     private var seconds = 0
-    private var runningFactors: [RunningFactor] = []
+    private var runningStats: [RunningStat] = []
     
     private let stackView = UIStackView()
     
     private let mapView = MKMapView()
-    private let runningFactorsCollectionView: UICollectionView = {
-        return UICollectionView(frame: .zero, collectionViewLayout: RunningFactorCellScrollLayout())
+    private let runningStatCollectionView: UICollectionView = {
+        return UICollectionView(frame: .zero, collectionViewLayout: RunningStatCellScrollLayout())
     }()
     private let runningStatusView = RunningStatusView()
     
@@ -37,8 +37,8 @@ class RunningViewController: UIViewController {
         setupNavigation()
         setupStackView()
         setupMapView()
-        setupRunningFactors()
-        setupRunningFactorsView()
+        setupRunningStats()
+        setupRunningStatsView()
         setupRunningStatusView()
         setupTimer()
         setupRunning()
@@ -72,17 +72,17 @@ class RunningViewController: UIViewController {
         }
     }
     
-    private func setupRunningFactors() {
-        runningFactors = [.speed(0), .numberOfSteps(0), .caloriesBurned(0), .pace(0)]
+    private func setupRunningStats() {
+        runningStats = [.speed(0), .numberOfSteps(0), .caloriesBurned(0), .pace(0)]
     }
     
-    private func setupRunningFactorsView() {
-        stackView.addArrangedSubview(runningFactorsCollectionView)
-        runningFactorsCollectionView.register(RunningFactorCardCell.self, forCellWithReuseIdentifier: RunningFactorCardCell.identifier)
-        runningFactorsCollectionView.delegate = self
-        runningFactorsCollectionView.dataSource = self
-        runningFactorsCollectionView.showsHorizontalScrollIndicator = false
-        runningFactorsCollectionView.snp.makeConstraints { make in
+    private func setupRunningStatsView() {
+        stackView.addArrangedSubview(runningStatCollectionView)
+        runningStatCollectionView.register(RunningStatCardCell.self, forCellWithReuseIdentifier: RunningStatCardCell.identifier)
+        runningStatCollectionView.delegate = self
+        runningStatCollectionView.dataSource = self
+        runningStatCollectionView.showsHorizontalScrollIndicator = false
+        runningStatCollectionView.snp.makeConstraints { make in
             make.height.equalTo(stackView.snp.height).offset(-8).multipliedBy(0.2)
         }
     }
@@ -102,13 +102,13 @@ class RunningViewController: UIViewController {
 
 extension RunningViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return runningFactors.count
+        return runningStats.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RunningFactorCardCell.identifier, for: indexPath) as! RunningFactorCardCell
-        let activity = runningFactors[indexPath.row]
-        cell.configure(with: activity)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RunningStatCardCell.identifier, for: indexPath) as! RunningStatCardCell
+        let stat = runningStats[indexPath.row]
+        cell.configure(with: stats)
         return cell
     }
 }
@@ -119,11 +119,11 @@ extension RunningViewController: RunningDelegate {
         running.start()
     }
     
-    func didUpdateRunningActivity(_ running: Running, distance: Double, speed: Double, pace: Double, caloriesBurned: Double, numberOfSteps: Int) {
+    func didUpdateRunningStats(_ running: Running, distance: Double, speed: Double, pace: Double, caloriesBurned: Double, numberOfSteps: Int) {
         DispatchQueue.main.async { [weak self] in
-            self?.runningFactors = [.speed(speed), .numberOfSteps(numberOfSteps), .caloriesBurned(caloriesBurned), .pace(pace)]
+            self?.runningStats = [.speed(speed), .numberOfSteps(numberOfSteps), .caloriesBurned(caloriesBurned), .pace(pace)]
             self?.runningStatusView.distance = distance
-            self?.runningFactorsCollectionView.reloadData()
+            self?.runningStatCollectionView.reloadData()
         }
     }
 }
