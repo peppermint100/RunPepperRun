@@ -25,6 +25,7 @@
 		BA86981F2B5A8C20009D8C75 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA86981E2B5A8C20009D8C75 /* OnboardingViewController.swift */; };
 		BA8698232B5AC497009D8C75 /* OnboardingCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8698222B5AC497009D8C75 /* OnboardingCollectionViewLayout.swift */; };
 		BA8698252B5B4653009D8C75 /* OnboardingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8698242B5B4653009D8C75 /* OnboardingCollectionViewCell.swift */; };
+		BA8FF4882B60F2A3000287F9 /* FirestoreRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8FF4872B60F2A3000287F9 /* FirestoreRepository.swift */; };
 		BAAF54C02B219A6F00265237 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAF54BF2B219A6F00265237 /* AppDelegate.swift */; };
 		BAAF54C22B219A6F00265237 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAF54C12B219A6F00265237 /* SceneDelegate.swift */; };
 		BAAF54C42B219A6F00265237 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAF54C32B219A6F00265237 /* ViewController.swift */; };
@@ -61,6 +62,7 @@
 		BA86981E2B5A8C20009D8C75 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		BA8698222B5AC497009D8C75 /* OnboardingCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCollectionViewLayout.swift; sourceTree = "<group>"; };
 		BA8698242B5B4653009D8C75 /* OnboardingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCollectionViewCell.swift; sourceTree = "<group>"; };
+		BA8FF4872B60F2A3000287F9 /* FirestoreRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreRepository.swift; sourceTree = "<group>"; };
 		BAAD1B5C2B25504B00296ED8 /* Route1.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Route1.gpx; sourceTree = "<group>"; };
 		BAAF54BC2B219A6F00265237 /* RunPepperRun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RunPepperRun.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAAF54BF2B219A6F00265237 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -133,6 +135,7 @@
 		BA64A2A12B42CEEA0004E55E /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				BA8FF4872B60F2A3000287F9 /* FirestoreRepository.swift */,
 				BAD5B8232B465A3700A40AE0 /* RunningFactor.swift */,
 				BA225CF92B4BD3E800A637BA /* Running.swift */,
 				BA225CFB2B4BD40F00A637BA /* Location.swift */,
@@ -338,6 +341,7 @@
 				BA8698172B5A3B5C009D8C75 /* UserManager.swift in Sources */,
 				BA7FE2092B54E4F800FADA40 /* RunningStatusView.swift in Sources */,
 				BAAF54DA2B21AD7200265237 /* HomeViewController.swift in Sources */,
+				BA8FF4882B60F2A3000287F9 /* FirestoreRepository.swift in Sources */,
 				BA225CFA2B4BD3E800A637BA /* Running.swift in Sources */,
 				BAAF54C02B219A6F00265237 /* AppDelegate.swift in Sources */,
 				BAED15AC2B4D201100139F67 /* RunningResult.swift in Sources */,
