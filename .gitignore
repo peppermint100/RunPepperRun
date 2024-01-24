@@ -88,3 +88,7 @@ fastlane/test_output
 # https://github.com/johnno1962/injectionforxcode
 
 iOSInjectionProject/
+RunPepperRun/GoogleService-Info.plist
+Pods/
+RunPepperRun/Resource/Config.xcconfig
+RunPepperRun/Resource/Config2.xcconfig

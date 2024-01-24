@@ -1,0 +1,11 @@
+//
+//  Config2.xcconfig
+//  RunPepperRun
+//
+//  Created by peppermint100 on 1/22/24.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+REVSERED_CLIENT_ID = com.googleusercontent.apps.229560159684-6vq4gfctar028oukgbtqscf5jgg949m3
