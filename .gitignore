@@ -89,7 +89,5 @@ fastlane/test_output
 
 iOSInjectionProject/
 RunPepperRun/GoogleService-Info.plist
-<<<<<<< HEAD
 RunPepperRun/Resource/Config2.xcconfig
-=======
->>>>>>> e5784c0 ([Build] Firebase Auth 의존성 추가)
+Pods/
