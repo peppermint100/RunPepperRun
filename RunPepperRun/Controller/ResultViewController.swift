@@ -125,14 +125,15 @@ class ResultViewController: UIViewController {
             from: result.endDate)
         guard let year = components.year, let month = components.month, let day = components.day else { return }
         
-        let history = History(
+        var history = History(
+            email: UserManager.shared.getEmail(),
             averageSpeed: result.averageSpeed, averagePace: result.averagePace, distance: result.distance,
             caloriesBurned: result.caloriesBurned, numberOfSteps: result.numberOfSteps,
             locations: result.points,
             startDate: result.startDate, endDate: result.endDate,
             year: year, month: month, day: day)
         
-        HistoryManager.shared.createHistory(history, completion: nil)
+        HistoryManager.shared.create(history, completion: nil)
     }
     
     private func popToHomeVC() {
