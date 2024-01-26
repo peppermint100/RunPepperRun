@@ -16,7 +16,7 @@ class UserManager {
     let repository = FirestoreRepository.shared
     
     func getEmail() -> String? {
-        return repository.getEmail()
+        return repository.fetchEmail()
     }
     
     func createUser(nickname: String, weight: Double, completion: ((Bool) -> Void)?) {

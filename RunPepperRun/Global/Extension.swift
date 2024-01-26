@@ -7,6 +7,12 @@
 
 import UIKit
 
+extension Date {
+    static func - (lhs: Date, rhs: Date) -> TimeInterval {
+        return lhs.timeIntervalSinceReferenceDate - rhs.timeIntervalSinceReferenceDate
+    }
+}
+
 extension Double {
     func mpsToKph() -> Double {
         return self * 1000 / 3600
@@ -43,6 +49,14 @@ extension Int {
         let minutes = secondsLeft / 60
         let seconds = secondsLeft % 60
         return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
+    }
+}
+
+extension TimeInterval {
+    func formatToMMSS() -> String {
+        let minutes = self / 60
+        let seconds = self.truncatingRemainder(dividingBy: 60)
+        return String(format: "%02d:%02d", minutes, seconds)
     }
 }
 

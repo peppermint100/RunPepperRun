@@ -9,6 +9,7 @@ import UIKit
 import MapKit
 import SnapKit
 import CoreMotion
+import FirebaseAuth
 
 class HomeViewController: UIViewController {
     
@@ -54,7 +55,20 @@ class HomeViewController: UIViewController {
     // MARK: - 네비게이션 바 세팅
     private func setupNavigationBar() {
         navigationItem.title = "Home"
+        navigationController?.navigationBar.sizeToFit()
         navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.largeTitleDisplayMode = .always
+        let buttonSize = CGSize(width: 25, height: 25)
+        let chartIcon = UIImage(systemName: "chart.bar")!.resizeImage(targetSize: buttonSize)
+        let gearIcon = UIImage(systemName: "gearshape")!.resizeImage(targetSize: buttonSize)
+        let toHistoryVCButton = UIButton()
+        let toSettingVCButton =  UIButton()
+        toHistoryVCButton.setImage(chartIcon, for: .normal)
+        toHistoryVCButton.addTarget(self, action: #selector(presentToHistoryVC), for: .touchUpInside)
+        toSettingVCButton.setImage(gearIcon, for: .normal)
+        let toHistoryBarButton = UIBarButtonItem(customView: toHistoryVCButton)
+        let toSettingBarButton = UIBarButtonItem(customView: toSettingVCButton)
+        navigationItem.rightBarButtonItems = [toHistoryBarButton, toSettingBarButton]
     }
     
     // TODO: - Setting Feature에서 추가 개발
@@ -139,14 +153,14 @@ class HomeViewController: UIViewController {
     }
     
     @objc private func didTapStartRunningButton() {
-        if checkAuthorizationsForRunning() {
+        if hasAuthorizationsForRunning() {
             presentToRunningVC()
         } else {
             makeOpenSettingsAlert()
         }
     }
     
-    private func checkAuthorizationsForRunning() -> Bool {
+    private func hasAuthorizationsForRunning() -> Bool {
         switch locationManager.authorizationStatus {
         case .notDetermined, .restricted, .denied:
             return false
@@ -173,6 +187,11 @@ class HomeViewController: UIViewController {
     
     private func presentToRunningVC() {
         let vc = RunningViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @objc private func presentToHistoryVC() {
+        let vc = HistoryViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
     
