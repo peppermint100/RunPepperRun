@@ -9,20 +9,22 @@ import Foundation
 import FirebaseFirestore
 import FirebaseAuth
 
+
 class FirestoreRepository {
     static let shared = FirestoreRepository()
     
-    private let userRef = Firestore.firestore().collection(FirestoreCollection.history.rawValue)
+    private let userRef = Firestore.firestore().collection(FirestoreCollection.user.rawValue)
+    private let historyRef = Firestore.firestore().collection(FirestoreCollection.history.rawValue)
 }
 
 // MARK: - User
 extension FirestoreRepository {
-    func getEmail() -> String? {
+    func fetchEmail() -> String? {
         return Auth.auth().currentUser?.email
     }
     
     func createUser(_ user: User, completion: ((Bool) -> Void)?) {
-        guard let email = getEmail() else {
+        guard let email = fetchEmail() else {
             completion?(false)
             return
         }
@@ -31,7 +33,6 @@ extension FirestoreRepository {
             try userRef.document(email).setData(from: user)
             completion?(true)
         } catch {
-            
             print("유저 정보를 Firebase에 저장하는데 실패했습니다.")
             completion?(false)
         }
@@ -47,4 +48,52 @@ extension FirestoreRepository {
             completion(document.exists)
         }
     }
+}
+
+// MARK: - History
+extension FirestoreRepository {
+     func create(_ history: History, completion: ((Bool) -> Void)?) {
+        do {
+            try historyRef.document().setData(from: history)
+            completion?(true)
+        } catch {
+            NSLog("러닝 내역을 저장하는데 실패했습니다.")
+            completion?(false)
+        }
+    }
+    
+    func fetchHistories(limit: Int, lastSnapshot: DocumentSnapshot?, completion: @escaping (Result<[DocumentSnapshot], HistoryError>) -> Void) {
+        guard let email = UserManager.shared.getEmail() else {
+            NSLog("이메일을 읽어오는데 실패했습니다.")
+            return completion(.failure(HistoryError.failToGetEmail))
+        }
+        
+        if let lastSnapshot = lastSnapshot {
+            historyRef.whereField("email", isEqualTo: email)
+                .order(by: "startDate", descending: true)
+                .limit(to: 3)
+                .start(afterDocument: lastSnapshot)
+                .getDocuments { snapshot, error in
+                    guard let snapshot = snapshot, error == nil else {
+                        NSLog("Snapshot을 가져오는데 실패했습니다.")
+                        completion(.failure(HistoryError.failToFetchData))
+                        return
+                    }
+                    completion(.success(snapshot.documents))
+                }
+        } else {
+            historyRef.whereField("email", isEqualTo: email)
+                .order(by: "startDate", descending: true)
+                .limit(to: 3)
+                .getDocuments { snapshot, error in
+                    guard let snapshot = snapshot, error == nil else {
+                        NSLog("Snapshot을 가져오는데 실패했습니다.")
+                        completion(.failure(HistoryError.failToFetchData))
+                        return
+                    }
+                    completion(.success(snapshot.documents))
+                }
+        }
+    }
+
 }
