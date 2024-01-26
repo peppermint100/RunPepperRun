@@ -62,12 +62,7 @@ extension FirestoreRepository {
         }
     }
     
-    func fetchHistories(limit: Int, lastSnapshot: DocumentSnapshot?, completion: @escaping (Result<[DocumentSnapshot], HistoryError>) -> Void) {
-        guard let email = UserManager.shared.getEmail() else {
-            NSLog("이메일을 읽어오는데 실패했습니다.")
-            return completion(.failure(HistoryError.failToGetEmail))
-        }
-        
+    func fetchHistories(email: String, limit: Int, lastSnapshot: DocumentSnapshot?, completion: @escaping (Result<[DocumentSnapshot], HistoryError>) -> Void) {
         if let lastSnapshot = lastSnapshot {
             historyRef.whereField("email", isEqualTo: email)
                 .order(by: "startDate", descending: true)
@@ -88,12 +83,24 @@ extension FirestoreRepository {
                 .getDocuments { snapshot, error in
                     guard let snapshot = snapshot, error == nil else {
                         NSLog("Snapshot을 가져오는데 실패했습니다.")
-                        completion(.failure(HistoryError.failToFetchData))
+                        completion(.failure(.failToFetchData))
                         return
                     }
                     completion(.success(snapshot.documents))
                 }
         }
     }
-
+    
+    func fetchHistories(startDate: Date, endDate: Date, completion: @escaping (Result<[DocumentSnapshot], HistoryError>) -> Void) {
+        historyRef
+            .whereField("startDate", isGreaterThan: startDate)
+            .whereField("endDate", isLessThan: endDate)
+            .getDocuments { snapshot, error in
+                guard let snapshot = snapshot, error == nil else {
+                    completion(.failure(.failToFetchData))
+                    return
+                }
+                completion(.success(snapshot.documents))
+            }
+    }
 }
