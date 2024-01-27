@@ -47,6 +47,8 @@ class HistoryTableViewCell: UITableViewCell {
         stackView.spacing = 8
         stackView.distribution = .fill
         stackView.alignment = .center
+        stackView.layoutMargins = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
+        stackView.isLayoutMarginsRelativeArrangement = true
         stackView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(12)
             make.top.bottom.equalToSuperview().inset(8)
@@ -61,7 +63,6 @@ class HistoryTableViewCell: UITableViewCell {
         mapView.snp.makeConstraints { make in
             make.width.equalToSuperview().multipliedBy(0.3)
             make.height.equalToSuperview().multipliedBy(0.8)
-            make.leading.equalToSuperview().offset(8)
         }
     }
     
