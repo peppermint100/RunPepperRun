@@ -125,7 +125,9 @@ class ResultViewController: UIViewController {
             from: result.endDate)
         guard let year = components.year, let month = components.month, let day = components.day else { return }
         
-        takeMapSnapshot { image in
+        let mid = result.points[result.points.count / 2]
+        
+        takeMapSnapshot(points: mid) { image in
             guard let imageData = image.jpegData(compressionQuality: .leastNormalMagnitude) else {
                 NSLog("러닝 맵 스냅샷을 Data로 변환하는데 실패했습니다.")
                 return
@@ -144,11 +146,13 @@ class ResultViewController: UIViewController {
         navigationController?.popToRootViewController(animated: false)
     }
     
-    private func takeMapSnapshot(completion: @escaping (UIImage) -> Void) {
+    private func takeMapSnapshot(points: Point, completion: @escaping (UIImage) -> Void) {
         let options: MKMapSnapshotter.Options = MKMapSnapshotter.Options()
         options.size = CGSize(width: 100, height: 100)
         options.mapType = .standard
         options.showsBuildings = true
+        let span = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
+        options.region = MKCoordinateRegion(center: points.toCoordinate(), span: span)
         let snapshotter = MKMapSnapshotter(
             options: options
         )
