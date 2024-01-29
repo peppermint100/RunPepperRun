@@ -125,7 +125,7 @@ class ResultViewController: UIViewController {
             from: result.endDate)
         guard let year = components.year, let month = components.month, let day = components.day else { return }
         
-        var history = History(
+        let history = History(
             email: UserManager.shared.getEmail(),
             averageSpeed: result.averageSpeed, averagePace: result.averagePace, distance: result.distance,
             caloriesBurned: result.caloriesBurned, numberOfSteps: result.numberOfSteps,
