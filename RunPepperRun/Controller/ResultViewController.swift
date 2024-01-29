@@ -125,19 +125,40 @@ class ResultViewController: UIViewController {
             from: result.endDate)
         guard let year = components.year, let month = components.month, let day = components.day else { return }
         
-        let history = History(
-            email: UserManager.shared.getEmail(),
-            averageSpeed: result.averageSpeed, averagePace: result.averagePace, distance: result.distance,
-            caloriesBurned: result.caloriesBurned, numberOfSteps: result.numberOfSteps,
-            locations: result.points,
-            startDate: result.startDate, endDate: result.endDate,
-            year: year, month: month, day: day)
-        
-        HistoryManager.shared.create(history, completion: nil)
+        takeMapSnapshot { image in
+            guard let imageData = image.jpegData(compressionQuality: .leastNormalMagnitude) else {
+                NSLog("러닝 맵 스냅샷을 Data로 변환하는데 실패했습니다.")
+                return
+            }
+            let history = History(
+                email: UserManager.shared.getEmail(),
+                averageSpeed: result.averageSpeed, averagePace: result.averagePace, distance: result.distance,
+                caloriesBurned: result.caloriesBurned, numberOfSteps: result.numberOfSteps,
+                locations: result.points,
+                startDate: result.startDate, endDate: result.endDate, mapSnapshot: imageData)
+            HistoryManager.shared.create(history, completion: nil)
+        }
     }
     
     private func popToHomeVC() {
         navigationController?.popToRootViewController(animated: false)
+    }
+    
+    private func takeMapSnapshot(completion: @escaping (UIImage) -> Void) {
+        let options: MKMapSnapshotter.Options = MKMapSnapshotter.Options()
+        options.size = CGSize(width: 100, height: 100)
+        options.mapType = .standard
+        options.showsBuildings = true
+        let snapshotter = MKMapSnapshotter(
+            options: options
+        )
+        snapshotter.start { snapshot, error in
+            guard let snapshot = snapshot, error == nil else {
+                NSLog("러닝 맵 스냅샷 생성에 실패했습니다.")
+                return
+            }
+            completion(snapshot.image)
+        }
     }
 }
 

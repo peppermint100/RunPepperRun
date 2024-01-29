@@ -20,11 +20,9 @@ struct History: Codable {
     let locations: [Point]
     let startDate: Date
     let endDate: Date
-    var year: Int
-    var month: Int
-    var day: Int
+    let mapSnapshot: Data
     
-    init(email: String?, averageSpeed: Double, averagePace: Double, distance: Double, caloriesBurned: Double, numberOfSteps: Int, locations: [Point], startDate: Date, endDate: Date, year: Int, month: Int, day: Int) {
+    init(email: String?, averageSpeed: Double, averagePace: Double, distance: Double, caloriesBurned: Double, numberOfSteps: Int, locations: [Point], startDate: Date, endDate: Date, mapSnapshot: Data) {
         self.email = email
         self.averageSpeed = averageSpeed
         self.averagePace = averagePace
@@ -34,9 +32,7 @@ struct History: Codable {
         self.locations = locations
         self.startDate = startDate
         self.endDate = endDate
-        self.year = year
-        self.month = month
-        self.day = day
+        self.mapSnapshot = mapSnapshot
     }
     
     init?(data: [String: Any]){
@@ -50,10 +46,8 @@ struct History: Codable {
             let locations = data["locations"] as? [Point],
             let startDate = data["startDate"] as? Date,
             let endDate = data["endDate"] as? Date,
-            let year = data["year"] as? Int,
-            let month = data["month"] as? Int,
-            let day = data["day"] as? Int
-        else { 
+            let mapSnapshot = data["endDate"] as? Data
+        else {
             return nil
         }
         self.email = email
@@ -65,8 +59,6 @@ struct History: Codable {
         self.locations = locations
         self.startDate = startDate
         self.endDate = endDate
-        self.year = year
-        self.month = month
-        self.day = day
+        self.mapSnapshot = mapSnapshot
     }
 }
