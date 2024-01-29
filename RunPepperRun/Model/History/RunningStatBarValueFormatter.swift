@@ -23,7 +23,7 @@ class RunningStatBarValueFormatter: ValueFormatter {
         
         switch runningStat {
         case .distance:
-            return String(value.metersToKilometers())
+            return String(value.metersToKilometers().truncatePoint(to: 1))
         case .speed:
             return String(value.mpsToKph().truncatePoint(to: 2))
         case .pace:
