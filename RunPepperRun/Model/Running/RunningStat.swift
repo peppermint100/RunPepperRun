@@ -66,4 +66,21 @@ enum RunningStat: Equatable {
             return .systemBrown
         }
     }
+    
+    var unitForChart: String {
+        switch self {
+        case .speed:
+            return "km/h"
+        case .pace:
+            return "분'초\"\""
+        case .caloriesBurned:
+            return "cal"
+        case .numberOfSteps:
+            return "걸음"
+        case .duration:
+            return "시간"
+        case .distance:
+            return "km"
+        }
+    }
 }

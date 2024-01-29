@@ -52,10 +52,14 @@ extension Double {
     }
     
     func formatPace() -> String {
-        let secondsPerKilometer = self * 1000
-        let minutes = secondsPerKilometer / 60
-        let secondsLeft = secondsPerKilometer.truncatingRemainder(dividingBy: 60)
+        let minutes = self / 60
+        let secondsLeft = self.truncatingRemainder(dividingBy: 60)
         return String(format: "%d'%d\"", Int(minutes), Int(secondsLeft))
+    }
+    
+    func truncatePoint(to: Double) -> Double {
+        let digit: Double = pow(10, to)
+        return floor(self * digit) / digit
     }
 }
 

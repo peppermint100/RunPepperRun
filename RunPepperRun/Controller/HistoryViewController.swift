@@ -7,13 +7,16 @@
 
 import UIKit
 import FirebaseFirestore
+import Charts
 
 class HistoryViewController: UIViewController {
     
     private let stackView = UIStackView()
     private let chartSegmentedControl = UISegmentedControl()
-    private let historyTableView = UITableView()
     private var filterButton: UIBarButtonItem?
+    private let historyTableView = UITableView()
+    private let chartView = BarChartView()
+    private var chartManager: HistoryChartManager?
     
     private var chartScope = ChartScope.week {
         didSet {
@@ -44,6 +47,7 @@ class HistoryViewController: UIViewController {
         .caloriesBurned(0), .numberOfSteps(0), .duration(0)
     ]
     
+    private var chartHistories: [History] = []
     private var recentHistories: [History] = []
     
     private let today = Date()
@@ -53,11 +57,10 @@ class HistoryViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         setupNavigationBar()
-        HistoryManager.shared.clearDocuments()
-        chartScope = .week
         setupStackView()
         setupChartSegmentedControl()
         setupChartView()
+        loadInitialChart()
         setupRecentHistories()
         setupHistoryTableView()
     }
@@ -93,6 +96,7 @@ class HistoryViewController: UIViewController {
         view.addSubview(stackView)
         stackView.axis = .vertical
         stackView.distribution = .fill
+        stackView.spacing = 8
         stackView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
@@ -112,33 +116,67 @@ class HistoryViewController: UIViewController {
         chartSegmentedControl.insertSegment(action: monthAction, at: 1, animated: true)
         chartSegmentedControl.selectedSegmentIndex = 0
         chartSegmentedControl.snp.makeConstraints { make in
-            make.height.equalToSuperview().multipliedBy(0.05)
+            make.height.equalToSuperview().multipliedBy(0.05).offset(-8)
         }
     }
     
     private func didSelectWeek() {
         periodIdx = 0
         chartScope = .week
+        loadChart(with: periodList[periodIdx])
     }
     
     private func didSelectMonth() {
         periodIdx = 0
         chartScope = .month
+        loadChart(with: periodList[periodIdx])
     }
     
     private func setupChartView() {
+        chartScope = .month
+        chartManager = HistoryChartManager(chartView: chartView)
         stackView.addArrangedSubview(chartView)
-        chartView.doubleTapToZoomEnabled = false
         chartView.xAxis.labelPosition = .bottom
-        chartView.leftAxis.enabled = false
+        chartView.doubleTapToZoomEnabled = false
+        chartView.leftAxis.axisMinimum = 0
         chartView.rightAxis.enabled = false
-        chartView.gridBackgroundColor = .systemGray5
+        chartView.xAxis.gridLineDashLengths = [4, 2]
+        chartView.leftAxis.gridLineDashLengths = [4, 2]
+        chartView.rightAxis.gridLineDashLengths = [4, 2]
         chartView.snp.makeConstraints { make in
-            make.height.equalTo(stackView).multipliedBy(0.5)
+            make.height.equalTo(stackView).multipliedBy(0.5).offset(-8)
         }
     }
     
+    private func loadInitialChart() {
+        periodList = calculatePeriod(chartScope: chartScope)
+        guard let period = periodList.first else { return }
+        loadChart(with: period)
+    }
+    
+    private func loadChart(with period: Period) {
+        HistoryManager.shared.getHistories(from: period.from, to: period.to) { [weak self] result in
+            switch result {
+            case .success(let histories):
+                guard let strongSelf = self, let chartManager = strongSelf.chartManager else { return }
+                strongSelf.chartHistories = histories
+                chartManager.drawChart(
+                    histories: strongSelf.chartHistories,
+                    period: period,
+                    runningStat: strongSelf.runningStat)
+            case .failure:
+                return
+            }
+        }
+    }
+    
+    private func loadChart(with runningStat: RunningStat) {
+        self.runningStat = runningStat
+        chartManager?.drawChart(histories: chartHistories, period: periodList[periodIdx], runningStat: runningStat)
+    }
+    
     private func setupHistoryTableView() {
+        HistoryManager.shared.clearDocuments()
         stackView.addArrangedSubview(historyTableView)
         historyTableView.delegate = self
         historyTableView.dataSource = self
@@ -201,6 +239,7 @@ extension HistoryViewController {
                 handler: { [weak self] _ in
                     guard let strongSelf = self else { return }
                     strongSelf.periodIdx = idx
+                    strongSelf.loadChart(with: strongSelf.periodList[strongSelf.periodIdx])
                 })
         }
         
@@ -213,6 +252,7 @@ extension HistoryViewController {
                 state: self.runningStat == runningStat ? .on : .off,
                 handler: { [weak self]_ in
                     self?.runningStat = runningStat
+                    self?.loadChart(with: runningStat)
                 })
         }
         
