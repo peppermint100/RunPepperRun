@@ -14,7 +14,7 @@ class HistoryTableViewCell: UITableViewCell {
     static let identifier = "HistoryTableViewCell"
     
     private let stackView = UIStackView()
-    private let mapView = MKMapView()
+    private let mapSnapshotView = UIImageView()
     private let labelStackView = UIStackView()
     private let dateLabel = UILabel()
     private let distanceLabel = UILabel()
@@ -26,7 +26,7 @@ class HistoryTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         selectionStyle = .none
         setupStackView()
-        setupMapView()
+        setupMapSnapshotView()
         setupLabelStackView()
         setupDateLabel()
         setupDistanceLabel()
@@ -55,12 +55,11 @@ class HistoryTableViewCell: UITableViewCell {
         }
     }
     
-    private func setupMapView() {
-        stackView.addArrangedSubview(mapView)
-        mapView.isUserInteractionEnabled = false
-        mapView.layer.cornerRadius = 8
-        mapView.clipsToBounds = true
-        mapView.snp.makeConstraints { make in
+    private func setupMapSnapshotView() {
+        stackView.addArrangedSubview(mapSnapshotView)
+        mapSnapshotView.layer.cornerRadius = 8
+        mapSnapshotView.clipsToBounds = true
+        mapSnapshotView.snp.makeConstraints { make in
             make.width.equalToSuperview().multipliedBy(0.3)
             make.height.equalToSuperview().multipliedBy(0.8)
         }
@@ -123,5 +122,15 @@ class HistoryTableViewCell: UITableViewCell {
         let minutes = Int(duration) / 60
         let seconds = Int(duration) % 60
         durationLabel.text = String(format: "%02d:%02d", minutes, seconds)
+        mapSnapshotView.image = UIImage(data: history.mapSnapshot)
+    }
+}
+
+extension HistoryTableViewCell: MKMapViewDelegate {
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        let renderer = MKGradientPolylineRenderer(overlay: overlay)
+        renderer.lineWidth = 1
+        renderer.strokeColor = .systemBlue
+        return renderer
     }
 }
