@@ -57,6 +57,7 @@ class HistoryTableViewCell: UITableViewCell {
     
     private func setupMapSnapshotView() {
         stackView.addArrangedSubview(mapSnapshotView)
+        mapSnapshotView.contentMode = .scaleAspectFit
         mapSnapshotView.layer.cornerRadius = 8
         mapSnapshotView.clipsToBounds = true
         mapSnapshotView.snp.makeConstraints { make in
