@@ -12,18 +12,49 @@ class HistoryViewController: UIViewController {
     
     private let stackView = UIStackView()
     private let chartSegmentedControl = UISegmentedControl()
-    private let chartView = UIView()
     private let historyTableView = UITableView()
+    private var filterButton: UIBarButtonItem?
     
-    var chartScope = ChartScope.week
+    private var chartScope = ChartScope.week {
+        didSet {
+            periodList = calculatePeriod(chartScope: chartScope)
+        }
+    }
     
-    var recentHistories: [History] = []
+    private var periodIdx = 0 {
+        didSet {
+            configureFilterButtonMenu()
+        }
+    }
+    
+    private var periodList: [Period] = [] {
+        didSet {
+            configureFilterButtonMenu()
+        }
+    }
+    
+    private var runningStat: RunningStat = .distance(0) {
+        didSet {
+            configureFilterButtonMenu()
+        }
+    }
+    
+    private var runningStatList: [RunningStat] = [
+        .distance(0), .speed(0), .pace(0),
+        .caloriesBurned(0), .numberOfSteps(0), .duration(0)
+    ]
+    
+    private var recentHistories: [History] = []
+    
+    private let today = Date()
+    private let calendar = Calendar.current
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-        HistoryManager.shared.clearDocuments()
         setupNavigationBar()
+        HistoryManager.shared.clearDocuments()
+        chartScope = .week
         setupStackView()
         setupChartSegmentedControl()
         setupChartView()
@@ -31,6 +62,14 @@ class HistoryViewController: UIViewController {
         setupHistoryTableView()
     }
     
+    private func setupNavigationBar() {
+        configureFilterButtonMenu()
+        navigationController?.navigationBar.prefersLargeTitles = false
+        navigationItem.title = "History"
+        filterButton = UIBarButtonItem(image: UIImage(systemName: "slider.horizontal.3"), style: .plain, target: self, action: nil)
+        navigationItem.rightBarButtonItem = filterButton
+    }
+
     private func setupRecentHistories() {
         HistoryManager.shared.getHistories(limit: 3) { [weak self] result in
             switch result {
@@ -49,15 +88,7 @@ class HistoryViewController: UIViewController {
             }
         }
     }
-    
-    private func setupNavigationBar() {
-        navigationController?.navigationBar.prefersLargeTitles = false
-        navigationItem.title = "History"
-        let image = UIImage(systemName: "slider.horizontal.3")
-        let button = UIBarButtonItem(image: image, style: .plain, target: self, action: nil)
-        navigationItem.rightBarButtonItem = button
-    }
-    
+
     private func setupStackView() {
         view.addSubview(stackView)
         stackView.axis = .vertical
@@ -86,17 +117,22 @@ class HistoryViewController: UIViewController {
     }
     
     private func didSelectWeek() {
-        print("week..")
+        periodIdx = 0
         chartScope = .week
     }
     
     private func didSelectMonth() {
-        print("month..")
+        periodIdx = 0
         chartScope = .month
     }
     
     private func setupChartView() {
         stackView.addArrangedSubview(chartView)
+        chartView.doubleTapToZoomEnabled = false
+        chartView.xAxis.labelPosition = .bottom
+        chartView.leftAxis.enabled = false
+        chartView.rightAxis.enabled = false
+        chartView.gridBackgroundColor = .systemGray5
         chartView.snp.makeConstraints { make in
             make.height.equalTo(stackView).multipliedBy(0.5)
         }
@@ -111,23 +147,83 @@ class HistoryViewController: UIViewController {
         historyTableView.showsVerticalScrollIndicator = false
         historyTableView.register(HistoryTableViewCell.self, forCellReuseIdentifier: HistoryTableViewCell.identifier)
     }
-    
-    private func createSpinnerFooter() -> UIView {
-        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 100))
-        
-        let spinner = UIActivityIndicatorView()
-        spinner.center = footerView.center
-        footerView.addSubview(spinner)
-        spinner.startAnimating()
-        
-        return footerView
-    }
-    
+
     deinit {
         HistoryManager.shared.clearDocuments()
     }
 }
 
+// MARK: - ChartFilter
+extension HistoryViewController {
+    private static let weekPeriodCount = 4
+    private static let monthPeriodCount = 2
+
+    /*
+     SegmentedControl의 ChartScope(주, 월)에 따라서
+     다른 기간 목록을 생성(Period)
+     */
+    func calculatePeriod(chartScope: ChartScope) -> [Period] {
+        var result: [Period] = []
+        
+        switch chartScope {
+        case .week:
+            let weekday = calendar.component(.weekday, from: today)
+            var sunday = calendar.date(byAdding: .weekday, value: -weekday + 1, to: today)!
+            result.append(Period(from: sunday.setTimeToStartOfTheDay(), to: today.setTimeToEndOfTheDay()))
+            for _ in 0..<HistoryViewController.weekPeriodCount - 1 {
+                let saturday = calendar.date(byAdding: .day, value: -1, to: sunday)!
+                let lastSunday = calendar.date(byAdding: .day, value: -7, to: sunday)!
+                result.append(Period(from: lastSunday.setTimeToStartOfTheDay(), to: saturday.setTimeToEndOfTheDay()))
+                sunday = lastSunday
+            }
+        case .month:
+            var firstDayOfMonth = calendar.date(from: calendar.dateComponents([.year, .month], from: today))!
+            var lastDayOfMonth = today
+            for _ in 0..<HistoryViewController.monthPeriodCount {
+                result.append(Period(from: firstDayOfMonth.setTimeToStartOfTheDay(), to: lastDayOfMonth.setTimeToEndOfTheDay()))
+                lastDayOfMonth = calendar.date(byAdding: .day, value: -1, to: firstDayOfMonth)!
+                firstDayOfMonth = calendar.date(byAdding: .month, value: -1, to: firstDayOfMonth)!
+            }
+        }
+        
+        return result
+    }
+    
+    /*
+     FilterButtonMenu에 현재 선택된 Period, runngingStat에 따라서
+     UIMenu를 생성
+     */
+    private func configureFilterButtonMenu() {
+        let periodActions = periodList.enumerated().map { (idx, period) in
+            return UIAction(
+                title: "\(period.from.toMMdd())~\(period.to.toMMdd())",
+                state: periodIdx == idx ? .on : .off,
+                handler: { [weak self] _ in
+                    guard let strongSelf = self else { return }
+                    strongSelf.periodIdx = idx
+                })
+        }
+        
+        let periodMenu = UIMenu(options: .displayInline, children: periodActions)
+        
+        let runningStatsActions = runningStatList.map { runningStat in
+            return UIAction(
+                title: runningStat.title,
+                image: UIImage(systemName: runningStat.sfSymbol),
+                state: self.runningStat == runningStat ? .on : .off,
+                handler: { [weak self]_ in
+                    self?.runningStat = runningStat
+                })
+        }
+        
+        let runningStatsMenu = UIMenu(options: .displayInline, children: runningStatsActions)
+        
+        let rootMenu = UIMenu(children: [periodMenu, runningStatsMenu])
+        filterButton?.menu = rootMenu
+    }
+}
+
+// MARK: - RecentHistoryTableView
 extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return recentHistories.count
@@ -167,4 +263,15 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
              }
          }
      }
+    
+    private func createSpinnerFooter() -> UIView {
+        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 100))
+        
+        let spinner = UIActivityIndicatorView()
+        spinner.center = footerView.center
+        footerView.addSubview(spinner)
+        spinner.startAnimating()
+        
+        return footerView
+    }
 }

@@ -11,6 +11,23 @@ extension Date {
     static func - (lhs: Date, rhs: Date) -> TimeInterval {
         return lhs.timeIntervalSinceReferenceDate - rhs.timeIntervalSinceReferenceDate
     }
+    
+    func setTimeToStartOfTheDay() -> Date {
+        let calendar = Calendar.current
+        return calendar.date(bySettingHour: 0, minute: 0, second: 0, of: self)!
+    }
+    
+    func setTimeToEndOfTheDay() -> Date {
+        let calendar = Calendar.current
+        return calendar.date(bySettingHour: 23, minute: 59, second: 59, of: self)!
+    }
+    
+    func toMMdd() -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MM.dd"
+        formatter.timeZone = TimeZone.current
+        return formatter.string(from: self)
+    }
 }
 
 extension Double {
