@@ -46,9 +46,9 @@ class HomeViewController: UIViewController {
         super.traitCollectionDidChange(previousTraitCollection)
         drawGradientOnMap()
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
+        super.viewDidAppear(animated)
         drawGradientOnMap()
     }
     
@@ -101,6 +101,28 @@ class HomeViewController: UIViewController {
     
     private func setupRunningStats() {
         runningStats = getRunningActivitiesForHomeVC()
+        let now = Date()
+        let aWeekAgo = Calendar.current.date(byAdding: .day, value: -7, to: now)!
+        HistoryManager.shared.getHistories(from: aWeekAgo, to: now) { [weak self] result in
+            switch result {
+            case .success(let histories):
+                var speed: Double = 0
+                var numberOfSteps: Int = 0
+                var caloriesBurned: Double = 0
+                histories.forEach { history in
+                    speed += history.averageSpeed
+                    numberOfSteps += history.numberOfSteps
+                    caloriesBurned += history.caloriesBurned
+                }
+                self?.runningStats = [.speed(speed), .numberOfSteps(numberOfSteps), .caloriesBurned(caloriesBurned)]
+                DispatchQueue.main.async {
+                    self?.runningStatCollectionView.reloadData()
+                }
+            case .failure:
+                NSLog("HomeVC에서 최근 러닝 기록을 불러오는데 실패했습니다.")
+                return
+            }
+        }
     }
     
     private func setupRunningStatCollectionView() {
