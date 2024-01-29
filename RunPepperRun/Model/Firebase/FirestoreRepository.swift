@@ -91,10 +91,10 @@ extension FirestoreRepository {
         }
     }
     
-    func fetchHistories(startDate: Date, endDate: Date, completion: @escaping (Result<[DocumentSnapshot], HistoryError>) -> Void) {
+    func fetchHistories(from: Date, to: Date, completion: @escaping (Result<[DocumentSnapshot], HistoryError>) -> Void) {
         historyRef
-            .whereField("startDate", isGreaterThan: startDate)
-            .whereField("endDate", isLessThan: endDate)
+            .whereField("startDate", isGreaterThan: from)
+            .whereField("startDate", isLessThan: to)
             .getDocuments { snapshot, error in
                 guard let snapshot = snapshot, error == nil else {
                     completion(.failure(.failToFetchData))

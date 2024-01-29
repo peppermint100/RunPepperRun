@@ -57,16 +57,8 @@ class HistoryManager {
         }
     }
     
-    func getHistories(startDateComponents: DateComponents, endDateComponents: DateComponents, completion: @escaping (Result<[History], HistoryError>) -> Void) {
-        guard let startDate = Calendar.current.date(from: startDateComponents),
-              let endDate = Calendar.current.date(from: endDateComponents)
-        else {
-            NSLog("날짜 형식이 잘못되었습니다.")
-            completion(.failure(.invalidInput))
-            return
-        }
-        
-        repository.fetchHistories(startDate: startDate, endDate: endDate) { [weak self] result in
+    func getHistories(from: Date, to: Date, completion: @escaping (Result<[History], HistoryError>) -> Void) {
+        repository.fetchHistories(from: from, to: to) { [weak self] result in
             guard let strongSelf = self else {
                 return
             }
