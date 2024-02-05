@@ -1,5 +1,4 @@
 PODS:
-<<<<<<< HEAD
   - abseil/algorithm (1.20220623.0):
     - abseil/algorithm/algorithm (= 1.20220623.0)
     - abseil/algorithm/container (= 1.20220623.0)
@@ -629,23 +628,18 @@ PODS:
     - abseil/base/base_internal
     - abseil/base/config
     - abseil/meta/type_traits
-=======
->>>>>>> e5784c0 ([Build] Firebase Auth 의존성 추가)
   - AppAuth (1.6.2):
     - AppAuth/Core (= 1.6.2)
     - AppAuth/ExternalUserAgent (= 1.6.2)
   - AppAuth/Core (1.6.2)
   - AppAuth/ExternalUserAgent (1.6.2):
     - AppAuth/Core
-<<<<<<< HEAD
   - BoringSSL-GRPC (0.0.24):
     - BoringSSL-GRPC/Implementation (= 0.0.24)
     - BoringSSL-GRPC/Interface (= 0.0.24)
   - BoringSSL-GRPC/Implementation (0.0.24):
     - BoringSSL-GRPC/Interface (= 0.0.24)
   - BoringSSL-GRPC/Interface (0.0.24)
-=======
->>>>>>> e5784c0 ([Build] Firebase Auth 의존성 추가)
   - Firebase/Auth (10.20.0):
     - Firebase/CoreOnly
     - FirebaseAuth (~> 10.20.0)
@@ -654,12 +648,9 @@ PODS:
     - FirebaseAnalytics (~> 10.20.0)
   - Firebase/CoreOnly (10.20.0):
     - FirebaseCore (= 10.20.0)
-<<<<<<< HEAD
   - Firebase/Firestore (10.20.0):
     - Firebase/CoreOnly
     - FirebaseFirestore (~> 10.20.0)
-=======
->>>>>>> e5784c0 ([Build] Firebase Auth 의존성 추가)
   - FirebaseAnalytics (10.20.0):
     - FirebaseAnalytics/AdIdSupport (= 10.20.0)
     - FirebaseCore (~> 10.0)
@@ -690,7 +681,6 @@ PODS:
     - FirebaseCoreInternal (~> 10.0)
     - GoogleUtilities/Environment (~> 7.12)
     - GoogleUtilities/Logger (~> 7.12)
-<<<<<<< HEAD
   - FirebaseCoreExtension (10.20.0):
     - FirebaseCore (~> 10.0)
   - FirebaseCoreInternal (10.20.0):
@@ -714,19 +704,14 @@ PODS:
     - "gRPC-C++ (~> 1.49.1)"
     - leveldb-library (~> 1.22)
     - nanopb (< 2.30910.0, >= 2.30908.0)
-=======
   - FirebaseCoreInternal (10.20.0):
     - "GoogleUtilities/NSData+zlib (~> 7.8)"
->>>>>>> e5784c0 ([Build] Firebase Auth 의존성 추가)
   - FirebaseInstallations (10.20.0):
     - FirebaseCore (~> 10.0)
     - GoogleUtilities/Environment (~> 7.8)
     - GoogleUtilities/UserDefaults (~> 7.8)
     - PromisesObjC (~> 2.1)
-<<<<<<< HEAD
   - FirebaseSharedSwift (10.20.0)
-=======
->>>>>>> e5784c0 ([Build] Firebase Auth 의존성 추가)
   - GoogleAppMeasurement (10.20.0):
     - GoogleAppMeasurement/AdIdSupport (= 10.20.0)
     - GoogleUtilities/AppDelegateSwizzler (~> 7.11)
@@ -770,7 +755,6 @@ PODS:
     - GoogleUtilities/Logger
   - GoogleUtilities/UserDefaults (7.12.0):
     - GoogleUtilities/Logger
-<<<<<<< HEAD
   - "gRPC-C++ (1.49.1)":
     - "gRPC-C++/Implementation (= 1.49.1)"
     - "gRPC-C++/Interface (= 1.49.1)"
@@ -832,16 +816,11 @@ PODS:
     - BoringSSL-GRPC (= 0.0.24)
     - gRPC-Core/Interface (= 1.49.1)
   - gRPC-Core/Interface (1.49.1)
-=======
->>>>>>> e5784c0 ([Build] Firebase Auth 의존성 추가)
   - GTMAppAuth (2.0.0):
     - AppAuth/Core (~> 1.6)
     - GTMSessionFetcher/Core (< 4.0, >= 1.5)
   - GTMSessionFetcher/Core (3.2.0)
-<<<<<<< HEAD
   - leveldb-library (1.22.2)
-=======
->>>>>>> e5784c0 ([Build] Firebase Auth 의존성 추가)
   - nanopb (2.30909.1):
     - nanopb/decode (= 2.30909.1)
     - nanopb/encode (= 2.30909.1)
@@ -854,28 +833,21 @@ PODS:
 DEPENDENCIES:
   - Firebase/Auth
   - Firebase/Core
-<<<<<<< HEAD
   - Firebase/Firestore
-=======
->>>>>>> e5784c0 ([Build] Firebase Auth 의존성 추가)
   - GoogleSignIn
   - SnapKit (~> 5.0.0)
 
 SPEC REPOS:
   trunk:
-<<<<<<< HEAD
+    - AppAuth
     - abseil
     - AppAuth
     - BoringSSL-GRPC
-=======
-    - AppAuth
->>>>>>> e5784c0 ([Build] Firebase Auth 의존성 추가)
     - Firebase
     - FirebaseAnalytics
     - FirebaseAppCheckInterop
     - FirebaseAuth
     - FirebaseCore
-<<<<<<< HEAD
     - FirebaseCoreExtension
     - FirebaseCoreInternal
     - FirebaseFirestore
@@ -890,7 +862,6 @@ SPEC REPOS:
     - GTMAppAuth
     - GTMSessionFetcher
     - leveldb-library
-=======
     - FirebaseCoreInternal
     - FirebaseInstallations
     - GoogleAppMeasurement
@@ -898,26 +869,20 @@ SPEC REPOS:
     - GoogleUtilities
     - GTMAppAuth
     - GTMSessionFetcher
->>>>>>> e5784c0 ([Build] Firebase Auth 의존성 추가)
     - nanopb
     - PromisesObjC
     - RecaptchaInterop
     - SnapKit
 
 SPEC CHECKSUMS:
-<<<<<<< HEAD
   abseil: 926fb7a82dc6d2b8e1f2ed7f3a718bce691d1e46
   AppAuth: 3bb1d1cd9340bd09f5ed189fb00b1cc28e1e8570
   BoringSSL-GRPC: 3175b25143e648463a56daeaaa499c6cb86dad33
-=======
-  AppAuth: 3bb1d1cd9340bd09f5ed189fb00b1cc28e1e8570
->>>>>>> e5784c0 ([Build] Firebase Auth 의존성 추가)
   Firebase: 10c8cb12fb7ad2ae0c09ffc86cd9c1ab392a0031
   FirebaseAnalytics: a2731bf3670747ce8f65368b118d18aa8e368246
   FirebaseAppCheckInterop: e81bdb1cdb82f8e0cef353ba5018a8402682032c
   FirebaseAuth: 9c5c400d2c3055d8ae3a0284944c86fa95d48dac
   FirebaseCore: 28045c1560a2600d284b9c45a904fe322dc890b6
-<<<<<<< HEAD
   FirebaseCoreExtension: 0659f035b88c5a7a15a9763c48c2e6ca8c0a2977
   FirebaseCoreInternal: efeeb171ac02d623bdaefe121539939821e10811
   FirebaseFirestore: 21be9ea244830f6cac15464550c2975c43f9dffc
@@ -932,24 +897,11 @@ SPEC CHECKSUMS:
   GTMAppAuth: 99fb010047ba3973b7026e45393f51f27ab965ae
   GTMSessionFetcher: 41b9ef0b4c08a6db4b7eb51a21ae5183ec99a2c8
   leveldb-library: f03246171cce0484482ec291f88b6d563699ee06
-=======
-  FirebaseCoreInternal: efeeb171ac02d623bdaefe121539939821e10811
-  FirebaseInstallations: 558b1da7d65afeb996fd5c814332f013234ece4e
-  GoogleAppMeasurement: bb3c564c3efb933136af0e94899e0a46167466a8
-  GoogleSignIn: b232380cf495a429b8095d3178a8d5855b42e842
-  GoogleUtilities: 0759d1a57ebb953965c2dfe0ba4c82e95ccc2e34
-  GTMAppAuth: 99fb010047ba3973b7026e45393f51f27ab965ae
-  GTMSessionFetcher: 41b9ef0b4c08a6db4b7eb51a21ae5183ec99a2c8
->>>>>>> e5784c0 ([Build] Firebase Auth 의존성 추가)
   nanopb: d4d75c12cd1316f4a64e3c6963f879ecd4b5e0d5
   PromisesObjC: c50d2056b5253dadbd6c2bea79b0674bd5a52fa4
   RecaptchaInterop: 7d1a4a01a6b2cb1610a47ef3f85f0c411434cb21
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
 
-<<<<<<< HEAD
 PODFILE CHECKSUM: ecc9ff8408009daa681bb13e5357e7b61c3d0059
-=======
-PODFILE CHECKSUM: 307549f5c6898d0974c4543da300c373d39b752b
->>>>>>> e5784c0 ([Build] Firebase Auth 의존성 추가)
 
 COCOAPODS: 1.14.3
