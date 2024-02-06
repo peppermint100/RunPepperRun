@@ -58,8 +58,8 @@ class HomeViewController: UIViewController {
         navigationController?.navigationBar.sizeToFit()
         navigationController?.navigationBar.prefersLargeTitles = true
         let buttonSize = CGSize(width: 25, height: 25)
-        let chartIcon = UIImage(systemName: "chart.bar")!.resizeImage(targetSize: buttonSize)
-        let gearIcon = UIImage(systemName: "gearshape")!.resizeImage(targetSize: buttonSize)
+        let chartIcon = UIImage(systemName: "chart.bar")!.withTintColor(.inverted).resizeImage(targetSize: buttonSize)
+        let gearIcon = UIImage(systemName: "gearshape")!.withTintColor(.inverted).resizeImage(targetSize: buttonSize)
         let toHistoryVCButton = UIButton()
         let toSettingVCButton =  UIButton()
         toHistoryVCButton.setImage(chartIcon, for: .normal)
