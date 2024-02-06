@@ -19,7 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if Auth.auth().currentUser == nil {
             window.rootViewController = UINavigationController(rootViewController: SignUpViewController())
         } else {
-            window.rootViewController = UINavigationController(rootViewController: HomeViewController())
+            window.rootViewController = UINavigationController(rootViewController: SettingViewController())
         }
         window.makeKeyAndVisible()
         self.window = window
