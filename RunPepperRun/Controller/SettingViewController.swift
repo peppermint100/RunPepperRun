@@ -21,7 +21,7 @@ class SettingViewController: UIViewController {
     
     private func setupNavigationBar() {
         navigationItem.title = "Setting"
-        navigationController?.navigationBar.prefersLargeTitles = false
+        navigationItem.largeTitleDisplayMode = .never
     }
     
     private func setupSignOutButton() {

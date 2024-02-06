@@ -67,8 +67,8 @@ class HistoryViewController: UIViewController {
     
     private func setupNavigationBar() {
         configureFilterButtonMenu()
-        navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.title = "History"
+        navigationItem.largeTitleDisplayMode = .never
         filterButton = UIBarButtonItem(image: UIImage(systemName: "slider.horizontal.3"), style: .plain, target: self, action: nil)
         navigationItem.rightBarButtonItem = filterButton
     }

@@ -57,7 +57,6 @@ class HomeViewController: UIViewController {
         navigationItem.title = "Home"
         navigationController?.navigationBar.sizeToFit()
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationItem.largeTitleDisplayMode = .always
         let buttonSize = CGSize(width: 25, height: 25)
         let chartIcon = UIImage(systemName: "chart.bar")!.resizeImage(targetSize: buttonSize)
         let gearIcon = UIImage(systemName: "gearshape")!.resizeImage(targetSize: buttonSize)
@@ -69,7 +68,7 @@ class HomeViewController: UIViewController {
         toSettingVCButton.addTarget(self, action: #selector(presentToSettingVC), for: .touchUpInside)
         let toHistoryBarButton = UIBarButtonItem(customView: toHistoryVCButton)
         let toSettingBarButton = UIBarButtonItem(customView: toSettingVCButton)
-        navigationItem.rightBarButtonItems = [toHistoryBarButton, toSettingBarButton]
+        navigationItem.rightBarButtonItems = [toSettingBarButton, toHistoryBarButton]
     }
     
     // MARK: - UI 세팅
