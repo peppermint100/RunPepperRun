@@ -51,6 +51,7 @@
 		BAAF54CC2B219A7000265237 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BAAF54CA2B219A7000265237 /* LaunchScreen.storyboard */; };
 		BAF701BE2B5A16BD000DB059 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BAF701BD2B5A16BD000DB059 /* GoogleService-Info.plist */; };
 		BAF9989A2B70E4EC00207F52 /* DrawbleMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF998992B70E4EC00207F52 /* DrawbleMapView.swift */; };
+		BAF9989C2B71DD1C00207F52 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF9989B2B71DD1C00207F52 /* SettingViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -101,6 +102,7 @@
 		BAAF54CD2B219A7000265237 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BAF701BD2B5A16BD000DB059 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BAF998992B70E4EC00207F52 /* DrawbleMapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawbleMapView.swift; sourceTree = "<group>"; };
+		BAF9989B2B71DD1C00207F52 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		FC2E6287CEEA40B1EF41A0B2 /* Pods_RunPepperRun.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RunPepperRun.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -237,6 +239,7 @@
 				BA5E99D72B70DEE900871B48 /* RunningViewController.swift */,
 				BA5E99D82B70DEE900871B48 /* OnboardingViewController.swift */,
 				BA5E99D92B70DEE900871B48 /* HistoryViewController.swift */,
+				BAF9989B2B71DD1C00207F52 /* SettingViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -420,6 +423,7 @@
 				BA5E9A002B70DEE900871B48 /* RunningStatusView.swift in Sources */,
 				BA5E99F42B70DEE900871B48 /* ViewController.swift in Sources */,
 				BA5E99FA2B70DEE900871B48 /* HistoryTableViewCell.swift in Sources */,
+				BAF9989C2B71DD1C00207F52 /* SettingViewController.swift in Sources */,
 				BA5E99EE2B70DEE900871B48 /* HistoryBar.swift in Sources */,
 				BA5E9A062B70DEE900871B48 /* HistoryViewController.swift in Sources */,
 				BA5E9A052B70DEE900871B48 /* OnboardingViewController.swift in Sources */,

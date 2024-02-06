@@ -66,14 +66,10 @@ class HomeViewController: UIViewController {
         toHistoryVCButton.setImage(chartIcon, for: .normal)
         toHistoryVCButton.addTarget(self, action: #selector(presentToHistoryVC), for: .touchUpInside)
         toSettingVCButton.setImage(gearIcon, for: .normal)
+        toSettingVCButton.addTarget(self, action: #selector(presentToSettingVC), for: .touchUpInside)
         let toHistoryBarButton = UIBarButtonItem(customView: toHistoryVCButton)
         let toSettingBarButton = UIBarButtonItem(customView: toSettingVCButton)
         navigationItem.rightBarButtonItems = [toHistoryBarButton, toSettingBarButton]
-    }
-    
-    // TODO: - Setting Feature에서 추가 개발
-    private func getRunningActivitiesForHomeVC() -> [RunningStat] {
-        return [.speed(36), .numberOfSteps(10), .caloriesBurned(224)]
     }
     
     // MARK: - UI 세팅
@@ -100,7 +96,6 @@ class HomeViewController: UIViewController {
     }
     
     private func setupRunningStats() {
-        runningStats = getRunningActivitiesForHomeVC()
         let now = Date()
         let aWeekAgo = Calendar.current.date(byAdding: .day, value: -7, to: now)!
         HistoryManager.shared.getHistories(from: aWeekAgo, to: now) { [weak self] result in
@@ -214,6 +209,11 @@ class HomeViewController: UIViewController {
     
     @objc private func presentToHistoryVC() {
         let vc = HistoryViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @objc private func presentToSettingVC() {
+        let vc = SettingViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
     
