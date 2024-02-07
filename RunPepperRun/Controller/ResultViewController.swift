@@ -120,11 +120,6 @@ class ResultViewController: UIViewController {
     
     private func saveRunning() {
         guard let result = result else { return }
-        let components = Calendar.current.dateComponents(
-            [.year, .month, .day],
-            from: result.endDate)
-        guard let year = components.year, let month = components.month, let day = components.day else { return }
-        
         let mid = result.points[result.points.count / 2]
         
         takeMapSnapshot(points: mid) { image in
@@ -132,13 +127,13 @@ class ResultViewController: UIViewController {
                 NSLog("러닝 맵 스냅샷을 Data로 변환하는데 실패했습니다.")
                 return
             }
-            let history = History(
+            
+            HistoryManager.shared.create(
                 email: UserManager.shared.getEmail(),
                 averageSpeed: result.averageSpeed, averagePace: result.averagePace, distance: result.distance,
                 caloriesBurned: result.caloriesBurned, numberOfSteps: result.numberOfSteps,
                 locations: result.points,
-                startDate: result.startDate, endDate: result.endDate, mapSnapshot: imageData)
-            HistoryManager.shared.create(history, completion: nil)
+                startDate: result.startDate, endDate: result.endDate, mapSnapshot: imageData, completion: nil)
         }
     }
     

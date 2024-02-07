@@ -20,7 +20,14 @@ class HistoryManager {
     var isLoading = false
     var lastDocumentSnapshot: DocumentSnapshot?
     
-    func create(_ history: History, completion: ((Bool) -> Void)?) {
+    func create(email: String?, averageSpeed: Double, averagePace: Double, distance: Double, caloriesBurned: Double, numberOfSteps: Int, locations: [Point], startDate: Date, endDate: Date, mapSnapshot: Data
+                , completion: ((Bool) -> Void)?) {
+        let history = History(
+            email: UserManager.shared.getEmail(),
+            averageSpeed: averageSpeed, averagePace: averagePace, distance: distance,
+            caloriesBurned: caloriesBurned, numberOfSteps: numberOfSteps,
+            locations: locations,
+            startDate: startDate, endDate: endDate, mapSnapshot: mapSnapshot)
         repository.create(history) { success in
             completion?(true)
         }
