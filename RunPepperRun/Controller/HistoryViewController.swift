@@ -26,24 +26,9 @@ class HistoryViewController: UIViewController {
         }
     }
     
-    private var periodIdx = 0 {
-        didSet {
-            configureFilterButtonMenu()
-        }
-    }
-    
-    private var periodList: [Period] = [] {
-        didSet {
-            configureFilterButtonMenu()
-        }
-    }
-    
-    private var runningStat: RunningStat = .distance(0) {
-        didSet {
-            configureFilterButtonMenu()
-        }
-    }
-    
+    private var periodIdx = 0
+    private var periodList: [Period] = []
+    private var runningStat: RunningStat = .distance(0)
     private var runningStatList: [RunningStat] = [
         .distance(0), .speed(0), .pace(0),
         .caloriesBurned(0), .numberOfSteps(0), .duration(0)
@@ -68,10 +53,44 @@ class HistoryViewController: UIViewController {
     }
     
     private func setupNavigationBar() {
-        configureFilterButtonMenu()
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.title = "History"
         filterButton = UIBarButtonItem(image: UIImage(systemName: "slider.horizontal.3"), style: .plain, target: self, action: nil)
+        
+        let periodMenu = UIDeferredMenuElement.uncached { [weak self] completion in
+            guard let strongSelf = self else { return }
+            let periodActions = strongSelf.periodList.enumerated().map { (idx, period) in
+                return UIAction(
+                    title: "\(period.from.toMMdd())~\(period.to.toMMdd())",
+                    state: strongSelf.periodIdx == idx ? .on : .off,
+                    handler: { [weak self] _ in
+                        guard let strongSelf = self else { return }
+                        strongSelf.periodIdx = idx
+                        strongSelf.loadChart(with: strongSelf.periodList[strongSelf.periodIdx])
+                    })
+            }
+            
+            completion([UIMenu(options: .displayInline, children: periodActions)])
+        }
+        
+        let runningStatsMenu = UIDeferredMenuElement.uncached { [weak self] completion in
+            guard let strongSelf = self else { return }
+            let runningStatsActions = strongSelf.runningStatList.map { runningStat in
+                return UIAction(
+                    title: runningStat.title,
+                    image: UIImage(systemName: runningStat.sfSymbol),
+                    state: strongSelf.runningStat == runningStat ? .on : .off,
+                    handler: { _ in
+                        strongSelf.runningStat = runningStat
+                        strongSelf.loadChart(with: runningStat)
+                    })
+            }
+            
+            completion([UIMenu(options: .displayInline,children: runningStatsActions)])
+        }
+        
+        filterButton?.menu = UIMenu(children: [periodMenu, runningStatsMenu])
+        
         navigationItem.rightBarButtonItem = filterButton
     }
 
@@ -222,41 +241,6 @@ extension HistoryViewController {
         }
         
         return result
-    }
-    
-    /*
-     FilterButtonMenu에 현재 선택된 Period, runngingStat에 따라서
-     UIMenu를 생성
-     */
-    private func configureFilterButtonMenu() {
-        let periodActions = periodList.enumerated().map { (idx, period) in
-            return UIAction(
-                title: "\(period.from.toMMdd())~\(period.to.toMMdd())",
-                state: periodIdx == idx ? .on : .off,
-                handler: { [weak self] _ in
-                    guard let strongSelf = self else { return }
-                    strongSelf.periodIdx = idx
-                    strongSelf.loadChart(with: strongSelf.periodList[strongSelf.periodIdx])
-                })
-        }
-        
-        let periodMenu = UIMenu(options: .displayInline, children: periodActions)
-        
-        let runningStatsActions = runningStatList.map { runningStat in
-            return UIAction(
-                title: runningStat.title,
-                image: UIImage(systemName: runningStat.sfSymbol),
-                state: self.runningStat == runningStat ? .on : .off,
-                handler: { [weak self]_ in
-                    self?.runningStat = runningStat
-                    self?.loadChart(with: runningStat)
-                })
-        }
-        
-        let runningStatsMenu = UIMenu(options: .displayInline, children: runningStatsActions)
-        
-        let rootMenu = UIMenu(children: [periodMenu, runningStatsMenu])
-        filterButton?.menu = rootMenu
     }
 }
 
