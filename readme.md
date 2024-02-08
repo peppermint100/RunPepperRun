@@ -112,7 +112,7 @@ iPhone 디바이스의 GPS와 가속도계로 사용자의 러닝 루트, 거리
 [Style] - 코드 스타일, 컨벤션 관련<br>
 [Perf] - 성능 개선<br>
 
-# 블로그
+# 블로그 작성
 > 프로젝트를 진행하며 공유하고 싶은 내용을 블로그에 작성하였습니다.
 
 [iOS 시뮬레이터 GPX를 통한 위치 변경 테스트](https://medium.com/peppermint100/ios-%EC%8B%9C%EB%AE%AC%EB%A0%88%EC%9D%B4%ED%84%B0-gpx%EB%A5%BC-%ED%86%B5%ED%95%9C-%EC%9C%84%EC%B9%98-%EB%B3%80%EA%B2%BD-%ED%85%8C%EC%8A%A4%ED%8A%B8-85af7038c29a)<br>
