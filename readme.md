@@ -60,16 +60,16 @@ iPhone 디바이스의 GPS와 가속도계로 사용자의 러닝 루트, 거리
 
 # 주요 기능
 <p float="left">
-    <img src="./essets/로그인-1.PNG" width="150" />
-    <img src="./essets/로그인-2.PNG" width="150" />
-    <img src="./essets/로그인-3.PNG" width="150" />
+    <img src="./essets/로그인-1.PNG" width="200" />
+    <img src="./essets/로그인-2.PNG" width="200" />
+    <img src="./essets/로그인-3.PNG" width="200" />
 </p>
 
 > Firebase Auth를 통한 구글 로그인
 
 <p float="left">
-    <img src="./essets/러닝.gif" width="150" />
-    <img src="./essets/러닝결과.gif" width="150" />
+    <img src="./essets/러닝.gif" width="200" />
+    <img src="./essets/러닝결과.gif" width="200" />
 </p>
 
 > - Timer를 통한 러닝 시간 표시
@@ -80,23 +80,23 @@ iPhone 디바이스의 GPS와 가속도계로 사용자의 러닝 루트, 거리
 
 
 <p float="left">
-    <img src="./essets/메뉴-주.PNG" width="150" />
-    <img src="./essets/메뉴-월.PNG" width="150" />
-    <img src="./essets/차트.gif" width="150" />
+    <img src="./essets/메뉴-주.PNG" width="200" />
+    <img src="./essets/메뉴-월.PNG" width="200" />
+    <img src="./essets/차트.gif" width="200" />
 </p>
 
 > UISegmentedControl, UIMenu, UIDefferedMenuElement를 통해 메뉴 생성
 
 <p float="left">
-    <img src="./essets/차트-주.PNG" width="150" />
-    <img src="./essets/차트-다른데이터.PNG" width="150" />
+    <img src="./essets/차트-주.PNG" width="200" />
+    <img src="./essets/차트-다른데이터.PNG" width="200" />
 </p>
 
 > 필터링된 데이터를 Charts를 활용하여 도식화
 
 <p float="left">
-    <img src="./essets/히스토리-로딩.PNG" width="150" />
-    <img src="./essets/로딩.gif" width="150" />
+    <img src="./essets/히스토리-로딩.PNG" width="200" />
+    <img src="./essets/로딩.gif" width="200" />
 </p>
 
 > 커스텀 Spinner와 lastSnapshot을 이용한 Firestore Pagination
