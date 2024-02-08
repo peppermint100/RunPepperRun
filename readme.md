@@ -73,7 +73,7 @@ iPhone 디바이스의 GPS와 가속도계로 사용자의 러닝 루트, 거리
 </p>
 
 > - Timer를 통한 러닝 시간 표시
-> - CorereLocation을 활용한 유저 트래킹
+> - CoreLocation을 활용한 유저 트래킹
 > - CoreMotion을 통해 속도, 페이스, 칼로리 표시
 > - MKMapView, CoreLocation을 활용한 유저 러닝 루트 표시
 > - Firestore에 유저 러닝 루트와 활동 내역 저장
