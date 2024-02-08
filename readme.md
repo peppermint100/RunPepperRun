@@ -9,6 +9,7 @@ iPhone 디바이스의 GPS와 가속도계로 사용자의 러닝 루트, 거리
 - CoreLocation, CoreMotion, Mapkit
 - [SnapKit](https://github.com/SnapKit/SnapKit), [Charts](https://github.com/danielgindi/Charts)
 - Firebase Auth, Firestore
+- Xcode, Kakao Oven, LucidChart, VSCode ...
 
 
 # 아키텍처
@@ -18,52 +19,7 @@ iPhone 디바이스의 GPS와 가속도계로 사용자의 러닝 루트, 거리
     <img src="./essets/MVC.png" />
 </p>
 
-# 주요 기능
-
-> Firebase Auth를 통한 구글 로그인
-
-<p float="left">
-    <img src="./essets/로그인-1.PNG" width="150" />
-    <img src="./essets/로그인-2.PNG" width="150" />
-    <img src="./essets/닉네임.PNG" width="150" />
-</p>
-
-> MKMapView, CoreLocation을 활용한 유저의 위치, 러닝 루트 표시
-
-<p float="left">
-    <img src="./essets/러닝결과-다크모드-1.PNG" width="150" />
-</p>
-
-> CoreMotion을 통해 속도, 페이스, 칼로리 표시
-
-<p float="left">
-    <img src="./essets/러닝중-다크모드-1.PNG" width="150" />
-</p>
-
-> Firestore에 러닝 결과 저장 및 표시
-<p float="left">
-    <img src="./essets/러닝결과표시.PNG" width="150" />
-</p>
-
-> UISegmentedControl, UIMenu, UIDefferedMenuElement를 통해 메뉴 생성
-<p float="left">
-    <img src="./essets/메뉴-주.PNG" width="150" />
-    <img src="./essets/메뉴-월.PNG" width="150" />
-</p>
-
-> 필터링된 데이터를 Charts를 활용하여 도식화
-<p float="left">
-    <img src="./essets/차트-주.PNG" width="150" />
-    <img src="./essets/차트-다른데이터.PNG" width="150" />
-</p>
-
-> 커스텀 Spinner와 lastSnapshot을 이용한 Firestore Pagination
-<p float="left">
-    <img src="./essets/히스토리-로딩.PNG" width="150" />
-</p>
-
-# 설계
-## 러닝 
+## 러닝 관련
 <p float="left">
     <img src="./essets/러닝_UML.png" />
 </p>
@@ -80,10 +36,9 @@ iPhone 디바이스의 GPS와 가속도계로 사용자의 러닝 루트, 거리
 ### Location
 - CLLocation 모듈이 다른 모듈에 영향을 미치지 않도록 Point 구조체로 래핑
 
-
-## 히스토리
-- 저장될 러닝 결과를 의미
-- ResultVC로 부터 생성된 RunningResult로 생성
+## 러닝 내역 관련
+- 저장되는 러닝 내역 관련
+- 러닝 내역들을 Firestore에 저장하고 불러와서 Chart에 표시
 
 <p float="left">
     <img src="./essets/히스토리_UML.png" />
@@ -95,7 +50,7 @@ iPhone 디바이스의 GPS와 가속도계로 사용자의 러닝 루트, 거리
 ### ChartScope, Period
 - UISegmentedControl을 주, 월로 바꿀 때마다 현재 날짜로부터 계산하여 최근 4주 혹은 지난달, 이번달의 기간(Period)을 생성
 
-## 유저
+## 유저 관련
 - 유저의 닉네임과 몸무게를 받는다.
 - 로그인 세션은 Firebase Auth로 관리하며 데이터는 Firestore에 저장
 
@@ -103,6 +58,48 @@ iPhone 디바이스의 GPS와 가속도계로 사용자의 러닝 루트, 거리
     <img src="./essets/유저_UML.png" />
 </p>
 
+# 주요 기능
+<p float="left">
+    <img src="./essets/로그인-1.PNG" width="150" />
+    <img src="./essets/로그인-2.PNG" width="150" />
+    <img src="./essets/로그인-3.PNG" width="150" />
+</p>
+
+> Firebase Auth를 통한 구글 로그인
+
+<p float="left">
+    <img src="./essets/러닝.gif" width="150" />
+    <img src="./essets/러닝결과.gif" width="150" />
+</p>
+
+> - Timer를 통한 러닝 시간 표시
+> - CorereLocation을 활용한 유저 트래킹
+> - CoreMotion을 통해 속도, 페이스, 칼로리 표시
+> - MKMapView, CoreLocation을 활용한 유저 러닝 루트 표시
+> - Firestore에 유저 러닝 루트와 활동 내역 저장
+
+
+<p float="left">
+    <img src="./essets/메뉴-주.PNG" width="150" />
+    <img src="./essets/메뉴-월.PNG" width="150" />
+    <img src="./essets/차트.gif" width="150" />
+</p>
+
+> UISegmentedControl, UIMenu, UIDefferedMenuElement를 통해 메뉴 생성
+
+<p float="left">
+    <img src="./essets/차트-주.PNG" width="150" />
+    <img src="./essets/차트-다른데이터.PNG" width="150" />
+</p>
+
+> 필터링된 데이터를 Charts를 활용하여 도식화
+
+<p float="left">
+    <img src="./essets/히스토리-로딩.PNG" width="150" />
+    <img src="./essets/로딩.gif" width="150" />
+</p>
+
+> 커스텀 Spinner와 lastSnapshot을 이용한 Firestore Pagination
 
 # 커밋 메시지 규칙
 > 코드 리뷰를 받는데 있어 커밋 메시지로 커밋 내 코드가 어떤지 명확히 보기 위하여 프로젝트 중간 커밋 메시지 규칙을 도입했습니다.
@@ -116,7 +113,7 @@ iPhone 디바이스의 GPS와 가속도계로 사용자의 러닝 루트, 거리
 [Perf] - 성능 개선<br>
 
 # 블로그
-> 프로젝트를 진행하여 공유하고 싶은 내용을 블로그에 작성하였습니다.
+> 프로젝트를 진행하며 공유하고 싶은 내용을 블로그에 작성하였습니다.
 
 [iOS 시뮬레이터 GPX를 통한 위치 변경 테스트](https://medium.com/peppermint100/ios-%EC%8B%9C%EB%AE%AC%EB%A0%88%EC%9D%B4%ED%84%B0-gpx%EB%A5%BC-%ED%86%B5%ED%95%9C-%EC%9C%84%EC%B9%98-%EB%B3%80%EA%B2%BD-%ED%85%8C%EC%8A%A4%ED%8A%B8-85af7038c29a)<br>
 [Pods 파일들을 깃에 올려야 할까?, Commit 수정하기](https://medium.com/peppermint100/cocoapods%EC%9D%84-%EA%B9%83%EC%97%90-%EC%98%AC%EB%A0%A4%EC%95%BC-%ED%95%A0%EA%B9%8C-commit-%EC%88%98%EC%A0%95%ED%95%98%EA%B8%B0-ae785e2049b2)<br>
