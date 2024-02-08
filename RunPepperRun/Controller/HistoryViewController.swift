@@ -11,34 +11,33 @@ import Charts
 
 class HistoryViewController: UIViewController {
     
-    private let historyManager = HistoryManager()
+    let historyManager = HistoryManager()
     
-    private let stackView = UIStackView()
+    let stackView = UIStackView()
     private let chartSegmentedControl = UISegmentedControl()
     private var filterButton: UIBarButtonItem?
-    private let historyTableView = UITableView()
-    private let chartView = BarChartView()
-    private var chartManager: HistoryChartManager?
-    
-    private var chartScope = ChartScope.week {
+    let historyTableView = UITableView()
+    let chartView = BarChartView()
+   
+    var chartScope = ChartScope.week {
         didSet {
             periodList = calculatePeriod(chartScope: chartScope)
         }
     }
     
-    private var periodIdx = 0
-    private var periodList: [Period] = []
-    private var runningStat: RunningStat = .distance(0)
+    var periodIdx = 0
+    var periodList: [Period] = []
+    var runningStat: RunningStat = .distance(0)
     private var runningStatList: [RunningStat] = [
         .distance(0), .speed(0), .pace(0),
         .caloriesBurned(0), .numberOfSteps(0), .duration(0)
     ]
     
-    private var chartHistories: [History] = []
+    var chartHistories: [History] = []
     private var recentHistories: [History] = []
     
-    private let today = Date()
-    private let calendar = Calendar.current
+    let today = Date()
+    let calendar = Calendar.current
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -155,7 +154,6 @@ class HistoryViewController: UIViewController {
     
     private func setupChartView() {
         chartScope = .month
-        chartManager = HistoryChartManager(chartView: chartView)
         stackView.addArrangedSubview(chartView)
         chartView.xAxis.labelPosition = .bottom
         chartView.doubleTapToZoomEnabled = false
@@ -169,33 +167,6 @@ class HistoryViewController: UIViewController {
         }
     }
     
-    private func loadInitialChart() {
-        periodList = calculatePeriod(chartScope: chartScope)
-        guard let period = periodList.first else { return }
-        loadChart(with: period)
-    }
-    
-    private func loadChart(with period: Period) {
-        historyManager.getHistories(from: period.from, to: period.to) { [weak self] result in
-            switch result {
-            case .success(let histories):
-                guard let strongSelf = self, let chartManager = strongSelf.chartManager else { return }
-                strongSelf.chartHistories = histories
-                chartManager.drawChart(
-                    histories: strongSelf.chartHistories,
-                    period: period,
-                    runningStat: strongSelf.runningStat)
-            case .failure:
-                return
-            }
-        }
-    }
-    
-    private func loadChart(with runningStat: RunningStat) {
-        self.runningStat = runningStat
-        chartManager?.drawChart(histories: chartHistories, period: periodList[periodIdx], runningStat: runningStat)
-    }
-    
     private func setupHistoryTableView() {
         stackView.addArrangedSubview(historyTableView)
         historyTableView.delegate = self
@@ -204,43 +175,6 @@ class HistoryViewController: UIViewController {
         historyTableView.separatorStyle = .none
         historyTableView.showsVerticalScrollIndicator = false
         historyTableView.register(HistoryTableViewCell.self, forCellReuseIdentifier: HistoryTableViewCell.identifier)
-    }
-}
-
-// MARK: - ChartFilter
-extension HistoryViewController {
-    private static let weekPeriodCount = 4
-    private static let monthPeriodCount = 2
-
-    /*
-     SegmentedControl의 ChartScope(주, 월)에 따라서
-     다른 기간 목록을 생성(Period)
-     */
-    func calculatePeriod(chartScope: ChartScope) -> [Period] {
-        var result: [Period] = []
-        
-        switch chartScope {
-        case .week:
-            let weekday = calendar.component(.weekday, from: today)
-            var sunday = calendar.date(byAdding: .weekday, value: -weekday + 1, to: today)!
-            result.append(Period(from: sunday.setTimeToStartOfTheDay(), to: today.setTimeToEndOfTheDay()))
-            for _ in 0..<HistoryViewController.weekPeriodCount - 1 {
-                let saturday = calendar.date(byAdding: .day, value: -1, to: sunday)!
-                let lastSunday = calendar.date(byAdding: .day, value: -7, to: sunday)!
-                result.append(Period(from: lastSunday.setTimeToStartOfTheDay(), to: saturday.setTimeToEndOfTheDay()))
-                sunday = lastSunday
-            }
-        case .month:
-            var firstDayOfMonth = calendar.date(from: calendar.dateComponents([.year, .month], from: today))!
-            var lastDayOfMonth = today
-            for _ in 0..<HistoryViewController.monthPeriodCount {
-                result.append(Period(from: firstDayOfMonth.setTimeToStartOfTheDay(), to: lastDayOfMonth.setTimeToEndOfTheDay()))
-                lastDayOfMonth = calendar.date(byAdding: .day, value: -1, to: firstDayOfMonth)!
-                firstDayOfMonth = calendar.date(byAdding: .month, value: -1, to: firstDayOfMonth)!
-            }
-        }
-        
-        return result
     }
 }
 

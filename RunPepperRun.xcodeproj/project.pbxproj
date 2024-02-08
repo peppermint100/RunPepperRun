@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		ACFD12E06E89F74AF1DBA685 /* Pods_RunPepperRun.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC2E6287CEEA40B1EF41A0B2 /* Pods_RunPepperRun.framework */; };
+		BA16A4502B74703F0021254F /* HistoryViewController+Chart.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA16A44F2B74703F0021254F /* HistoryViewController+Chart.swift */; };
 		BA5E99DA2B70DEE900871B48 /* Motion.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5E99A32B70DEE900871B48 /* Motion.swift */; };
 		BA5E99DB2B70DEE900871B48 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5E99A42B70DEE900871B48 /* Location.swift */; };
 		BA5E99DC2B70DEE900871B48 /* RunningResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5E99A52B70DEE900871B48 /* RunningResult.swift */; };
@@ -27,7 +28,6 @@
 		BA5E99EE2B70DEE900871B48 /* HistoryBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5E99BC2B70DEE900871B48 /* HistoryBar.swift */; };
 		BA5E99EF2B70DEE900871B48 /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5E99BD2B70DEE900871B48 /* History.swift */; };
 		BA5E99F02B70DEE900871B48 /* HistoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5E99BE2B70DEE900871B48 /* HistoryManager.swift */; };
-		BA5E99F12B70DEE900871B48 /* HistoryChartManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5E99BF2B70DEE900871B48 /* HistoryChartManager.swift */; };
 		BA5E99F32B70DEE900871B48 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5E99C32B70DEE900871B48 /* Extension.swift */; };
 		BA5E99F42B70DEE900871B48 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5E99C52B70DEE900871B48 /* ViewController.swift */; };
 		BA5E99F52B70DEE900871B48 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA5E99C62B70DEE900871B48 /* Assets.xcassets */; };
@@ -56,6 +56,7 @@
 /* Begin PBXFileReference section */
 		1B48CF0FE7430AB0D12CEF4F /* Pods-RunPepperRun.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunPepperRun.release.xcconfig"; path = "Target Support Files/Pods-RunPepperRun/Pods-RunPepperRun.release.xcconfig"; sourceTree = "<group>"; };
 		88BCE0B9D707B2A31B771838 /* Pods-RunPepperRun.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunPepperRun.debug.xcconfig"; path = "Target Support Files/Pods-RunPepperRun/Pods-RunPepperRun.debug.xcconfig"; sourceTree = "<group>"; };
+		BA16A44F2B74703F0021254F /* HistoryViewController+Chart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HistoryViewController+Chart.swift"; sourceTree = "<group>"; };
 		BA5E99A32B70DEE900871B48 /* Motion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Motion.swift; sourceTree = "<group>"; };
 		BA5E99A42B70DEE900871B48 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		BA5E99A52B70DEE900871B48 /* RunningResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunningResult.swift; sourceTree = "<group>"; };
@@ -75,7 +76,6 @@
 		BA5E99BC2B70DEE900871B48 /* HistoryBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryBar.swift; sourceTree = "<group>"; };
 		BA5E99BD2B70DEE900871B48 /* History.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = History.swift; sourceTree = "<group>"; };
 		BA5E99BE2B70DEE900871B48 /* HistoryManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryManager.swift; sourceTree = "<group>"; };
-		BA5E99BF2B70DEE900871B48 /* HistoryChartManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryChartManager.swift; sourceTree = "<group>"; };
 		BA5E99C32B70DEE900871B48 /* Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		BA5E99C52B70DEE900871B48 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		BA5E99C62B70DEE900871B48 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -187,7 +187,6 @@
 				BA5E99BC2B70DEE900871B48 /* HistoryBar.swift */,
 				BA5E99BD2B70DEE900871B48 /* History.swift */,
 				BA5E99BE2B70DEE900871B48 /* HistoryManager.swift */,
-				BA5E99BF2B70DEE900871B48 /* HistoryChartManager.swift */,
 			);
 			path = History;
 			sourceTree = "<group>";
@@ -237,6 +236,7 @@
 				BA5E99D72B70DEE900871B48 /* RunningViewController.swift */,
 				BA5E99D82B70DEE900871B48 /* OnboardingViewController.swift */,
 				BA5E99D92B70DEE900871B48 /* HistoryViewController.swift */,
+				BA16A44F2B74703F0021254F /* HistoryViewController+Chart.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -396,7 +396,6 @@
 				BA5E99EA2B70DEE900871B48 /* RunningStatLeftAxisValueFormatter.swift in Sources */,
 				BA5E99F82B70DEE900871B48 /* AppDelegate.swift in Sources */,
 				BA5E9A042B70DEE900871B48 /* RunningViewController.swift in Sources */,
-				BA5E99F12B70DEE900871B48 /* HistoryChartManager.swift in Sources */,
 				BA5E99ED2B70DEE900871B48 /* RunningStatBarValueFormatter.swift in Sources */,
 				BA5E99E92B70DEE900871B48 /* FirestoreCollection.swift in Sources */,
 				BA5E9A032B70DEE900871B48 /* HomeViewController.swift in Sources */,
@@ -409,6 +408,7 @@
 				BA5E99E12B70DEE900871B48 /* RunningStat.swift in Sources */,
 				BA5E99E72B70DEE900871B48 /* User.swift in Sources */,
 				BA5E99DB2B70DEE900871B48 /* Location.swift in Sources */,
+				BA16A4502B74703F0021254F /* HistoryViewController+Chart.swift in Sources */,
 				BA5E99EB2B70DEE900871B48 /* ChartScope.swift in Sources */,
 				BAF9989A2B70E4EC00207F52 /* DrawbleMapView.swift in Sources */,
 				BA5E99DD2B70DEE900871B48 /* Running.swift in Sources */,
