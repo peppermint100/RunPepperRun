@@ -11,6 +11,8 @@ import Charts
 
 class HistoryViewController: UIViewController {
     
+    private let historyManager = HistoryManager()
+    
     private let stackView = UIStackView()
     private let chartSegmentedControl = UISegmentedControl()
     private var filterButton: UIBarButtonItem?
@@ -74,7 +76,7 @@ class HistoryViewController: UIViewController {
     }
 
     private func setupRecentHistories() {
-        HistoryManager.shared.getHistories(limit: 3) { [weak self] result in
+        historyManager.getHistories(limit: 3) { [weak self] result in
             switch result {
             case .success(let histories):
                 self?.recentHistories = histories
@@ -155,7 +157,7 @@ class HistoryViewController: UIViewController {
     }
     
     private func loadChart(with period: Period) {
-        HistoryManager.shared.getHistories(from: period.from, to: period.to) { [weak self] result in
+        historyManager.getHistories(from: period.from, to: period.to) { [weak self] result in
             switch result {
             case .success(let histories):
                 guard let strongSelf = self, let chartManager = strongSelf.chartManager else { return }
@@ -176,7 +178,6 @@ class HistoryViewController: UIViewController {
     }
     
     private func setupHistoryTableView() {
-        HistoryManager.shared.clearDocuments()
         stackView.addArrangedSubview(historyTableView)
         historyTableView.delegate = self
         historyTableView.dataSource = self
@@ -184,10 +185,6 @@ class HistoryViewController: UIViewController {
         historyTableView.separatorStyle = .none
         historyTableView.showsVerticalScrollIndicator = false
         historyTableView.register(HistoryTableViewCell.self, forCellReuseIdentifier: HistoryTableViewCell.identifier)
-    }
-
-    deinit {
-        HistoryManager.shared.clearDocuments()
     }
 }
 
@@ -281,13 +278,13 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
          let position = scrollView.contentOffset.y
          
          if position > (historyTableView.contentSize.height - 100 - scrollView.frame.size.height) {
-             guard !HistoryManager.shared.isLoading else {
+             guard historyManager.isLoading else {
                  return
              }
              
              self.historyTableView.tableFooterView = createSpinnerFooter()
              
-             HistoryManager.shared.getHistories(isPaginating: true, limit: 3){ [weak self] result in
+             historyManager.getHistories(isPaginating: true, limit: 3){ [weak self] result in
                  DispatchQueue.main.async {
                      self?.historyTableView.tableFooterView = nil
                  }

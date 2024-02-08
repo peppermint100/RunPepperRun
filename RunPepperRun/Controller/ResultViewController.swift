@@ -21,6 +21,8 @@ class ResultViewController: UIViewController {
     private let finishButton = UIButton()
     private var runningStats: [RunningStat] = []
     
+    private let historyManager = HistoryManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
@@ -122,13 +124,13 @@ class ResultViewController: UIViewController {
         guard let result = result else { return }
         let mid = result.points[result.points.count / 2]
         
-        takeMapSnapshot(points: mid) { image in
+        takeMapSnapshot(points: mid) { [weak self] image in
             guard let imageData = image.jpegData(compressionQuality: .leastNormalMagnitude) else {
                 NSLog("러닝 맵 스냅샷을 Data로 변환하는데 실패했습니다.")
                 return
             }
             
-            HistoryManager.shared.create(
+            self?.historyManager.create(
                 email: UserManager.shared.getEmail(),
                 averageSpeed: result.averageSpeed, averagePace: result.averagePace, distance: result.distance,
                 caloriesBurned: result.caloriesBurned, numberOfSteps: result.numberOfSteps,

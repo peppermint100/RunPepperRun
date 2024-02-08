@@ -28,6 +28,8 @@ class HomeViewController: UIViewController {
     private let buttonView = UIView()
     private let startButton = UIButton()
     
+    private let historyManager = HistoryManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(stackView)
@@ -103,7 +105,7 @@ class HomeViewController: UIViewController {
         runningStats = getRunningActivitiesForHomeVC()
         let now = Date()
         let aWeekAgo = Calendar.current.date(byAdding: .day, value: -7, to: now)!
-        HistoryManager.shared.getHistories(from: aWeekAgo, to: now) { [weak self] result in
+        historyManager.getHistories(from: aWeekAgo, to: now) { [weak self] result in
             switch result {
             case .success(let histories):
                 var speed: Double = 0

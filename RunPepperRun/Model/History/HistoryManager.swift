@@ -15,7 +15,6 @@ enum HistoryError: Error {
 }
 
 class HistoryManager {
-    static let shared = HistoryManager()
     let repository = FirestoreRepository.shared
     var isLoading = false
     var lastDocumentSnapshot: DocumentSnapshot?
@@ -32,11 +31,7 @@ class HistoryManager {
             completion?(true)
         }
     }
-    
-    func clearDocuments() {
-        lastDocumentSnapshot = nil
-    }
-    
+ 
     func getHistories(isPaginating: Bool = false, limit: Int, completion: @escaping (Result<[History], HistoryError>) -> Void) {
         guard let email = UserManager.shared.getEmail() else {
             NSLog("이메일을 읽어오는데 실패했습니다.")
