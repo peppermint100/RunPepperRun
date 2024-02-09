@@ -12,31 +12,29 @@ iPhone 디바이스의 GPS와 가속도계로 사용자의 러닝 루트, 거리
 - Xcode, Kakao Oven, LucidChart, VSCode ...
 
 
-# 아키텍처
+# 설계
 > 가장 기본이 되는 MVC 패턴을 채용하였습니다. 개발 이전에 UML을 그리고, 미리 API의 가용성을 확인 해 본 후 개발을 진행했습니다.
 
-<p float="left">
-    <img src="./essets/MVC.png" />
-</p>
-
-## 러닝 관련
+## 러닝 추적 기능
 <p float="left">
     <img src="./essets/러닝_UML.png" />
 </p>
 
-### Running
+### 주요 class
+#### Running
 - 시작, 멈춤, 재개 등 상태 관리
 - 속도, 칼로리, 페이스, 케이던스, 러닝시간, 러닝거리 등에 필요한 값을 다양한 하드웨어로부터 받아서 계산 후 가지고 있다가 UI에 delegate로 전달
 
-### Motion
+#### Motion
 - Pedometer에서 pace, speed, cadence 값을 받아서 Running에 전달
 - Pedometer에서 받은 speed, startDate, endDate로 distance를 계산해서 Running에 전달
 - ActivityManager에서 Motion 상태를 받아서 calories 계산 후 Running에 전달 [칼로리 계산식](https://downhilltodowntown.com/how-to-calculate-your-caloric-burn-while-running/)
 
-### Location
+#### Location
+- 사용자의 위치가 변경될 때 그 좌표를 Running에 전달
 - CLLocation 모듈이 다른 모듈에 영향을 미치지 않도록 Point 구조체로 래핑
 
-## 러닝 내역 관련
+## 러닝 내역 관리 기능
 - 저장되는 러닝 내역 관련
 - 러닝 내역들을 Firestore에 저장하고 불러와서 Chart에 표시
 
@@ -44,13 +42,18 @@ iPhone 디바이스의 GPS와 가속도계로 사용자의 러닝 루트, 거리
     <img src="./essets/히스토리_UML.png" />
 </p>
 
-### FirebaseRepository
-- Firestore로부터 데이터를 불러옴
+### 주요 class
 
-### ChartScope, Period
+#### HistoryManager
+- Firestore에서 러닝 내역 데이터를 저장하거나 쿼리해 옴
+
+#### ChartScope, Period
 - UISegmentedControl을 주, 월로 바꿀 때마다 현재 날짜로부터 계산하여 최근 4주 혹은 지난달, 이번달의 기간(Period)을 생성
 
-## 유저 관련
+#### HistoryBar
+- History를 BarChart에 기록할 수 있도록 래핑
+
+## 유저 관리 기능
 - 유저의 닉네임과 몸무게를 받는다.
 - 로그인 세션은 Firebase Auth로 관리하며 데이터는 Firestore에 저장
 
