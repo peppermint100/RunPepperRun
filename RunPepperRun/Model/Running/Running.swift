@@ -8,7 +8,7 @@
 import Foundation
 
 protocol RunningDelegate {
-    func didUpdateRunningActivity(_ running: Running, distance: Double, speed: Double, pace: Double, caloriesBurned: Double, numberOfSteps: Int)
+    func didUpdateRunningStats(_ running: Running, distance: Double, speed: Double, pace: Double, caloriesBurned: Double, numberOfSteps: Int)
 }
 
 class Running: MotionDelegate {
@@ -47,11 +47,11 @@ class Running: MotionDelegate {
     }
     
     func getResults() -> RunningResult {
-        let averageSpeed = speedArray.reduce(0.0, +) / Double(speedArray.count)
+        let averageSpeed = speedArray.isEmpty ? 0 : speedArray.reduce(0.0, +) / Double(speedArray.count)
         return RunningResult(
             points: location?.pointsCompacted() ?? [], distance: self.distance,
             duration: self.distance, averageSpeed: averageSpeed,
-            averagePace: self.averagePace, caloriesBurend: self.caloriesBurned,
+            averagePace: self.averagePace, caloriesBurned: self.caloriesBurned,
             numberOfSteps: self.numberOfSteps, startDate: startDate, endDate: Date())
     }
     
@@ -64,7 +64,6 @@ class Running: MotionDelegate {
         self.speed = self.distance / now.timeIntervalSince(startDate)
         speedArray.append(self.speed)
         self.caloriesBurned += caloriesCalculator.getCalories(speed: speed, duration: now.timeIntervalSince(lastUpdatedAt ?? now), motionActivity: motionActivity)
-        delegate?.didUpdateRunningActivity(self, distance: self.distance, speed: self.speed, pace: self.pace, caloriesBurned: self.caloriesBurned, numberOfSteps: self.numberOfSteps)
+        delegate?.didUpdateRunningStats(self, distance: self.distance, speed: self.speed, pace: self.pace, caloriesBurned: self.caloriesBurned, numberOfSteps: self.numberOfSteps)
     }
 }
-

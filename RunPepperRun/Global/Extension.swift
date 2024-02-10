@@ -7,6 +7,29 @@
 
 import UIKit
 
+extension Date {
+    static func - (lhs: Date, rhs: Date) -> TimeInterval {
+        return lhs.timeIntervalSinceReferenceDate - rhs.timeIntervalSinceReferenceDate
+    }
+    
+    func setTimeToStartOfTheDay() -> Date {
+        let calendar = Calendar.current
+        return calendar.date(bySettingHour: 0, minute: 0, second: 0, of: self)!
+    }
+    
+    func setTimeToEndOfTheDay() -> Date {
+        let calendar = Calendar.current
+        return calendar.date(bySettingHour: 23, minute: 59, second: 59, of: self)!
+    }
+    
+    func toMMdd() -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MM.dd"
+        formatter.timeZone = TimeZone.current
+        return formatter.string(from: self)
+    }
+}
+
 extension Double {
     func mpsToKph() -> Double {
         return self * 1000 / 3600
@@ -29,10 +52,14 @@ extension Double {
     }
     
     func formatPace() -> String {
-        let secondsPerKilometer = self * 1000
-        let minutes = secondsPerKilometer / 60
-        let secondsLeft = secondsPerKilometer.truncatingRemainder(dividingBy: 60)
+        let minutes = self / 60
+        let secondsLeft = self.truncatingRemainder(dividingBy: 60)
         return String(format: "%d'%d\"", Int(minutes), Int(secondsLeft))
+    }
+    
+    func truncatePoint(to: Double) -> Double {
+        let digit: Double = pow(10, to)
+        return floor(self * digit) / digit
     }
 }
 
@@ -43,6 +70,14 @@ extension Int {
         let minutes = secondsLeft / 60
         let seconds = secondsLeft % 60
         return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
+    }
+}
+
+extension TimeInterval {
+    func formatToMMSS() -> String {
+        let minutes = self / 60
+        let seconds = self.truncatingRemainder(dividingBy: 60)
+        return String(format: "%02d:%02d", minutes, seconds)
     }
 }
 

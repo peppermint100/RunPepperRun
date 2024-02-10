@@ -8,7 +8,7 @@
 import Foundation
 import MapKit
 
-struct Point: Equatable {
+struct Point: Equatable, Codable {
     let lat: Double
     let lng: Double
     let timestamp: Date

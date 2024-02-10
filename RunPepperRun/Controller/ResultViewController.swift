@@ -15,11 +15,13 @@ class ResultViewController: UIViewController {
     private let stackView = UIStackView()
     private let mapView = MKMapView()
     private let runningFactorsCollectionView: UICollectionView = {
-        return UICollectionView(frame: .zero, collectionViewLayout: RunningFactorCellScrollLayout())
+        return UICollectionView(frame: .zero, collectionViewLayout: RunningStatCellScrollLayout())
     }()
     
     private let finishButton = UIButton()
-    private var runningFactors: [RunningFactor] = []
+    private var runningStats: [RunningStat] = []
+    
+    private let historyManager = HistoryManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,8 +29,8 @@ class ResultViewController: UIViewController {
         setupNavigation()
         setupStackView()
         setupMapView()
-        setupRunningFactors()
-        setupRunningFactorsView()
+        setupRunningStats()
+        setupRunningStatsView()
         setupFinishButton()
     }
     
@@ -76,13 +78,13 @@ class ResultViewController: UIViewController {
         }
     }
     
-    private func setupRunningFactors() {
-        runningFactors = [.speed(self.result?.averageSpeed ?? 0), .pace(self.result?.averagePace ?? 0), .numberOfSteps(self.result?.numberOfSteps ?? 0), .caloriesBurned(self.result?.caloriesBurend ?? 0), .distance(self.result?.distance ?? 0), .duration(self.result?.duration ?? 0)]
+    private func setupRunningStats() {
+        runningStats = [.speed(self.result?.averageSpeed ?? 0), .pace(self.result?.averagePace ?? 0), .numberOfSteps(self.result?.numberOfSteps ?? 0), .caloriesBurned(self.result?.caloriesBurned ?? 0), .distance(self.result?.distance ?? 0), .duration(self.result?.duration ?? 0)]
     }
     
-    private func setupRunningFactorsView() {
+    private func setupRunningStatsView() {
         stackView.addArrangedSubview(runningFactorsCollectionView)
-        runningFactorsCollectionView.register(RunningFactorCardCell.self, forCellWithReuseIdentifier: RunningFactorCardCell.identifier)
+        runningFactorsCollectionView.register(RunningStatCardCell.self, forCellWithReuseIdentifier: RunningStatCardCell.identifier)
         runningFactorsCollectionView.delegate = self
         runningFactorsCollectionView.dataSource = self
         runningFactorsCollectionView.showsHorizontalScrollIndicator = false
@@ -119,23 +121,57 @@ class ResultViewController: UIViewController {
     }
     
     private func saveRunning() {
-        print("러닝 저장...")
+        guard let result = result else { return }
+        let mid = result.points[result.points.count / 2]
+        
+        takeMapSnapshot(points: mid) { [weak self] image in
+            guard let imageData = image.jpegData(compressionQuality: .leastNormalMagnitude) else {
+                NSLog("러닝 맵 스냅샷을 Data로 변환하는데 실패했습니다.")
+                return
+            }
+            
+            self?.historyManager.create(
+                email: UserManager.shared.getEmail(),
+                averageSpeed: result.averageSpeed, averagePace: result.averagePace, distance: result.distance,
+                caloriesBurned: result.caloriesBurned, numberOfSteps: result.numberOfSteps,
+                locations: result.points,
+                startDate: result.startDate, endDate: result.endDate, mapSnapshot: imageData, completion: nil)
+        }
     }
     
     private func popToHomeVC() {
         navigationController?.popToRootViewController(animated: false)
     }
+    
+    private func takeMapSnapshot(points: Point, completion: @escaping (UIImage) -> Void) {
+        let options: MKMapSnapshotter.Options = MKMapSnapshotter.Options()
+        options.size = CGSize(width: 100, height: 100)
+        options.mapType = .standard
+        options.showsBuildings = true
+        let span = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
+        options.region = MKCoordinateRegion(center: points.toCoordinate(), span: span)
+        let snapshotter = MKMapSnapshotter(
+            options: options
+        )
+        snapshotter.start { snapshot, error in
+            guard let snapshot = snapshot, error == nil else {
+                NSLog("러닝 맵 스냅샷 생성에 실패했습니다.")
+                return
+            }
+            completion(snapshot.image)
+        }
+    }
 }
 
 extension ResultViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return runningFactors.count
+        return runningStats.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RunningFactorCardCell.identifier, for: indexPath) as! RunningFactorCardCell
-        let activity = runningFactors[indexPath.row]
-        cell.configure(with: activity)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RunningStatCardCell.identifier, for: indexPath) as! RunningStatCardCell
+        let runningStat = runningStats[indexPath.row]
+        cell.configure(with: runningStat)
         return cell
     }
 }

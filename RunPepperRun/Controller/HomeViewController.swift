@@ -9,6 +9,7 @@ import UIKit
 import MapKit
 import SnapKit
 import CoreMotion
+import FirebaseAuth
 
 class HomeViewController: UIViewController {
     
@@ -16,16 +17,18 @@ class HomeViewController: UIViewController {
     
     private let locationManager = CLLocationManager()
     
-    private var runningFactors: [RunningFactor] = []
+    private var runningStats: [RunningStat] = []
     
     private let stackView = UIStackView()
     private let mapView = MKMapView()
-    private var runningFactosCollectionView: UICollectionView = {
-        let layout = RunningFactorCellLayout()
+    private var runningStatCollectionView: UICollectionView = {
+        let layout = RunningStatCollectionViewLayout()
         return UICollectionView(frame: .zero, collectionViewLayout: layout)
     }()
     private let buttonView = UIView()
     private let startButton = UIButton()
+    
+    private let historyManager = HistoryManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,8 +37,8 @@ class HomeViewController: UIViewController {
         setupStackView()
         setupNavigationBar()
         setupMapView()
-        setupRunningFactors()
-        setupRunningFactorsCollectionView()
+        setupRunningStats()
+        setupRunningStatCollectionView()
         setupButtonView()
         setupStartButton()
         handleLocationAuthorization()
@@ -45,22 +48,34 @@ class HomeViewController: UIViewController {
         super.traitCollectionDidChange(previousTraitCollection)
         drawGradientOnMap()
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
+        super.viewDidAppear(animated)
         drawGradientOnMap()
     }
     
     // MARK: - 네비게이션 바 세팅
     private func setupNavigationBar() {
         navigationItem.title = "Home"
+        navigationController?.navigationBar.sizeToFit()
         navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.largeTitleDisplayMode = .always
+        let buttonSize = CGSize(width: 25, height: 25)
+        let chartIcon = UIImage(systemName: "chart.bar")!.resizeImage(targetSize: buttonSize)
+        let gearIcon = UIImage(systemName: "gearshape")!.resizeImage(targetSize: buttonSize)
+        let toHistoryVCButton = UIButton()
+        let toSettingVCButton =  UIButton()
+        toHistoryVCButton.setImage(chartIcon, for: .normal)
+        toHistoryVCButton.addTarget(self, action: #selector(presentToHistoryVC), for: .touchUpInside)
+        toSettingVCButton.setImage(gearIcon, for: .normal)
+        let toHistoryBarButton = UIBarButtonItem(customView: toHistoryVCButton)
+        let toSettingBarButton = UIBarButtonItem(customView: toSettingVCButton)
+        navigationItem.rightBarButtonItems = [toHistoryBarButton, toSettingBarButton]
     }
     
     // TODO: - Setting Feature에서 추가 개발
-    private func getRunningActivitiesForHomeVC() -> [RunningFactor] {
-        let activities: [RunningFactor] = [.speed(36), .numberOfSteps(10), .caloriesBurned(224)]
-        return activities
+    private func getRunningActivitiesForHomeVC() -> [RunningStat] {
+        return [.speed(36), .numberOfSteps(10), .caloriesBurned(224)]
     }
     
     // MARK: - UI 세팅
@@ -86,18 +101,40 @@ class HomeViewController: UIViewController {
         }
     }
     
-    private func setupRunningFactors() {
-        runningFactors = getRunningActivitiesForHomeVC()
+    private func setupRunningStats() {
+        runningStats = getRunningActivitiesForHomeVC()
+        let now = Date()
+        let aWeekAgo = Calendar.current.date(byAdding: .day, value: -7, to: now)!
+        historyManager.getHistories(from: aWeekAgo, to: now) { [weak self] result in
+            switch result {
+            case .success(let histories):
+                var speed: Double = 0
+                var numberOfSteps: Int = 0
+                var caloriesBurned: Double = 0
+                histories.forEach { history in
+                    speed += history.averageSpeed
+                    numberOfSteps += history.numberOfSteps
+                    caloriesBurned += history.caloriesBurned
+                }
+                self?.runningStats = [.speed(speed), .numberOfSteps(numberOfSteps), .caloriesBurned(caloriesBurned)]
+                DispatchQueue.main.async {
+                    self?.runningStatCollectionView.reloadData()
+                }
+            case .failure:
+                NSLog("HomeVC에서 최근 러닝 기록을 불러오는데 실패했습니다.")
+                return
+            }
+        }
     }
     
-    private func setupRunningFactorsCollectionView() {
-        stackView.addArrangedSubview(runningFactosCollectionView)
-        runningFactosCollectionView.register(RunningFactorCardCell.self, forCellWithReuseIdentifier: RunningFactorCardCell.identifier)
-        runningFactosCollectionView.delegate = self
-        runningFactosCollectionView.dataSource = self
-        runningFactosCollectionView.showsHorizontalScrollIndicator = false
+    private func setupRunningStatCollectionView() {
+        stackView.addArrangedSubview(runningStatCollectionView)
+        runningStatCollectionView.register(RunningStatCardCell.self, forCellWithReuseIdentifier: RunningStatCardCell.identifier)
+        runningStatCollectionView.delegate = self
+        runningStatCollectionView.dataSource = self
+        runningStatCollectionView.showsHorizontalScrollIndicator = false
         
-        runningFactosCollectionView.snp.makeConstraints { make in
+        runningStatCollectionView.snp.makeConstraints { make in
             make.height.equalTo(stackView.snp.height).offset(-10).multipliedBy(0.28)
         }
     }
@@ -140,14 +177,14 @@ class HomeViewController: UIViewController {
     }
     
     @objc private func didTapStartRunningButton() {
-        if checkAuthorizationsForRunning() {
+        if hasAuthorizationsForRunning() {
             presentToRunningVC()
         } else {
             makeOpenSettingsAlert()
         }
     }
     
-    private func checkAuthorizationsForRunning() -> Bool {
+    private func hasAuthorizationsForRunning() -> Bool {
         switch locationManager.authorizationStatus {
         case .notDetermined, .restricted, .denied:
             return false
@@ -174,6 +211,11 @@ class HomeViewController: UIViewController {
     
     private func presentToRunningVC() {
         let vc = RunningViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @objc private func presentToHistoryVC() {
+        let vc = HistoryViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -211,13 +253,13 @@ extension HomeViewController {
 // MARK: - CollectionView
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return runningFactors.count
+        return runningStats.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RunningFactorCardCell.identifier, for: indexPath) as! RunningFactorCardCell
-        let activity = runningFactors[indexPath.row]
-        cell.configure(with: activity)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RunningStatCardCell.identifier, for: indexPath) as! RunningStatCardCell
+        let stat = runningStats[indexPath.row]
+        cell.configure(with: stat)
         return cell
     }
 }
